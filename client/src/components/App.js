@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import Calendar from "./Calendar";
 import Sidebar from "./Sidebar";
 import Home from "./Home";
-import Stats from "./Stats";
+import Dashboard from "./Dashboard";
 import Detail from "./Detail";
 
 const drawerWidth = 200;
