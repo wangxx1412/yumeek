@@ -14,7 +14,7 @@
 
 4. As a user, I want to be able to add the recipes in my list to my week meal plan, and see my plan in a dashboard.
 
-- When a open the dashboard, I want see my plan for each day with an "Edit" button that I can click to add or remove recipes for the day. I also want to see the nutrients info of my day and week plan to help me make the decision.
+- When I open the dashboard, I want see my plan for each day with an "Edit" button. When click to add recipe for a day, I want to see a pop-up window with all recipes I saved. By clicking on one of them I add the recipe to selected day. After recipe appeared on this day, I can “Remove” it or see “Details”. “Details” will redirect me to Recipe Details page. I also want to see the nutrients info of my day and week plan to help me make the decision
 
 5. As a user, I want to be able to see some detail nutrients info because I want to know the nutrition of my day.
 
@@ -22,7 +22,7 @@
 
 ## Stretch
 
-1. As a user, I want to a shopping list based on my recipes.
+1. As a user, I want to get a shopping list based on my recipes.
 
 - I want to have a "Create shopping list" button to generate a shopping list with amount for me and I can send it to my phone.
 
