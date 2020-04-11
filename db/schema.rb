@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_064258) do
+ActiveRecord::Schema.define(version: 2020_04_11_213750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_064258) do
     t.integer "carbs"
     t.integer "fat"
     t.integer "energies"
-    t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_nutrients_on_recipe_id"
