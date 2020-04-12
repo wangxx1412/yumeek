@@ -47,7 +47,10 @@ export default function SavedRecipes(props) {
       className={classes.root}
       subheader={
         <ListSubheader button onClick={expandList}>
-          <ListItemText primary="Saved Recipes" className={classes.subheader} />
+          <ListItemText
+            primary={`${savedRecipes.length || "No"} Saved Recipes`}
+            className={classes.subheader}
+          />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListSubheader>
       }
@@ -64,7 +67,7 @@ export default function SavedRecipes(props) {
                 className={classes.nested}
                 key={index}
               >
-                <ListItemText primary={recipe.name} />
+                <ListItemText primary={recipe.label} />
               </ListItem>
             ))}
         </List>
