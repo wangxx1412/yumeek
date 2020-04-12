@@ -6,6 +6,8 @@ import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 
+import savedRecipes from "./homepage/example-recipes";
+
 const useStyles = makeStyles((theme) => ({
   logo: {
     width: theme.spacing(7),
@@ -28,23 +30,7 @@ export default function Sidebar() {
       <Divider variant="middle" />
       <UserInfo />
       <Divider variant="middle" />
-      <SavedRecipes
-        savedRecipes={[
-          { name: "test1" },
-          { name: "test2" },
-          { name: "test3" },
-          { name: "test4" },
-          { name: "test5" },
-          { name: "test6" },
-          { name: "test6" },
-          { name: "test6" },
-          { name: "test6" },
-          { name: "test6" },
-          { name: "test6" },
-          { name: "test6" },
-          { name: "test6" },
-        ]}
-      />
+      <SavedRecipes savedRecipes={savedRecipes} />
     </div>
   );
 }
