@@ -15,38 +15,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "assignment_submissions", id: :serial, force: :cascade do |t|
-    t.integer "assignment_id"
-    t.integer "student_id"
-    t.integer "duration"
-    t.date "submission_date"
-  end
-
-  create_table "assignments", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.text "content"
-    t.integer "day"
-    t.integer "chapter"
-    t.integer "duration"
-  end
-
-  create_table "assistance_requests", id: :serial, force: :cascade do |t|
-    t.integer "student_id"
-    t.integer "teacher_id"
-    t.integer "assignment_id"
-    t.datetime "created_at"
-    t.datetime "started_at"
-    t.datetime "completed_at"
-    t.text "student_feedback"
-    t.text "teacher_feedback"
-  end
-
-  create_table "cohorts", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255, null: false
-    t.date "start_date"
-    t.date "end_date"
-  end
-
   create_table "nutrients", force: :cascade do |t|
     t.bigint "recipe_id"
     t.integer "protein"
@@ -70,23 +38,6 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "students", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255, null: false
-    t.string "email", limit: 255
-    t.string "phone", limit: 32
-    t.string "github", limit: 255
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "cohort_id"
-  end
-
-  create_table "teachers", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255, null: false
-    t.date "start_date"
-    t.date "end_date"
-    t.boolean "is_active", default: true
-  end
-
   create_table "user_recipes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "recipe_id"
@@ -107,13 +58,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "assignment_submissions", "assignments", name: "assignment_submissions_assignment_id_fkey", on_delete: :cascade
-  add_foreign_key "assignment_submissions", "students", name: "assignment_submissions_student_id_fkey", on_delete: :cascade
-  add_foreign_key "assistance_requests", "assignments", name: "assistance_requests_assignment_id_fkey", on_delete: :cascade
-  add_foreign_key "assistance_requests", "students", name: "assistance_requests_student_id_fkey", on_delete: :cascade
-  add_foreign_key "assistance_requests", "teachers", name: "assistance_requests_teacher_id_fkey", on_delete: :cascade
   add_foreign_key "nutrients", "recipes"
-  add_foreign_key "students", "cohorts", name: "students_cohort_id_fkey", on_delete: :cascade
   add_foreign_key "user_recipes", "recipes"
   add_foreign_key "user_recipes", "users"
 end
