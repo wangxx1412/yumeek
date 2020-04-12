@@ -7,6 +7,13 @@ Rails.application.routes.draw do
     
     resources :dogs
 
+    post '/recipe', to: "recipes#create"
+
+    post '/login' => 'sessions#create'
+    get '/logout' => 'sessions#destroy'
+    
+    post '/users' => 'users#create'
+
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do

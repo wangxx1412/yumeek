@@ -13,28 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_04_11_213750) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "btree_gin"
-  enable_extension "btree_gist"
-  enable_extension "citext"
-  enable_extension "cube"
-  enable_extension "dblink"
-  enable_extension "dict_int"
-  enable_extension "dict_xsyn"
-  enable_extension "earthdistance"
-  enable_extension "fuzzystrmatch"
-  enable_extension "hstore"
-  enable_extension "intarray"
-  enable_extension "ltree"
-  enable_extension "pg_stat_statements"
-  enable_extension "pg_trgm"
-  enable_extension "pgcrypto"
-  enable_extension "pgrowlocks"
-  enable_extension "pgstattuple"
   enable_extension "plpgsql"
-  enable_extension "tablefunc"
-  enable_extension "unaccent"
-  enable_extension "uuid-ossp"
-  enable_extension "xml2"
 
   create_table "nutrients", force: :cascade do |t|
     t.bigint "recipe_id"
@@ -53,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
     t.text "steps"
     t.string "img_url"
     t.string "src_url"
-    t.string "health_labels"
-    t.text "ingredients"
+    t.text "health_labels", default: [], array: true
+    t.text "ingredients", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
