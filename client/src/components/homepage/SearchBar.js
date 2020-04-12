@@ -65,7 +65,7 @@ export default function SearchBar() {
           </Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon button onClick={handleSearch} />
+              <SearchIcon />
             </div>
             <InputBase
               placeholder="Search…"

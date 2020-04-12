@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 export default function RecipesCard(props) {
   const { recipe } = props;
   const ingredients = recipe.ingredients.split(",");
-  console.log(ingredients);
   const classes = useStyles();
 
   return (

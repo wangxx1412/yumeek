@@ -46,7 +46,7 @@ export default function SavedRecipes(props) {
       aria-labelledby="nested-list-subheader"
       className={classes.root}
       subheader={
-        <ListSubheader button onClick={expandList}>
+        <ListSubheader onClick={expandList}>
           <ListItemText
             primary={`${savedRecipes.length || "No"} Saved Recipes`}
             className={classes.subheader}
