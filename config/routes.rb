@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   namespace :api do # /api/data
 
     get '/data', to: 'tests#index'
-    
-    resources :dogs
 
-    post '/recipe', to: "recipes#create"
+    post '/recipe' => 'recipes#create'
+    resources :recipes do
+      resources :user_recipes, only: [:create, :update, :destroy]
+      resources :nutrients, only: [:create, :update, :destroy]
+    end
 
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
@@ -21,3 +23,4 @@ Rails.application.routes.draw do
   end
 
 end
+
