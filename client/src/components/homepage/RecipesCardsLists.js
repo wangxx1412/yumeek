@@ -1,9 +1,37 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import ListSubheader from "@material-ui/core/ListSubheader";
 
-export default function RecipesCardsLists() {
+import RecipesCard from "./RecipesCard";
+
+const useStyles = makeStyles((theme) => ({
+  gridList: {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    // backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export default function RecipesCardsLists(props) {
+  const { searchResultRecipes } = props;
+  const classes = useStyles();
+
   return (
     <div>
-      <div>RecipesCardsLists</div>
+      <GridList cellHeight={180} className={classes.gridList}>
+        <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
+          <ListSubheader component="div">
+            {searchResultRecipes.length} Recipes For You!
+          </ListSubheader>
+        </GridListTile>
+        {searchResultRecipes.map((recipe, index) => (
+          <RecipesCard key={index} recipe={recipe} />
+        ))}
+      </GridList>
     </div>
   );
 }
