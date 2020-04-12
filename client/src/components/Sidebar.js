@@ -19,7 +19,17 @@ const useStyles = makeStyles((theme) => ({
 
 // SavedRecipes, ShoppingList(Strech)
 export default function Sidebar() {
+  const [user, setUser] = useState(null);
   const classes = useStyles();
+
+  const userSignup = (user) => {
+    console.log("signup", user.email, user.password);
+    setUser(user);
+  };
+  const userLogin = (user) => {
+    console.log("login", user.email, user.password);
+    setUser(user);
+  };
   return (
     <div>
       <Avatar
@@ -28,7 +38,11 @@ export default function Sidebar() {
         className={classes.logo}
       />
       <Divider variant="middle" />
-      <UserInfo />
+      <UserInfo
+        user={user}
+        handleLogin={(user) => userLogin(user)}
+        handleSignup={(user) => userSignup(user)}
+      />
       <Divider variant="middle" />
       <SavedRecipes savedRecipes={savedRecipes} />
     </div>
