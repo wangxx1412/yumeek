@@ -3,9 +3,11 @@ class Api::UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
-      redirect_to '/'
+      # redirect user to home page after signup
+      redirect_to 'http://localhost:3000'
     else
-      redirect_to '/signup'
+      # redirect user to home page after signup failed
+      redirect_to 'http://localhost:3000/signup'
     end
   end
 
