@@ -13,7 +13,7 @@ export default function Steps(props) {
     <section>
       <h2>Directions</h2>
       <ul>
-      {allSteps.map((step, index) => <li key={index}>{`Step ${index+1}: ${step} \n`}</li>)}
+      {allSteps.map((step, index) => <li key={index}><p className="step-number">{`Step ${index+1}`}</p> <p>{step}</p></li>)}
       </ul>
     </section>
   );

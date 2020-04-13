@@ -1,8 +1,19 @@
 import React, { useState , useEffect } from "react";
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
 
 import Steps from './Steps';
 import IngredientsList from './IngredientsList';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+          display: "flex" ,
+          flexDirection: "column",
+          alignItems: "center"       
+    }
+  })
+);
 
 // IngredientsList, Steps, NutrientsList
 export default function Detail() {
@@ -30,12 +41,15 @@ export default function Detail() {
       )
       .catch(err => console.log('Error: ', err))
   }, []);
-  
+
+  const classes = useStyles()
   return(
         <div>
+          <Box className={classes.root}>
           <h2>{recipe.label}</h2>
-          <img src={recipe.img} alt="image" />
+          <img src={recipe.img} alt={recipe.img} />
           <p>{recipe.health_labels}</p>
+          </Box>
           <IngredientsList ingredients={recipe.ingredients}/>
           <Steps steps={recipe.steps}/>
         </div>
