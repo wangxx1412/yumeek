@@ -1,7 +1,4 @@
 class Api::RecipesController < ApplicationController
-  # Protected controller
-  # before_action :authorize
-
   def create
     @recipe = Recipe.new(recipe_params)
 
@@ -12,14 +9,27 @@ class Api::RecipesController < ApplicationController
       )
     
       if @user_recipe.save!
-        pp @recipe
-        pp @user_recipe
+        @nutrient = Nutrient.new(
+          recipe_id: @recipe.id,
+          protein: params[:nutrients][:protein],
+          fiber: params[:nutrients][:fiber],
+          carbs: params[:nutrients][:carbs],
+          fat: params[:nutrients][:fat],
+          energies: params[:nutrients][:energies]
+        )
+
+        if @nutrient.save!
+          render :json => { :error => 0, :success => 1 }
+        else
+          render :json => { :error => 1, :success => 0 }
+        end
 
       else
-        redirect_to 'http://localhost:3000'
+        render :json => { :error => 1, :success => 0 }
       end
+      
     else
-      redirect_to 'http://localhost:3000'
+      render :json => { :error => 1, :success => 0 }
     end
   end
 
@@ -37,8 +47,8 @@ class Api::RecipesController < ApplicationController
       :steps, 
       :img_url, 
       :src_url, 
-      :health_labels, 
-      :ingredients
+      :health_labels=>[], 
+      :ingredients=>[]
       )
   end
 end
