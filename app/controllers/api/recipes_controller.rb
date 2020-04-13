@@ -1,10 +1,8 @@
 class Api::RecipesController < ApplicationController
-  # Protected controller
-  # before_action :authorize
-
   def create
     @recipe = Recipe.new(recipe_params)
-
+    pp recipe_params
+    pp params[:nutrients]
     if @recipe.save 
       @user_recipe = UserRecipe.new(
         user_id: session[:user_id],
@@ -12,8 +10,11 @@ class Api::RecipesController < ApplicationController
       )
     
       if @user_recipe.save!
-        pp @recipe
-        pp @user_recipe
+        pp recipe_params
+        pp "end"
+        # @nutrient = Nutrient.new(
+
+        # )
 
       else
         redirect_to 'http://localhost:3000'
