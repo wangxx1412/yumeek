@@ -18,6 +18,7 @@ import Sidebar from "./Sidebar";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 import Detail from "./Detail";
+import Auth from "./Auth";
 
 const drawerWidth = 200;
 
@@ -128,8 +129,9 @@ export default function App(props) {
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
               <Route exact path="/user/:userid/calendar" component={Calendar} />
-              <Route exact path="/user/:userid/dashboard" component={Dashboard} />
+              <Route exact path="/user/:userid/stats" component={Dashboard} />
               <Route exact path="/recipe/:recipeid" component={Detail} />
+              <Route exact path="/login" component={Auth} />
               <Route exact path="/" component={Home} />
             </Switch>
           </Container>
