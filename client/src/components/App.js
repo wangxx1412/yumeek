@@ -172,7 +172,6 @@ export default function App(props) {
             <Switch>
               <Route exact path="/user/:userid/calendar" component={Calendar} />
               <Route exact path="/user/:userid/stats" component={Dashboard} />
-              <Route exact path="/recipe/:recipeid" component={Detail} />
               <Route
                 exact
                 path="/"
@@ -182,7 +181,6 @@ export default function App(props) {
               />
               <Route exact path="/recipe/:recipeid" component={Recipe} />
               <Route exact path="/login" component={Auth} />
-              <Route exact path="/" component={Home} />
             </Switch>
           </Container>
         </main>
