@@ -5,12 +5,12 @@ Rails.application.routes.draw do
 
     get '/data', to: 'tests#index'
 
+    # Save a recipe
     post '/recipe' => 'recipes#create'
+    # Recipe detial
     get '/recipe/:id' => 'recipes#show'
-    # resources :recipes, only: [:create, :update, :destroy] do
-    #   resources :user_recipes, only: [:create]
-    #   resources :nutrients, only: [:create, :update, :destroy]
-    # end
+    # Remove a saved recipe
+    delete '/recipe/:id' => 'recipes#destroy'
 
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
