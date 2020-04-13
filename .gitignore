@@ -67,3 +67,6 @@ yarn-debug.log*
 
 /public
 .DS_Store
+
+# Ignore db creds / settings
+/config/database.yml

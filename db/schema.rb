@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
     t.text "steps"
     t.string "img_url"
     t.string "src_url"
-    t.string "health_labels"
-    t.text "ingredients"
+    t.text "health_labels", default: [], array: true
+    t.text "ingredients", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_213750) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

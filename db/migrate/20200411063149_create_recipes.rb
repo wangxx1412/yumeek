@@ -7,8 +7,8 @@ class CreateRecipes < ActiveRecord::Migration[5.2]
       t.text :steps
       t.string :img_url
       t.string :src_url
-      t.string :health_labels
-      t.text :ingredients
+      t.text :health_labels, array: true, default: []
+      t.text :ingredients, array: true, default: []
 
       t.timestamps
     end

@@ -4,10 +4,19 @@ Rails.application.routes.draw do
   namespace :api do # /api/data
 
     get '/data', to: 'tests#index'
-    
-    resources :dogs
-    resources :details, only: [:show]
 
+    post '/recipe' => 'recipes#create'
+    # resources :recipes, only: [:create, :update, :destroy] do
+    #   resources :user_recipes, only: [:create]
+    #   resources :nutrients, only: [:create, :update, :destroy]
+    # end
+
+    post '/login' => 'sessions#create'
+    get '/logout' => 'sessions#destroy'
+    
+    post '/users' => 'users#create'
+    
+    resources :details, only: [:show]
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do
@@ -15,3 +24,5 @@ Rails.application.routes.draw do
   end
 
 end
+
+# curl -d 'email=test1@test.com&password=test' http://localhost:3001/api/login -c cookie.txt
