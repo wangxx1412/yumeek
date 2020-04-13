@@ -43,6 +43,10 @@ class Api::RecipesController < ApplicationController
   def destroy
     @nutrient = Nutrient.find_by(recipe_id: params[:id] ) 
     @nutrient.destroy
+    @userrecipe = UserRecipe.find_by(recipe_id: params[:id] ) 
+    @userrecipe.destroy
+    @recipe = Recipe.find_by(id:params[:id]  )
+    @recipe.destroy
     # @recipe = Recipe.find params[:id]
     # @recipe.destroy
   end
