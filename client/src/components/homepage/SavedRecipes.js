@@ -36,9 +36,9 @@ export default function SavedRecipes(props) {
     setOpen(!open);
   };
 
-  const clickRecipe = (index) => {
+  const clickRecipe = (recipe) => {
     //! need to go to recipe detail page
-    console.log(index);
+    console.log("to detail", recipe);
   };
 
   return (
@@ -63,7 +63,7 @@ export default function SavedRecipes(props) {
               <ListItem
                 button
                 onClick={() => {
-                  clickRecipe(index);
+                  clickRecipe(recipe);
                 }}
                 className={classes.nested}
                 key={index}
