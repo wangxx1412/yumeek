@@ -1,19 +1,3 @@
-// import React from 'react';
-// import { Box } from '@material-ui/core';
-
-// export default function IngredientsList(props) {
-//   const { ingredients } = props;
-
-//   return (
-//     <section>
-//       <Box borderRadius={16} borderTop={2} borderBottom={2} borderColor="grey.300" width="40%">
-//       <h2>Ingredients</h2>
-//         {ingredients.map((ingredient, index) => <p key={index}>{ingredient}</p>)}
-//       </Box>
-//     </section>
-//   );
-// }
-
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -26,7 +10,6 @@ const defaultProps = {
   border: 1,
   boxShadow: 1
 
-  // style: { width: '15rem', height: '15rem' },
 };
 
 export default function IngredientsList(props) {
