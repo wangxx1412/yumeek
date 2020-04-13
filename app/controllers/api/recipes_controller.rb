@@ -40,6 +40,13 @@ class Api::RecipesController < ApplicationController
     }
   end
 
+  def destroy
+    @nutrient = Nutrient.find_by(recipe_id: params[:id] ) 
+    @nutrient.destroy
+    # @recipe = Recipe.find params[:id]
+    # @recipe.destroy
+  end
+
   private
   def recipe_params
     params.require(:recipe).permit(
