@@ -47,8 +47,11 @@ class Api::RecipesController < ApplicationController
     @userrecipe.destroy
     @recipe = Recipe.find_by(id:params[:id]  )
     @recipe.destroy
-    # @recipe = Recipe.find params[:id]
-    # @recipe.destroy
+    if @nutrient.destroy && @userrecipe.destroy && @recipe.destroy
+      render :json => { :error => 0, :success => 1 }
+    else
+      render :json => { :error => 1, :success => 0 }
+    end
   end
 
   private
