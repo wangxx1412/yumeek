@@ -1,8 +1,7 @@
 class Api::RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
-    pp recipe_params
-    pp params[:nutrients]
+
     if @recipe.save 
       @user_recipe = UserRecipe.new(
         user_id: session[:user_id],
@@ -10,17 +9,27 @@ class Api::RecipesController < ApplicationController
       )
     
       if @user_recipe.save!
-        pp recipe_params
-        pp "end"
-        # @nutrient = Nutrient.new(
+        @nutrient = Nutrient.new(
+          recipe_id: @recipe.id,
+          protein: params[:nutrients][:protein],
+          fiber: params[:nutrients][:fiber],
+          carbs: params[:nutrients][:carbs],
+          fat: params[:nutrients][:fat],
+          energies: params[:nutrients][:energies]
+        )
 
-        # )
+        if @nutrient.save!
+          render :json => { :error => 0, :success => 1 }
+        else
+          render :json => { :error => 1, :success => 0 }
+        end
 
       else
-        redirect_to 'http://localhost:3000'
+        render :json => { :error => 1, :success => 0 }
       end
+      
     else
-      redirect_to 'http://localhost:3000'
+      render :json => { :error => 1, :success => 0 }
     end
   end
 
