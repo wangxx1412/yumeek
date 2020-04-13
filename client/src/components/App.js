@@ -17,7 +17,8 @@ import Calendar from "./Calendar";
 import Sidebar from "./Sidebar";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
-import Detail from "./Detail";
+import Recipe from "./Recipe";
+import Auth from "./Auth";
 
 import axios from "axios";
 
@@ -179,6 +180,9 @@ export default function App(props) {
                   <Home handleAdd={(recipe) => handleAdd(recipe)} />
                 )}
               />
+              <Route exact path="/recipe/:recipeid" component={Recipe} />
+              <Route exact path="/login" component={Auth} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </Container>
         </main>
