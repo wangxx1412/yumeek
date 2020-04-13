@@ -5,6 +5,7 @@ import { Box } from '@material-ui/core';
 
 import Steps from './Steps';
 import IngredientsList from './IngredientsList';
+import SaveRecipeButton from './SaveRecipeButton';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,9 +23,9 @@ export default function Detail() {
   const [ recipe, setRecipe ] = useState({
     label: "",
     steps: "",
-    ingredients: "",
+    ingredients: [],
     img: "",
-    health_labels: "",
+    health_labels: [],
     src_url: ""
   });
  
@@ -42,9 +43,12 @@ export default function Detail() {
       .catch(err => console.log('Error: ', err))
   }, []);
 
+  console.log(recipe.health_labels)
+
   const classes = useStyles()
   return(
         <div>
+          <SaveRecipeButton />
           <Box className={classes.root}>
           <h2>{recipe.label}</h2>
           <img src={recipe.img} alt={recipe.img} />
@@ -56,11 +60,10 @@ export default function Detail() {
       );
 }
 
- // const API_ID = '856f1e70';
+  // const API_ID = '856f1e70';
   // const API_KEY = '5ffd7f76ad176cbdbfdbc8c268013dc1';
   // const query = 'chicken';
-  
-  
+    
   // const getRecipe = () => {
   //   axios.get(`https://api.edamam.com/search?q=${query}&app_id=${API_ID}&app_key=${API_KEY}`)
   //   .then(res => console.log(res.data.hits))
@@ -69,3 +72,5 @@ export default function Detail() {
   // useEffect(() => {
   //   getRecipe()
   // }, [])
+
+
