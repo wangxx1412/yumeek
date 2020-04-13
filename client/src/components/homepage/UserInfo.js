@@ -31,8 +31,10 @@ const useStyles = makeStyles((theme) => ({
 export default function UserInfo(props) {
   const { user, handleSignup, handleLogin } = props;
   const [open, setOpen] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const classes = useStyles();
 
@@ -98,29 +100,66 @@ export default function UserInfo(props) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {showSignup && (
+            <TextField
+              autoFocus
+              margin="dense"
+              id="confirm-password"
+              label="confirm password"
+              type="password"
+              fullWidth
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          )}
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              handleSignup({ email, password });
-              handleClose();
-            }}
-            color="primary"
-          >
-            Sign up
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button
-            onClick={() => {
-              handleLogin({ email, password });
-              handleClose();
-            }}
-            color="primary"
-          >
-            Log in
-          </Button>
+          {!showSignup && (
+            <>
+              <Button
+                onClick={() => {
+                  setShowSignup(true);
+                }}
+                color="primary"
+              >
+                Sign up
+              </Button>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  handleLogin({ email, password });
+                  handleClose();
+                }}
+                color="primary"
+              >
+                Log in
+              </Button>
+            </>
+          )}
+          {showSignup && (
+            <>
+              <Button
+                onClick={() => {
+                  handleClose();
+                  setShowSignup(false);
+                }}
+                color="primary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  handleSignup({ email, password, confirmPassword });
+                  handleClose();
+                }}
+                color="primary"
+              >
+                Sign up
+              </Button>
+            </>
+          )}
         </DialogActions>
       </Dialog>
     </div>

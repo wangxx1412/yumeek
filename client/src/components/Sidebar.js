@@ -23,13 +23,13 @@ export default function Sidebar() {
   const classes = useStyles();
 
   const userSignup = (user) => {
-    //! user signup
+    //! user signup, some session logic, db logic
     console.log("signup", user.email, user.password);
     setUser(user);
   };
 
   const userLogin = (user) => {
-    //! user login
+    //! user login, some session logic, db validation logic
     console.log("login", user.email, user.password);
     setUser(user);
   };
