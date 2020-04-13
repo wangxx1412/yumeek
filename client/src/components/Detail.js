@@ -2,6 +2,7 @@ import React, { useState , useEffect } from "react";
 import axios from 'axios';
 
 import Steps from './Steps';
+import IngredientsList from './IngredientsList';
 
 // IngredientsList, Steps, NutrientsList
 export default function Detail() {
@@ -35,6 +36,7 @@ export default function Detail() {
           <h2>{recipe.label}</h2>
           <img src={recipe.img} alt="image" />
           <p>{recipe.health_labels}</p>
+          <IngredientsList ingredients={recipe.ingredients}/>
           <Steps steps={recipe.steps}/>
         </div>
       );
