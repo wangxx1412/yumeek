@@ -6,9 +6,7 @@ class Api::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save 
-      puts session[:user_id]
-      pp current_user
-
+      #session[:user_id]
       @user_recipe = UserRecipe.new(
         user_id: 1,
         recipe_id: @recipe.id
@@ -16,7 +14,7 @@ class Api::RecipesController < ApplicationController
     
       if @user_recipe.save!
         pp @user_recipe
-        pp "yeh"
+
       else
         redirect_to 'http://localhost:3000'
       end

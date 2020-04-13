@@ -3,7 +3,6 @@ class Api::SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      puts session[:user_id]
       # redirect user to home page after login
       redirect_to 'http://localhost:3000'
     else
