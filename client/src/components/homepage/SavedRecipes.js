@@ -37,6 +37,7 @@ export default function SavedRecipes(props) {
   };
 
   const clickRecipe = (index) => {
+    //! need to go to recipe detail page
     console.log(index);
   };
 

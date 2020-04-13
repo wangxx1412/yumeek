@@ -6,7 +6,7 @@ import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 
-import savedRecipes from "./homepage/example-recipes";
+import savedRecipes from "./homepage/example-recipes"; //! sample
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -23,10 +23,13 @@ export default function Sidebar() {
   const classes = useStyles();
 
   const userSignup = (user) => {
+    //! user signup
     console.log("signup", user.email, user.password);
     setUser(user);
   };
+
   const userLogin = (user) => {
+    //! user login
     console.log("login", user.email, user.password);
     setUser(user);
   };

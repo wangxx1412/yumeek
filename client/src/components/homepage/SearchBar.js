@@ -43,13 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar(props) {
+  const { handleSearch } = props;
   const classes = useStyles();
   const [searchValue, setsearchValue] = useState("");
-  const handleSearch = () => {
-    console.log(searchValue);
-    setsearchValue("");
-  };
 
   return (
     <div className={classes.root}>
@@ -59,7 +56,10 @@ export default function SearchBar() {
             variant="contained"
             size="medium"
             color="primary"
-            onClick={handleSearch}
+            onClick={() => {
+              handleSearch(searchValue);
+              setsearchValue("");
+            }}
           >
             Go!
           </Button>

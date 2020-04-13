@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipesCardsLists(props) {
+  //! recieve search result from main panel, Home Component
   const { searchResultRecipes } = props;
   const classes = useStyles();
 
