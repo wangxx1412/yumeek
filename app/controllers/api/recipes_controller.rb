@@ -1,6 +1,6 @@
 class Api::RecipesController < ApplicationController
   # Protected controller
-  before_action :authorize
+  # before_action :authorize
 
   def create
     @recipe = Recipe.new(recipe_params)
