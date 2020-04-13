@@ -68,7 +68,7 @@ export default function SavedRecipes(props) {
                 className={classes.nested}
                 key={index}
               >
-                <ListItemText primary={recipe.label} />
+                <ListItemText primary={recipe.recipe.label} />
               </ListItem>
             ))}
         </List>

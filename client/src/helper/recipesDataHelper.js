@@ -2,13 +2,13 @@ export default (response) => {
   const recipesArr = response.data.hits;
   const res = [];
   for (let item of recipesArr) {
-    const recipeObj = {};
-    recipeObj.label = item.recipe.label;
-    recipeObj.steps = null; //! we don't have steps
-    recipeObj.img_url = item.recipe.image;
-    recipeObj.src_url = item.recipe.url;
-    recipeObj.health_labels = item.recipe.healthLabels;
-    recipeObj.ingredients = item.recipe.ingredientLines;
+    const recipeObj = { recipe: {}, nutrients: null };
+    recipeObj.recipe.label = item.recipe.label;
+    recipeObj.recipe.steps = null; //! we don't have steps
+    recipeObj.recipe.img_url = item.recipe.image;
+    recipeObj.recipe.src_url = item.recipe.url;
+    recipeObj.recipe.health_labels = item.recipe.healthLabels;
+    recipeObj.recipe.ingredients = item.recipe.ingredientLines;
     recipeObj.nutrients = {
       protein: parseInt(item.recipe.totalNutrients.PROCNT.quantity * 1000), // unit mg
       fiber: parseInt(item.recipe.totalNutrients.FIBTG.quantity * 1000), // unit mg

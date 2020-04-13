@@ -31,11 +31,11 @@ export default function RecipesCard(props) {
       <CardActionArea onClick={() => handleClick(recipe)}>
         <CardMedia
           className={classes.media}
-          image={recipe.img_url}
-          title={recipe.label}
+          image={recipe.recipe.img_url}
+          title={recipe.recipe.label}
         />
         <CardContent>
-          <Typography>{recipe.label}</Typography>
+          <Typography>{recipe.recipe.label}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
