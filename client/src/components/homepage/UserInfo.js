@@ -34,7 +34,9 @@ export default function UserInfo(props) {
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password_confirmation, setPassword_confirmation] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
 
   const classes = useStyles();
 
@@ -81,8 +83,28 @@ export default function UserInfo(props) {
           <DialogContentText>
             Are you ready to start your yumeek?
           </DialogContentText>
+          {showSignup && (
+            <>
+              <TextField
+                margin="dense"
+                id="firstname"
+                label="firstname"
+                type="text"
+                value={first_name}
+                onChange={(e) => setFirst_name(e.target.value)}
+              />
+              <TextField
+                margin="dense"
+                id="lastname"
+                label="lastname"
+                type="text"
+                value={last_name}
+                onChange={(e) => setLast_name(e.target.value)}
+              />
+            </>
+          )}
+
           <TextField
-            autoFocus
             margin="dense"
             id="email"
             label="email"
@@ -102,14 +124,12 @@ export default function UserInfo(props) {
           />
           {showSignup && (
             <TextField
-              autoFocus
               margin="dense"
               id="confirm-password"
               label="confirm password"
               type="password"
-              fullWidth
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={password_confirmation}
+              onChange={(e) => setPassword_confirmation(e.target.value)}
             />
           )}
         </DialogContent>
@@ -151,7 +171,13 @@ export default function UserInfo(props) {
               </Button>
               <Button
                 onClick={() => {
-                  handleSignup({ email, password, confirmPassword });
+                  handleSignup({
+                    first_name,
+                    last_name,
+                    email,
+                    password,
+                    password_confirmation,
+                  });
                   handleClose();
                 }}
                 color="primary"

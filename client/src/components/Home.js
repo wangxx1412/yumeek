@@ -5,7 +5,8 @@ import axios from "axios";
 import recipesDataHelper from "../helper/recipesDataHelper";
 
 // SearchBar, RecipesCardsLists
-export default function Home() {
+export default function Home(props) {
+  const { handleAdd } = props;
   const appInfo = `&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=100`;
   const apiBaseURL = `https://api.edamam.com/search?q=`;
   const [searchResult, setSearchResult] = useState([]);
@@ -43,7 +44,10 @@ export default function Home() {
   return (
     <div>
       <SearchBar handleSearch={(value) => handleSearch(value)} />
-      <RecipesCardsLists searchResultRecipes={searchResult} />
+      <RecipesCardsLists
+        searchResultRecipes={searchResult}
+        handleAdd={handleAdd}
+      />
     </div>
   );
 }

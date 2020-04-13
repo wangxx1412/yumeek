@@ -6,8 +6,6 @@ import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 
-import savedRecipes from "./homepage/example-recipes"; //! sample
-
 const useStyles = makeStyles((theme) => ({
   logo: {
     width: theme.spacing(7),
@@ -18,21 +16,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // SavedRecipes, ShoppingList(Strech)
-export default function Sidebar() {
-  const [user, setUser] = useState(null);
+export default function Sidebar(props) {
+  const { savedRecipes, sessionUser, userSignup, userLogin } = props;
   const classes = useStyles();
 
-  const userSignup = (user) => {
-    //! user signup, some session logic, db logic
-    console.log("signup", user.email, user.password);
-    setUser(user);
-  };
-
-  const userLogin = (user) => {
-    //! user login, some session logic, db validation logic
-    console.log("login", user.email, user.password);
-    setUser(user);
-  };
   return (
     <div>
       <Avatar
@@ -42,9 +29,9 @@ export default function Sidebar() {
       />
       <Divider variant="middle" />
       <UserInfo
-        user={user}
-        handleLogin={(user) => userLogin(user)}
-        handleSignup={(user) => userSignup(user)}
+        user={sessionUser}
+        handleLogin={userLogin}
+        handleSignup={userSignup}
       />
       <Divider variant="middle" />
       <SavedRecipes savedRecipes={savedRecipes} />

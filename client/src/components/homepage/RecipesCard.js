@@ -39,7 +39,7 @@ export default function RecipesCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={handleAdd}>
+        <Button size="small" color="primary" onClick={() => handleAdd(recipe)}>
           Add
         </Button>
         <Button

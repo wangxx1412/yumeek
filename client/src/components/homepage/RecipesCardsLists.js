@@ -17,12 +17,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipesCardsLists(props) {
-  const { searchResultRecipes } = props;
+  const { searchResultRecipes, handleAdd } = props;
   const classes = useStyles();
-
-  const handleAdd = (recipe) => {
-    console.log("add to saved list", recipe); //! need to be moved to parent, where pass saved recipes arr
-  };
 
   return (
     <div>
@@ -33,11 +29,7 @@ export default function RecipesCardsLists(props) {
           </ListSubheader>
         </GridListTile>
         {searchResultRecipes.map((recipe, index) => (
-          <RecipesCard
-            key={index}
-            recipe={recipe}
-            handleAdd={() => handleAdd(recipe)}
-          />
+          <RecipesCard key={index} recipe={recipe} handleAdd={handleAdd} />
         ))}
       </GridList>
     </div>

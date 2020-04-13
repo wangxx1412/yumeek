@@ -19,6 +19,8 @@ import Home from "./Home";
 import Dashboard from "./Dashboard";
 import Detail from "./Detail";
 
+import axios from "axios";
+
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
@@ -69,8 +71,30 @@ export default function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [savedRecipes, setSavedRecipes] = React.useState([]);
+  const [sessionUser, setSessionUser] = React.useState(null);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleAdd = (recipe) => {
+    console.log("add to saved list", recipe); //! pass to Home
+    axios
+      .post("api/recipe", recipe)
+      .then(() => setSavedRecipes((prev) => [recipe, ...prev]));
+  };
+
+  const userSignup = (user) => {
+    //! user signup, some session logic, db logic
+    console.log("signup", user);
+    axios.post("api/users", user).then(() => setSessionUser(user));
+  };
+
+  const userLogin = (user) => {
+    //! user login, some session logic, db validation logic
+    console.log("login", user);
+    axios.post("api/login", user).then(() => setSessionUser(user));
   };
 
   return (
@@ -109,7 +133,16 @@ export default function App(props) {
               keepMounted: true,
             }}
           >
-            <Sidebar />
+            <Sidebar
+              savedRecipes={savedRecipes}
+              sessionUser={sessionUser}
+              userSignup={(user) => {
+                userSignup(user);
+              }}
+              userLogin={(user) => {
+                userLogin(user);
+              }}
+            />
           </Drawer>
         </Hidden>
         <Hidden xsDown>
@@ -121,7 +154,16 @@ export default function App(props) {
               paper: classes.drawerPaper,
             }}
           >
-            <Sidebar />
+            <Sidebar
+              savedRecipes={savedRecipes}
+              sessionUser={sessionUser}
+              userSignup={(user) => {
+                userSignup(user);
+              }}
+              userLogin={(user) => {
+                userLogin(user);
+              }}
+            />
           </Drawer>
         </Hidden>
         <main className={classes.content}>
@@ -130,7 +172,13 @@ export default function App(props) {
               <Route exact path="/user/:userid/calendar" component={Calendar} />
               <Route exact path="/user/:userid/stats" component={Dashboard} />
               <Route exact path="/recipe/:recipeid" component={Detail} />
-              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <Home handleAdd={(recipe) => handleAdd(recipe)} />
+                )}
+              />
             </Switch>
           </Container>
         </main>
