@@ -3,16 +3,20 @@ class Api::RecipesController < ApplicationController
   # before_filter :authorize
 
   def create
-    recipe = Recipe.new(recipe_params)
+    @recipe = Recipe.new(recipe_params)
 
-    if recipe.save 
+    if @recipe.save 
       puts session[:user_id]
-      puts recipe.id
-      user_recipe = UserRecipe.new(
-        recipe_id: recipe.id,
-        user_id: session[:user_id]
+      pp current_user
+
+      @user_recipe = UserRecipe.new(
+        user_id: 1,
+        recipe_id: @recipe.id
       )
-      if user_recipe.save
+    
+      if @user_recipe.save!
+        pp @user_recipe
+        pp "yeh"
       else
         redirect_to 'http://localhost:3000'
       end

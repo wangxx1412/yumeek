@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     get '/data', to: 'tests#index'
 
     post '/recipe' => 'recipes#create'
-    resources :recipes do
-      resources :user_recipes, only: [:create, :update, :destroy]
-      resources :nutrients, only: [:create, :update, :destroy]
-    end
+    # resources :recipes, only: [:create, :update, :destroy] do
+    #   resources :user_recipes, only: [:create]
+    #   resources :nutrients, only: [:create, :update, :destroy]
+    # end
 
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
@@ -24,3 +24,4 @@ Rails.application.routes.draw do
 
 end
 
+# curl -d 'email=test1@test.com&password=test' http://localhost:3001/api/login -c cookie.txt
