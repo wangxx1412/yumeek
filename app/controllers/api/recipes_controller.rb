@@ -31,8 +31,8 @@ class Api::RecipesController < ApplicationController
       :steps, 
       :img_url, 
       :src_url, 
-      :health_labels, 
-      :ingredients
+      :health_labels=>[], 
+      :ingredients=>[]
       )
   end
 end
