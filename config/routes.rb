@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     delete '/recipe/:id' => 'recipes#destroy'
 
     # Update Recipe weekday
-    put '/userrecipe/:id/' => 'userrecipes#update'
+    put '/userrecipe/:userid/recipe/:recipeid' => 'userrecipes#update'
 
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
