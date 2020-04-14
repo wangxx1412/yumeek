@@ -26,6 +26,10 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def fetchuser
+    render :json => { :user_id => session[:user_id] }
+  end
+  
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password)

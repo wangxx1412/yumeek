@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
     
+    # Fetch current user
+    get '/currentuser', to: 'users#fetchuser'
+    # Signup a user
     post '/users' => 'users#create'
+    # Fetch user's all recipe and associations
     get '/users/:id' => 'users#show'
   end
 
