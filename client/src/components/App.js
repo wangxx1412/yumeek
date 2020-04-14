@@ -89,14 +89,19 @@ export default function App(props) {
     } else {
       setSavedRecipes((prev) => [recipe, ...prev]);
 
-      axios.post("api/recipe", recipe).then(() => console.log("saved"));
+      axios
+        .post("api/recipe", recipe)
+        .then((response) => console.log("saved", response));
     }
   };
 
   const userSignup = (user) => {
     //! user signup, some session logic, db logic
     console.log("signup", user);
-    axios.post("api/users", { user }).then(() => setSessionUser(user));
+    axios.post("api/users", { user }).then((response) => {
+      console.log(response);
+      setSessionUser(user);
+    });
   };
 
   const userLogin = (user) => {

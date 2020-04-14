@@ -31,6 +31,7 @@ export default function Sidebar(props) {
 
   return (
     <div>
+      {/* change to our app logo later */}
       <Avatar
         alt="logo"
         src="https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
