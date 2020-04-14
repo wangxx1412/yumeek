@@ -24,7 +24,11 @@ export default function RecipesCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={() => clickRecipe(recipe)}>
+      <CardActionArea
+        onClick={() =>
+          clickRecipe({ ...recipe.recipe, ...recipe.nutrients, weekday: null })
+        }
+      >
         <CardMedia
           className={classes.media}
           image={recipe.recipe.img_url}
@@ -42,7 +46,11 @@ export default function RecipesCard(props) {
           size="small"
           color="primary"
           onClick={() => {
-            clickRecipe(recipe);
+            clickRecipe({
+              ...recipe.recipe,
+              ...recipe.nutrients,
+              weekday: null,
+            });
           }}
         >
           Learn More

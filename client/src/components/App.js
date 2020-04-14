@@ -74,7 +74,7 @@ export default function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [savedRecipes, setSavedRecipes] = React.useState([]); //! init is hard coded to empty arr, need data from db
+  const [savedRecipes, setSavedRecipes] = React.useState([]);
   const [sessionUser, setSessionUser] = React.useState(null);
 
   React.useEffect(() => {
@@ -136,14 +136,16 @@ export default function App(props) {
 
   const clickRecipe = (recipe) => {
     //! need to go to recipe detail page
+
     console.log("to detail", recipe);
   };
 
   const deleteRecipe = (recipe) => {
     //! delete saved recipe in db
     console.log("delete recipe", recipe);
+    setSavedRecipes((prev) => prev.filter((item) => item.id !== recipe.id));
     axios
-      .delete(`api/recipe/${1}`, recipe) //! hard coded here, need recipe id from db
+      .delete(`api/recipe/${recipe.id}`, recipe)
       .then((response) => console.log("deleted", response));
   };
 
