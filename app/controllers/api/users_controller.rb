@@ -19,10 +19,10 @@ class Api::UsersController < ApplicationController
     if user.save
       session[:user_id] = user.id
       # redirect user to home page after signup
-      redirect_to 'http://localhost:3000'
+      render :json => { :data => user }
     else
       # redirect user to home page after signup failed
-      redirect_to 'http://localhost:3000/signup'
+      render :json => { :error => "Signup failed" }
     end
   end
 

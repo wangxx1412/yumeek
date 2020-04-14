@@ -4,7 +4,7 @@ class Api::SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       # redirect user to home page after login
-      redirect_to 'http://localhost:3000'
+      render :json => { :data => user }
     else
       # redirect user to Login page after login failed
       render :json => { :error => "Invalid Credentials" }
@@ -14,7 +14,7 @@ class Api::SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     # redirect user to home page after logout
-    redirect_to 'http://localhost:3000'
+    render :json => { :msg => "Log out successfully" }
   end
 
 end
