@@ -35,8 +35,16 @@ class Api::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find params[:id]
+    @nutrients = Nutrient.find_by(recipe_id: params[:id] ) 
+    @userrecipe = UserRecipe.find_by(id: params[:id])
+    pp @userrecipe[:user_id]
+    pp session[:user_id]
+    @isowner = (@userrecipe[:user_id] == session[:user_id])
+
     render :json => {
-      recipe: @recipe
+      recipe: @recipe,
+      nutrients: @nutrients,
+      isOwner: @isowner
     }
   end
 
@@ -57,12 +65,12 @@ class Api::RecipesController < ApplicationController
   end
 
   def check_and_remove
-    @userrecipe = UserRecipe.find_by(id: params[:id])
+    @userrecipe = UserRecipe.find_by(recipe_id: params[:id])
 
     if session[:user_id] == @userrecipe[:user_id]
       @nutrient = Nutrient.find_by(recipe_id: params[:id] ) 
       @nutrient.destroy
-      @recipe = Recipe.find_by(id:params[:id])
+      @recipe = Recipe.find(params[:id])
       @recipe.destroy
       render :json => { :success => "Delete successfully" }
     else
