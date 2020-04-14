@@ -84,13 +84,13 @@ export default function App(props) {
   const handleAdd = (recipe) => {
     console.log("add to saved list", recipe); //! pass to Home
 
-    if (duplcateRecipe) {
-      setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
+    if (duplcateRecipe(savedRecipes, recipe)) {
+      setSavedRecipes((prev) => [recipe, ...uniqueRecipe(prev, recipe)]);
+    } else {
+      setSavedRecipes((prev) => [recipe, ...prev]);
+
+      axios.post("api/recipe", recipe).then(() => console.log("saved"));
     }
-
-    setSavedRecipes((prev) => [recipe, ...prev]);
-
-    axios.post("api/recipe", recipe).then(() => console.log("saved"));
   };
 
   const userSignup = (user) => {
@@ -106,6 +106,11 @@ export default function App(props) {
       console.log(response);
       setSessionUser(user);
     });
+  };
+
+  const userLogout = () => {
+    console.log("logout");
+    axios.get("api/logout");
   };
 
   const clickRecipe = (recipe) => {
