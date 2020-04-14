@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipesCardsLists(props) {
-  const { searchResultRecipes, handleAdd } = props;
+  const { searchResultRecipes, handleAdd, clickRecipe } = props;
   const classes = useStyles();
 
   return (
@@ -29,7 +29,12 @@ export default function RecipesCardsLists(props) {
           </ListSubheader>
         </GridListTile>
         {searchResultRecipes.map((recipe, index) => (
-          <RecipesCard key={index} recipe={recipe} handleAdd={handleAdd} />
+          <RecipesCard
+            key={index}
+            recipe={recipe}
+            handleAdd={handleAdd}
+            clickRecipe={clickRecipe}
+          />
         ))}
       </GridList>
     </div>

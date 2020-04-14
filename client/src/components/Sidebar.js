@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import UserInfo from "./homepage/UserInfo";
 import SavedRecipes from "./homepage/SavedRecipes";
 
@@ -17,7 +17,13 @@ const useStyles = makeStyles((theme) => ({
 
 // SavedRecipes, ShoppingList(Strech)
 export default function Sidebar(props) {
-  const { savedRecipes, sessionUser, userSignup, userLogin } = props;
+  const {
+    savedRecipes,
+    sessionUser,
+    userSignup,
+    userLogin,
+    clickRecipe,
+  } = props;
   const classes = useStyles();
 
   return (
@@ -34,7 +40,7 @@ export default function Sidebar(props) {
         handleSignup={userSignup}
       />
       <Divider variant="middle" />
-      <SavedRecipes savedRecipes={savedRecipes} />
+      <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} />
     </div>
   );
 }

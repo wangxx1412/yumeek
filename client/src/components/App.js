@@ -108,6 +108,11 @@ export default function App(props) {
     });
   };
 
+  const clickRecipe = (recipe) => {
+    //! need to go to recipe detail page
+    console.log("to detail", recipe);
+  };
+
   return (
     <BrowserRouter>
       <div className={clsx("App", classes.root)}>
@@ -174,6 +179,9 @@ export default function App(props) {
               userLogin={(user) => {
                 userLogin(user);
               }}
+              clickRecipe={(recipe) => {
+                clickRecipe(recipe);
+              }}
             />
           </Drawer>
         </Hidden>
@@ -186,7 +194,10 @@ export default function App(props) {
                 exact
                 path="/"
                 render={() => (
-                  <Home handleAdd={(recipe) => handleAdd(recipe)} />
+                  <Home
+                    handleAdd={(recipe) => handleAdd(recipe)}
+                    clickRecipe={(recipe) => clickRecipe(recipe)}
+                  />
                 )}
               />
               <Route exact path="/recipe/:recipeid" component={Recipe} />

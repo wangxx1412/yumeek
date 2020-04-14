@@ -28,17 +28,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SavedRecipes(props) {
-  const { savedRecipes } = props;
+  const { savedRecipes, clickRecipe } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(true);
 
   const expandList = () => {
     setOpen(!open);
-  };
-
-  const clickRecipe = (recipe) => {
-    //! need to go to recipe detail page
-    console.log("to detail", recipe);
   };
 
   return (

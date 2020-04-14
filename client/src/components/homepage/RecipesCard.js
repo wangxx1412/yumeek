@@ -19,16 +19,12 @@ const useStyles = makeStyles({
 });
 
 export default function RecipesCard(props) {
-  const { recipe, handleAdd } = props;
+  const { recipe, handleAdd, clickRecipe } = props;
   const classes = useStyles();
-
-  const handleClick = (recipe) => {
-    console.log("to detail", recipe); //! to detail page
-  };
 
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={() => handleClick(recipe)}>
+      <CardActionArea onClick={() => clickRecipe(recipe)}>
         <CardMedia
           className={classes.media}
           image={recipe.recipe.img_url}
@@ -45,7 +41,7 @@ export default function RecipesCard(props) {
         <Button
           size="small"
           color="primary"
-          onClick={() => handleClick(recipe)}
+          onClick={() => clickRecipe(recipe)}
         >
           Learn More
         </Button>
