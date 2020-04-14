@@ -77,6 +77,15 @@ export default function App(props) {
   const [savedRecipes, setSavedRecipes] = React.useState([]); //! init is hard coded to empty arr, need data from db
   const [sessionUser, setSessionUser] = React.useState(null);
 
+  React.useEffect(() => {
+    if (sessionUser) {
+      axios.get(`/api/users/${sessionUser.user_id}`).then((response) => {
+        console.log(response.data);
+        setSavedRecipes(response.data.data);
+      });
+    }
+  }, [sessionUser]);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

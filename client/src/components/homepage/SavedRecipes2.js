@@ -66,7 +66,7 @@ export default function SavedRecipes(props) {
                 return (
                   <Chip
                     key={index}
-                    label={recipe.recipe.label}
+                    label={recipe.label}
                     onDelete={() => deleteRecipe(recipe)}
                     className={classes.chip}
                     onClick={() => {
