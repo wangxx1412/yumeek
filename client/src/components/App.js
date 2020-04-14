@@ -100,7 +100,8 @@ export default function App(props) {
     console.log("signup", user);
     axios.post("api/users", { user }).then((response) => {
       console.log(response);
-      setSessionUser(user);
+      const user_id = response.data.data.id;
+      setSessionUser({ user_id, ...user });
     });
   };
 
@@ -109,7 +110,8 @@ export default function App(props) {
     console.log("login", user);
     axios.post("api/login", user).then((response) => {
       console.log(response);
-      setSessionUser(user);
+      const user_id = response.data.data.id;
+      setSessionUser({ user_id, ...user });
     });
   };
 
