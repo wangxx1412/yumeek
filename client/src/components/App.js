@@ -76,13 +76,6 @@ export default function App(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [savedRecipes, setSavedRecipes] = React.useState([]); //! init is hard coded to empty arr, need data from db
   const [sessionUser, setSessionUser] = React.useState(null);
- 
-  //------
-  const [recipe, setRecipe] = React.useState('');   
-  const handleRecipeProps = (recipe) => {     
-    setRecipe(recipe);  
-  }  
-  //------
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -216,7 +209,7 @@ export default function App(props) {
                 )}
               />
               <Route exact path="/recipe" render={() => (
-                <Recipe handleAdd={(recipe) => handleAdd(recipe)} recipe={recipe}/>
+                <Recipe handleAdd={(recipe) => handleAdd(recipe)} />
               )} 
               />
               <Route exact path="/login" component={Auth} />

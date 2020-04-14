@@ -27,7 +27,6 @@ export default function RecipesCard(props) {
 
   // const handleClick = (recipe) => { 
   //   console.log("to detail", recipe); //! to detail page
-  //   props.handleRecipeProps(recipe);
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

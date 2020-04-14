@@ -12,9 +12,10 @@ const useStyles = makeStyles(theme => ({
 );
 
 export default function SaveRecipeButton(props) {
+  const {recipe, handleAdd } = props;
   const classes = useStyles();
   return(
-        <Button color="secondary" component="div" className={classes.root} onClick={() => props.handleAdd()}> {/* handleAdd(recipe) */}
+        <Button color="secondary" component="div" className={classes.root} onClick={() => handleAdd(recipe)}> 
           <CalendarTodayOutlinedIcon className={classes.style}/>
             Save to My List
         </Button>
