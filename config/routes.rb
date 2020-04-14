@@ -25,4 +25,4 @@ Rails.application.routes.draw do
 
 end
 
-# curl -d 'email=test1@test.com&password=test' http://localhost:3001/api/login -c cookie.txt
+

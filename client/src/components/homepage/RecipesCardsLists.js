@@ -29,7 +29,7 @@ export default function RecipesCardsLists(props) {
           </ListSubheader>
         </GridListTile>
         {searchResultRecipes.map((recipe, index) => (
-          <RecipesCard key={index} recipe={recipe} handleAdd={handleAdd} />
+          <RecipesCard key={index} recipe={recipe} handleAdd={handleAdd} handleRecipeProps={props.handleRecipeProps}/>  
         ))}
       </GridList>
     </div>

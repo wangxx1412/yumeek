@@ -74,6 +74,13 @@ export default function App(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [savedRecipes, setSavedRecipes] = React.useState([]);
   const [sessionUser, setSessionUser] = React.useState(null);
+ 
+  //------
+  const [recipe, setRecipe] = React.useState('');   
+  const handleRecipeProps = (recipe) => {     
+    setRecipe(recipe);  
+  }  
+  //------
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -176,10 +183,13 @@ export default function App(props) {
                 exact
                 path="/"
                 render={() => (
-                  <Home handleAdd={(recipe) => handleAdd(recipe)} />
+                  <Home handleAdd={(recipe) => handleAdd(recipe)} handleRecipeProps={handleRecipeProps}/>
                 )}
               />
-              <Route exact path="/recipe/:recipeid" component={Recipe} />
+              <Route exact path="/recipe" render={() => (
+                <Recipe handleAdd={(recipe) => handleAdd(recipe)} recipe={recipe}/>
+              )} 
+              />
               <Route exact path="/login" component={Auth} />
             </Switch>
           </Container>

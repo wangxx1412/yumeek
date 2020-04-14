@@ -19,11 +19,13 @@ const useStyles = makeStyles({
 });
 
 export default function RecipesCard(props) {
-  const { recipe, handleAdd } = props;
+  const { recipe, handleAdd } = props;  
   const classes = useStyles();
 
-  const handleClick = (recipe) => {
+
+  const handleClick = (recipe) => { 
     console.log("to detail", recipe); //! to detail page
+    props.handleRecipeProps(recipe);
   };
 
   return (

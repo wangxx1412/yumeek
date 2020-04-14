@@ -5,21 +5,18 @@ import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined'
 
 const useStyles = makeStyles(theme => ({
   root: {
-        // display: "flex",
-        // justifyContent: "flex-start",
-        // alignItems: "center",
         width: "4 em"
   },
   style: { fontSize: 40 }
 })
 );
 
-export default function SaveRecipeButton() {
+export default function SaveRecipeButton(props) {
   const classes = useStyles();
   return(
-        <Button color="secondary" component="div" className={classes.root}>
+        <Button color="secondary" component="div" className={classes.root} onClick={() => props.handleAdd()}> {/* handleAdd(recipe) */}
           <CalendarTodayOutlinedIcon className={classes.style}/>
-            Save to My Calendar
+            Save to My List
         </Button>
   );
 }
