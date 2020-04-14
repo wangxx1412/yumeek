@@ -21,6 +21,8 @@ import Recipe from "./Recipe";
 import Auth from "./Auth";
 
 import axios from "axios";
+import uniqueRecipe from "../helper/uniqueRecipe";
+import duplcateRecipe from "../helper/duplicateRecipe";
 
 const drawerWidth = 200;
 
@@ -81,9 +83,14 @@ export default function App(props) {
 
   const handleAdd = (recipe) => {
     console.log("add to saved list", recipe); //! pass to Home
-    axios
-      .post("api/recipe", recipe)
-      .then(() => setSavedRecipes((prev) => [recipe, ...prev]));
+
+    if (duplcateRecipe) {
+      setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
+    }
+
+    setSavedRecipes((prev) => [recipe, ...prev]);
+
+    axios.post("api/recipe", recipe).then(() => console.log("saved"));
   };
 
   const userSignup = (user) => {
