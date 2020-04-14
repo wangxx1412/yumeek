@@ -40,6 +40,20 @@ class Api::RecipesController < ApplicationController
     }
   end
 
+  def destroy
+    @nutrient = Nutrient.find_by(recipe_id: params[:id] ) 
+    @nutrient.destroy
+    @userrecipe = UserRecipe.find_by(recipe_id: params[:id] ) 
+    @userrecipe.destroy
+    @recipe = Recipe.find_by(id:params[:id]  )
+    @recipe.destroy
+    if @nutrient.destroy && @userrecipe.destroy && @recipe.destroy
+      render :json => { :error => 0, :success => 1 }
+    else
+      render :json => { :error => 1, :success => 0 }
+    end
+  end
+
   private
   def recipe_params
     params.require(:recipe).permit(
