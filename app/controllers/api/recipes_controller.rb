@@ -19,7 +19,7 @@ class Api::RecipesController < ApplicationController
         )
 
         if @nutrient.save!
-          render :json => { :success => "Recipe saved successfully" }
+          render :json => { :success => "Recipe saved successfully", :data => @recipe }
         else
           render :json => { :error => "Nutirent saved failed"  }
         end

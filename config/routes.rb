@@ -12,11 +12,18 @@ Rails.application.routes.draw do
     # Remove a saved recipe
     delete '/recipe/:id' => 'recipes#destroy'
 
+    # Update Recipe weekday
+    put '/userrecipe/:userid/recipe/:recipeid' => 'userrecipes#update'
+
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#destroy'
     
+    # Fetch current user
+    get '/currentuser', to: 'users#fetchuser'
+    # Signup a user
     post '/users' => 'users#create'
- 
+    # Fetch user's all recipe and associations
+    get '/users/:id' => 'users#show'
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do
