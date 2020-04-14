@@ -26,10 +26,15 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
+  logout: {
+    height: theme.spacing(3),
+    marginLeft: theme.spacing(5),
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export default function UserInfo(props) {
-  const { user, handleSignup, handleLogin } = props;
+  const { user, handleSignup, handleLogin, handleLogout } = props;
   const [open, setOpen] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState("");
@@ -66,6 +71,11 @@ export default function UserInfo(props) {
             className={classes.logo}
           />
           <Chip label={`Welcome ${user.email}`} className={classes.userEmail} />
+          <Chip
+            label="logout"
+            className={classes.logout}
+            onClick={handleLogout}
+          />
         </>
       ) : (
         <Button

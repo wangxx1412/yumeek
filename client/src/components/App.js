@@ -110,7 +110,8 @@ export default function App(props) {
 
   const userLogout = () => {
     console.log("logout");
-    axios.get("api/logout");
+    setSessionUser(null); //! clean the saved recipes
+    axios.get("api/logout").then((response) => console.log("logout", response));
   };
 
   const clickRecipe = (recipe) => {
@@ -171,6 +172,7 @@ export default function App(props) {
               userLogin={(user) => {
                 userLogin(user);
               }}
+              userLogout={userLogout}
             />
           </Drawer>
         </Hidden>
@@ -188,6 +190,7 @@ export default function App(props) {
               sessionUser={sessionUser}
               userSignup={(user) => userSignup(user)}
               userLogin={(user) => userLogin(user)}
+              userLogout={userLogout}
               clickRecipe={(recipe) => clickRecipe(recipe)}
               deleteRecipe={(recipe) => deleteRecipe(recipe)}
             />
