@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import UserInfo from "./homepage/UserInfo";
-import SavedRecipes from "./homepage/SavedRecipes";
+// import SavedRecipes from "./homepage/SavedRecipes";
+import SavedRecipes2 from "./homepage/SavedRecipes2";
 
 import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,7 +18,14 @@ const useStyles = makeStyles((theme) => ({
 
 // SavedRecipes, ShoppingList(Strech)
 export default function Sidebar(props) {
-  const { savedRecipes, sessionUser, userSignup, userLogin } = props;
+  const {
+    savedRecipes,
+    sessionUser,
+    userSignup,
+    userLogin,
+    clickRecipe,
+    deleteRecipe,
+  } = props;
   const classes = useStyles();
 
   return (
@@ -34,7 +42,12 @@ export default function Sidebar(props) {
         handleSignup={userSignup}
       />
       <Divider variant="middle" />
-      <SavedRecipes savedRecipes={savedRecipes} />
+      {/* <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} /> */}
+      <SavedRecipes2
+        savedRecipes={savedRecipes}
+        clickRecipe={clickRecipe}
+        deleteRecipe={deleteRecipe}
+      />
     </div>
   );
 }

@@ -21,6 +21,8 @@ import Recipe from "./Recipe";
 import Auth from "./Auth";
 
 import axios from "axios";
+import uniqueRecipe from "../helper/uniqueRecipe";
+import duplcateRecipe from "../helper/duplicateRecipe";
 
 const drawerWidth = 200;
 
@@ -72,7 +74,7 @@ export default function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [savedRecipes, setSavedRecipes] = React.useState([]);
+  const [savedRecipes, setSavedRecipes] = React.useState([]); //! init is hard coded to empty arr, need data from db
   const [sessionUser, setSessionUser] = React.useState(null);
  
   //------
@@ -88,9 +90,14 @@ export default function App(props) {
 
   const handleAdd = (recipe) => {
     console.log("add to saved list", recipe); //! pass to Home
-    axios
-      .post("api/recipe", recipe)
-      .then(() => setSavedRecipes((prev) => [recipe, ...prev]));
+
+    if (duplcateRecipe(savedRecipes, recipe)) {
+      setSavedRecipes((prev) => [recipe, ...uniqueRecipe(prev, recipe)]);
+    } else {
+      setSavedRecipes((prev) => [recipe, ...prev]);
+
+      axios.post("api/recipe", recipe).then(() => console.log("saved"));
+    }
   };
 
   const userSignup = (user) => {
@@ -102,7 +109,28 @@ export default function App(props) {
   const userLogin = (user) => {
     //! user login, some session logic, db validation logic
     console.log("login", user);
-    axios.post("api/login", user).then(() => setSessionUser(user));
+    axios.post("api/login", user).then((response) => {
+      console.log(response);
+      setSessionUser(user);
+    });
+  };
+
+  const userLogout = () => {
+    console.log("logout");
+    axios.get("api/logout");
+  };
+
+  const clickRecipe = (recipe) => {
+    //! need to go to recipe detail page
+    console.log("to detail", recipe);
+  };
+
+  const deleteRecipe = (recipe) => {
+    //! delete saved recipe in db
+    console.log("delete recipe", recipe);
+    axios
+      .delete(`api/recipe/${1}`, recipe) //! hard coded here, need recipe id from db
+      .then((response) => console.log("deleted", response));
   };
 
   return (
@@ -165,12 +193,10 @@ export default function App(props) {
             <Sidebar
               savedRecipes={savedRecipes}
               sessionUser={sessionUser}
-              userSignup={(user) => {
-                userSignup(user);
-              }}
-              userLogin={(user) => {
-                userLogin(user);
-              }}
+              userSignup={(user) => userSignup(user)}
+              userLogin={(user) => userLogin(user)}
+              clickRecipe={(recipe) => clickRecipe(recipe)}
+              deleteRecipe={(recipe) => deleteRecipe(recipe)}
             />
           </Drawer>
         </Hidden>
@@ -183,7 +209,10 @@ export default function App(props) {
                 exact
                 path="/"
                 render={() => (
-                  <Home handleAdd={(recipe) => handleAdd(recipe)} handleRecipeProps={handleRecipeProps}/>
+                  <Home
+                    handleAdd={(recipe) => handleAdd(recipe)}
+                    clickRecipe={(recipe) => clickRecipe(recipe)}
+                  />
                 )}
               />
               <Route exact path="/recipe" render={() => (

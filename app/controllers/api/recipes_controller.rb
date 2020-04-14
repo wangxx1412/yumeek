@@ -19,39 +19,37 @@ class Api::RecipesController < ApplicationController
         )
 
         if @nutrient.save!
-          render :json => { :error => 0, :success => 1 }
+          render :json => { :success => "Recipe saved successfully" }
         else
-          render :json => { :error => 1, :success => 0 }
+          render :json => { :error => "Nutirent saved failed"  }
         end
 
       else
-        render :json => { :error => 1, :success => 0 }
+        render :json => { :error => "User recipe relation saved failed"  }
       end
       
     else
-      render :json => { :error => 1, :success => 0 }
+      render :json => { :error => "Recipe saved failed" }
     end
   end
 
   def show
     @recipe = Recipe.find params[:id]
+    @nutrients = Nutrient.find_by(recipe_id: params[:id] ) 
+    @userrecipe = UserRecipe.find_by(id: params[:id])
+    pp @userrecipe[:user_id]
+    pp session[:user_id]
+    @isowner = (@userrecipe[:user_id] == session[:user_id])
+
     render :json => {
-      recipe: @recipe
+      recipe: @recipe,
+      nutrients: @nutrients,
+      isOwner: @isowner
     }
   end
 
   def destroy
-    @nutrient = Nutrient.find_by(recipe_id: params[:id] ) 
-    @nutrient.destroy
-    @userrecipe = UserRecipe.find_by(recipe_id: params[:id] ) 
-    @userrecipe.destroy
-    @recipe = Recipe.find_by(id:params[:id]  )
-    @recipe.destroy
-    if @nutrient.destroy && @userrecipe.destroy && @recipe.destroy
-      render :json => { :error => 0, :success => 1 }
-    else
-      render :json => { :error => 1, :success => 0 }
-    end
+    check_and_remove
   end
 
   private
@@ -64,6 +62,20 @@ class Api::RecipesController < ApplicationController
       :health_labels=>[], 
       :ingredients=>[]
       )
+  end
+
+  def check_and_remove
+    @userrecipe = UserRecipe.find_by(recipe_id: params[:id])
+
+    if session[:user_id] == @userrecipe[:user_id]
+      @nutrient = Nutrient.find_by(recipe_id: params[:id] ) 
+      @nutrient.destroy
+      @recipe = Recipe.find(params[:id])
+      @recipe.destroy
+      render :json => { :success => "Delete successfully" }
+    else
+     render :json => { :error => "You are not the owner" }
+    end
   end
 end
 
