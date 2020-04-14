@@ -8,7 +8,7 @@ class Api::SessionsController < ApplicationController
       redirect_to 'http://localhost:3000'
     else
       # redirect user to Login page after login failed
-      redirect_to 'http://localhost:3000/login'
+      render :json => { :error => "Invalid Credentials" }
     end
   end
 
