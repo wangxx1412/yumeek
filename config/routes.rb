@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get '/logout' => 'sessions#destroy'
     
     post '/users' => 'users#create'
- 
+    get '/users/:id' => 'users#show'
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do
