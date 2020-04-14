@@ -46,6 +46,11 @@ export default function UserInfo(props) {
 
   const handleClose = () => {
     setOpen(false);
+    setEmail("");
+    setPassword("");
+    setPassword_confirmation("");
+    setFirst_name("");
+    setLast_name("");
   };
 
   return (
