@@ -94,9 +94,12 @@ export default function App(props) {
     console.log("add to saved list", recipe); //! pass to Home
 
     if (duplcateRecipe(savedRecipes, recipe)) {
-      setSavedRecipes((prev) => [recipe, ...uniqueRecipe(prev, recipe)]);
+      setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
     } else {
-      setSavedRecipes((prev) => [recipe, ...prev]);
+      setSavedRecipes((prev) => [
+        { ...recipe.recipe, ...recipe.nutrients, weekday: null },
+        ...prev,
+      ]);
 
       axios
         .post("api/recipe", recipe)
@@ -126,7 +129,8 @@ export default function App(props) {
 
   const userLogout = () => {
     console.log("logout");
-    setSessionUser(null); //! clean the saved recipes
+    setSessionUser(null);
+    setSavedRecipes([]);
     axios.get("api/logout").then((response) => console.log("logout", response));
   };
 
