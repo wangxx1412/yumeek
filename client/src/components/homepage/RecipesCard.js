@@ -8,7 +8,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles({
   root: {
@@ -60,9 +59,11 @@ export default function RecipesCard(props) {
           Learn More
         </Button>
       </CardActions>
-      <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
-        <Alert severity="success">This is a success message!</Alert>
-      </Snackbar>
+      <Snackbar
+        open={open}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      ></Snackbar>
     </Card>
   );
 }
