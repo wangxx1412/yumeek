@@ -102,7 +102,10 @@ export default function App(props) {
   const userLogin = (user) => {
     //! user login, some session logic, db validation logic
     console.log("login", user);
-    axios.post("api/login", user).then(() => setSessionUser(user));
+    axios.post("api/login", user).then((response) => {
+      console.log(response);
+      setSessionUser(user);
+    });
   };
 
   return (
