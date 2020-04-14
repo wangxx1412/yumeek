@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SavedRecipes(props) {
-  const { savedRecipes, clickRecipe } = props;
+  const { savedRecipes, clickRecipe, deleteRecipe } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -67,7 +67,7 @@ export default function SavedRecipes(props) {
                   <Chip
                     key={index}
                     label={recipe.recipe.label}
-                    onDelete={() => console.log("delete")}
+                    onDelete={() => deleteRecipe(recipe)}
                     className={classes.chip}
                     onClick={() => {
                       clickRecipe(recipe);

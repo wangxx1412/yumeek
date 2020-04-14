@@ -1,6 +1,6 @@
 import React from "react";
 import UserInfo from "./homepage/UserInfo";
-import SavedRecipes from "./homepage/SavedRecipes";
+// import SavedRecipes from "./homepage/SavedRecipes";
 import SavedRecipes2 from "./homepage/SavedRecipes2";
 
 import Divider from "@material-ui/core/Divider";
@@ -24,6 +24,7 @@ export default function Sidebar(props) {
     userSignup,
     userLogin,
     clickRecipe,
+    deleteRecipe,
   } = props;
   const classes = useStyles();
 
@@ -42,7 +43,11 @@ export default function Sidebar(props) {
       />
       <Divider variant="middle" />
       {/* <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} /> */}
-      <SavedRecipes2 savedRecipes={savedRecipes} clickRecipe={clickRecipe} />
+      <SavedRecipes2
+        savedRecipes={savedRecipes}
+        clickRecipe={clickRecipe}
+        deleteRecipe={deleteRecipe}
+      />
     </div>
   );
 }

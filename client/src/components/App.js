@@ -74,7 +74,7 @@ export default function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [savedRecipes, setSavedRecipes] = React.useState([]);
+  const [savedRecipes, setSavedRecipes] = React.useState([]); //! init is hard coded to empty arr, need data from db
   const [sessionUser, setSessionUser] = React.useState(null);
 
   const handleDrawerToggle = () => {
@@ -111,6 +111,14 @@ export default function App(props) {
   const clickRecipe = (recipe) => {
     //! need to go to recipe detail page
     console.log("to detail", recipe);
+  };
+
+  const deleteRecipe = (recipe) => {
+    //! delete saved recipe in db
+    console.log("delete recipe", recipe);
+    axios
+      .delete(`api/recipe/${1}`, recipe) //! hard coded here, need recipe id from db
+      .then((response) => console.log("deleted", response));
   };
 
   return (
@@ -173,15 +181,10 @@ export default function App(props) {
             <Sidebar
               savedRecipes={savedRecipes}
               sessionUser={sessionUser}
-              userSignup={(user) => {
-                userSignup(user);
-              }}
-              userLogin={(user) => {
-                userLogin(user);
-              }}
-              clickRecipe={(recipe) => {
-                clickRecipe(recipe);
-              }}
+              userSignup={(user) => userSignup(user)}
+              userLogin={(user) => userLogin(user)}
+              clickRecipe={(recipe) => clickRecipe(recipe)}
+              deleteRecipe={(recipe) => deleteRecipe(recipe)}
             />
           </Drawer>
         </Hidden>
