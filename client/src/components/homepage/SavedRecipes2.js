@@ -8,6 +8,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -66,6 +67,7 @@ export default function SavedRecipes(props) {
                 return (
                   <Chip
                     key={index}
+                    avatar={<Avatar alt={recipe.label} src={recipe.img_url} />}
                     label={recipe.label}
                     onDelete={() => deleteRecipe(recipe)}
                     className={classes.chip}
