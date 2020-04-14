@@ -1,6 +1,7 @@
 import React from "react";
 import UserInfo from "./homepage/UserInfo";
 import SavedRecipes from "./homepage/SavedRecipes";
+import SavedRecipes2 from "./homepage/SavedRecipes2";
 
 import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,7 +41,8 @@ export default function Sidebar(props) {
         handleSignup={userSignup}
       />
       <Divider variant="middle" />
-      <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} />
+      {/* <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} /> */}
+      <SavedRecipes2 savedRecipes={savedRecipes} clickRecipe={clickRecipe} />
     </div>
   );
 }
