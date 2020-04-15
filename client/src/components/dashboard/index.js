@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Chart from "./StatsChart";
+import WeekChart from "./WeekChart";
 
 // DayCardList(child: pop up AddRecipe component), Chart,
 export default function Dashboard() {
   return (
     <div>
-      <Chart />
+      <WeekChart />
     </div>
   );
 }

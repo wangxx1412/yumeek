@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 import Paper from "@material-ui/core/Paper";
 import {
   Animation,
@@ -10,7 +13,6 @@ import {
   Title,
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
-
 import { ValueScale, Stack } from "@devexpress/dx-react-chart";
 import { oilProduction } from "./demo-data/data-vizualization";
 
@@ -26,8 +28,14 @@ const modifyOilDomain = (domain) => [domain[0], 2200];
 const modifyPriceDomain = () => [0, 110];
 
 // DayCardList(child: pop up AddRecipe component), Chart,
-export default function StatsChart() {
-  const [chartData, setChartData] = useState(oilProduction);
+export default function WeekChart() {
+  const [chartData, setChartData] = useState();
+
+  useEffect(() => {
+    axios.get("/api/users/{userid}/week").then((data) => {
+      setChartData(data);
+    });
+  }, []);
 
   return (
     <Paper>
