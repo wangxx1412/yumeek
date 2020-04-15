@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import SearchBar from "./homepage/SearchBar";
 import RecipesCardsLists from "./homepage/RecipesCardsLists";
 import axios from "axios";
@@ -6,11 +7,19 @@ import recipesDataHelper from "../helper/recipesDataHelper";
 
 // SearchBar, RecipesCardsLists
 export default function Home(props) {
-  const { handleAdd, clickRecipe } = props;
+  const { handleAdd } = props;
   const appInfo = `&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=100`;
   const apiBaseURL = `https://api.edamam.com/search?q=`;
   const [searchResult, setSearchResult] = useState([]);
+
+  let history = useHistory();
+
+  const handleRedirect = (recipe) => {
+    history.push("/login", { recipe });
+  };
+
   useEffect(() => {
+    //!use conditonal here, to check if the search result if passing back
     const recipeList = [
       "chicken",
       "beef",
@@ -47,7 +56,9 @@ export default function Home(props) {
       <RecipesCardsLists
         searchResultRecipes={searchResult}
         handleAdd={handleAdd}
-        clickRecipe={clickRecipe}
+        clickRecipe={(recipe) => {
+          handleRedirect(recipe);
+        }}
       />
     </div>
   );

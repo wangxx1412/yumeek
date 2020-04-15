@@ -24,7 +24,6 @@ export default function Sidebar(props) {
     userSignup,
     userLogin,
     userLogout,
-    clickRecipe,
     deleteRecipe,
   } = props;
   const classes = useStyles();
@@ -45,12 +44,7 @@ export default function Sidebar(props) {
         handleLogout={userLogout}
       />
       <Divider variant="middle" />
-      {/* <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} /> */}
-      <SavedRecipes2
-        savedRecipes={savedRecipes}
-        clickRecipe={clickRecipe}
-        deleteRecipe={deleteRecipe}
-      />
+      <SavedRecipes2 savedRecipes={savedRecipes} deleteRecipe={deleteRecipe} />
     </div>
   );
 }

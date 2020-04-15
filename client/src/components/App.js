@@ -134,12 +134,6 @@ export default function App(props) {
     axios.get("api/logout").then((response) => console.log("logout", response));
   };
 
-  const clickRecipe = (recipe) => {
-    //! need to go to recipe detail page
-
-    console.log("to detail", recipe);
-  };
-
   const deleteRecipe = (recipe) => {
     //! delete saved recipe in db
     console.log("delete recipe", recipe);
@@ -213,7 +207,6 @@ export default function App(props) {
               userSignup={(user) => userSignup(user)}
               userLogin={(user) => userLogin(user)}
               userLogout={userLogout}
-              clickRecipe={(recipe) => clickRecipe(recipe)}
               deleteRecipe={(recipe) => deleteRecipe(recipe)}
             />
           </Drawer>
@@ -227,10 +220,7 @@ export default function App(props) {
                 exact
                 path="/"
                 render={() => (
-                  <Home
-                    handleAdd={(recipe) => handleAdd(recipe)}
-                    clickRecipe={(recipe) => clickRecipe(recipe)}
-                  />
+                  <Home handleAdd={(recipe) => handleAdd(recipe)} />
                 )}
               />
               <Route exact path="/recipe/:recipeid" component={Recipe} />
