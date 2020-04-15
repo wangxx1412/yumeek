@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import Calendar from "./Calendar";
 import Sidebar from "./Sidebar";
 import Home from "./Home";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
 import Auth from "./Auth";
 
