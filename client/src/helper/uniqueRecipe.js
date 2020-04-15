@@ -1,7 +1,12 @@
 export default (savedRecipes, newRecipe) => {
   const uniqueURL = newRecipe.recipe.src_url;
-  const res = savedRecipes.filter(
-    (recipe) => recipe.recipe.src_url !== uniqueURL
+  const duplicateRecipe = savedRecipes.find(
+    (recipe) => recipe.src_url === uniqueURL
   );
+  let res = [];
+  if (duplicateRecipe) {
+    res = savedRecipes.filter((recipe) => recipe.src_url !== uniqueURL);
+    res.unshift(duplicateRecipe);
+  }
   return res;
 };
