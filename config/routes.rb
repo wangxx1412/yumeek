@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     post '/users' => 'users#create'
     # Fetch user's all recipe and associations
     get '/users/:id' => 'users#show'
+    # Fetch grouped data for week chart
+    get '/users/:id/week' => 'users#fetchweek'
   end
 
   get '*path', to: "static_pages#fallback_index_html", constraints: ->(request) do
