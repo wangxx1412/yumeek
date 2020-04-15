@@ -1,6 +1,6 @@
 import React from "react"
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Box, Typography, CardMedia, Container, Divider } from '@material-ui/core';
+import { Box, Typography, CardMedia, Container, Divider, Button } from '@material-ui/core';
 
 import Labels from './recipe_details_page/Labels';
 import IngredientsList from './recipe_details_page/IngredientsList';
@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     root: {
           display: "flex" ,
           flexDirection: "row-reverse",
-          width: "80%",
+          width: "85%",
           justifyContent: "space-around",
           alignItems: "center", 
           [theme.breakpoints.down("sm")]: {
@@ -65,7 +65,7 @@ export default function Recipe(props) {
   // const { recipe } = props;
   console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
-  
+
   return(
         <div>
           <SaveRecipeButton handleAdd={props.handleAdd} recipe={recipe} savedRecipes={props.savedRecipes} deleteRecipe={props.deleteRecipe}/>

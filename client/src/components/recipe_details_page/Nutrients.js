@@ -1,35 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
-import { Chart, BarSeries, Title, ArgumentAxis, ValueAxis, LineSeries } from '@devexpress/dx-react-chart-material-ui';
-// import {ValueScale} from '@devexpress/dx-react-chart-material-ui';
-import { Animation, ValueScale } from '@devexpress/dx-react-chart';
+import { PieSeries, Chart, BarSeries, Title, ArgumentAxis, LineSeries, Tooltip} from '@devexpress/dx-react-chart-material-ui';
+import { Animation } from '@devexpress/dx-react-chart';
+
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  paper: {
+    width: "45%"
+  }
+});
 
 export default function Nutrients(props) {
   // const { nutrients } = props;
   // console.log("INSIDE NUTRIENTS.JS", nutrients)
-const nutrients = [
-  {protein: 31719},
-  {fiber: 3060},
-  {carbs: 61998},
-  {fat: 59297},
-  {energies: 898}
-]
+  
+  const classes = useStyles();
+  const nutrients = [
+    {name: "protein", value: 31719},
+    {name: "fiber", value: 3060},
+    {name: "carbs", value: 61998},
+    {name: "fat", value: 59297},
+    {name: "energies", value: 898}
+  ]
 
    return (
-    <div>
-     <Paper>
-       <Chart data={nutrients}> 
-        <Title text="Nutrition Facts" />
-        <ValueScale name="fat"/>
-        <ArgumentAxis />
-        <ValueAxis scaleName="fat" showGrid={false} showLine showTicks/>
-        <BarSeries
-            name="Units Sold"
-            valueField="fat"
-            argumentField="month"
-            scaleName="fat"
-          />
-       </Chart>
+    <div className={classes.root}>
+     <Paper className={classes.paper}>
+        <Chart data={nutrients} > 
+          <Title text="Nutrition Facts" />
+          {/* <Tooltip targetItem={nutrients} >  */}
+          <PieSeries
+              valueField="value"
+              argumentField="name"
+              innerRadius={0.7}
+              // onClick={}
+            />
+            {/* </Tooltip> */}
+            {/* <Animation /> */}
+        </Chart>
      </Paper>
     </div>
   );
