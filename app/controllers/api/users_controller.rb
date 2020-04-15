@@ -30,7 +30,7 @@ class Api::UsersController < ApplicationController
   end
   
   def fetchweek
-    if session[:user_id].to_s == params[:id]
+    # if session[:user_id].to_s == params[:id]
       @response = Recipe.find_by_sql(["
       SELECT weekday, sum(energies) as energies,sum(carbs) as carbs, sum(fat) as fat, sum(protein) as protein, sum(fiber) as fiber
       FROM Recipes 
@@ -40,9 +40,9 @@ class Api::UsersController < ApplicationController
       group by weekday",params[:id]])
 
       render :json => { :data => @response }
-    else 
-      render :json => { :error => "Only owner can view the dashboard" }
-    end
+    # else 
+    #   render :json => { :error => "Only owner can view the dashboard" }
+    # end
   end
   private
   def user_params

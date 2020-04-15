@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
 import Paper from "@material-ui/core/Paper";
 import {
-  Animation,
   Chart,
   BarSeries,
   LineSeries,
@@ -13,89 +11,114 @@ import {
   Title,
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
+
 import { ValueScale, Stack } from "@devexpress/dx-react-chart";
-import { oilProduction } from "./demo-data/data-vizualization";
 
 const Label = (symbol) => (props) => {
   const { text } = props;
   return <ValueAxis.Label {...props} text={text + symbol} />;
 };
 
-const PriceLabel = Label(" $");
-const LabelWithThousand = Label(" k");
+const KCalLabel = Label(" kCal");
+const GramLabel = Label(" g");
 
-const modifyOilDomain = (domain) => [domain[0], 2200];
-const modifyPriceDomain = () => [0, 110];
+const modifyGramDomain = (domain) => [domain[0], 1000];
+const modifyKCalDomain = () => [0, 5000];
 
-// DayCardList(child: pop up AddRecipe component), Chart,
-export default function WeekChart() {
-  const [chartData, setChartData] = useState();
+export default function Demo() {
+  const [chartRecipeData, setChartRecipeData] = useState();
+
+  let { userid } = useParams();
 
   useEffect(() => {
-    axios.get("/api/users/{userid}/week").then((data) => {
-      setChartData(data);
-    });
+    Promise.resolve(
+      axios.get(`/api/users/${userid}/week`).then((res) => {
+        const newData = res.data.data.map((el) => {
+          el["carbs"] = el["carbs"] / 1000;
+          el["protein"] = el["protein"] / 1000;
+          el["fiber"] = el["fiber"] / 1000;
+          el["fat"] = el["fat"] / 1000;
+          return el;
+        });
+        setChartRecipeData(newData);
+      })
+    );
   }, []);
 
   return (
-    <Paper>
-      <Chart data={chartData}>
-        <ValueScale name="oil" modifyDomain={modifyOilDomain} />
-        <ValueScale name="price" modifyDomain={modifyPriceDomain} />
+    <div>
+      {chartRecipeData ? (
+        <div>
+          <button
+            onClick={() => {
+              console.log(chartRecipeData);
+              console.log(Array.isArray(chartRecipeData));
+              console.log(chartRecipeData[0]);
+            }}
+          >
+            click
+          </button>
+          <Paper>
+            <Chart data={chartRecipeData}>
+              <ValueScale name="gram" modifyDomain={modifyGramDomain} />
+              <ValueScale name="kCal" modifyDomain={modifyKCalDomain} />
 
-        <ArgumentAxis />
-        <ValueAxis scaleName="oil" labelComponent={LabelWithThousand} />
-        <ValueAxis
-          scaleName="price"
-          position="right"
-          labelComponent={PriceLabel}
-        />
+              <ArgumentAxis />
+              <ValueAxis scaleName="gram" labelComponent={GramLabel} />
+              <ValueAxis
+                scaleName="kCal"
+                position="right"
+                labelComponent={KCalLabel}
+              />
 
-        <Title text="Oil production vs Oil price" />
+              <Title text="Oil production vs Oil price" />
 
-        <BarSeries
-          name="USA"
-          valueField="usa"
-          argumentField="year"
-          scaleName="oil"
-        />
-        <BarSeries
-          name="Saudi Arabia"
-          valueField="saudiArabia"
-          argumentField="year"
-          scaleName="oil"
-        />
-        <BarSeries
-          name="Iran"
-          valueField="iran"
-          argumentField="year"
-          scaleName="oil"
-        />
-        <BarSeries
-          name="Mexico"
-          valueField="mexico"
-          argumentField="year"
-          scaleName="oil"
-        />
-        <BarSeries
-          name="Russia"
-          valueField="russia"
-          argumentField="year"
-          scaleName="oil"
-        />
-        <LineSeries
-          name="Oil Price"
-          valueField="price"
-          argumentField="year"
-          scaleName="price"
-        />
-        <Stack
-          stacks={[
-            { series: ["USA", "Saudi Arabia", "Iran", "Mexico", "Russia"] },
-          ]}
-        />
-        <Legend />
-      </Chart>
-    </Paper>
+              <BarSeries
+                name="Carbs"
+                valueField="carbs"
+                argumentField="weekday"
+                scaleName="gram"
+              />
+              <BarSeries
+                name="Protein"
+                valueField="protein"
+                argumentField="weekday"
+                scaleName="gram"
+              />
+              <BarSeries
+                name="Fiber"
+                valueField="fiber"
+                argumentField="weekday"
+                scaleName="gram"
+              />
+              <BarSeries
+                name="Fat"
+                valueField="fat"
+                argumentField="weekday"
+                scaleName="gram"
+              />
+              <LineSeries
+                name="Energies"
+                valueField="energies"
+                argumentField="weekday"
+                scaleName="kCal"
+              />
+              <Stack
+                stacks={[
+                  {
+                    series: ["Carbs", "Protein", "Fiber", "Fat"],
+                  },
+                ]}
+              />
+              <Legend />
+            </Chart>
+          </Paper>
+        </div>
+      ) : (
+        <div>Loading</div>
+      )}
+    </div>
   );
 }
+
+// const [chartData, setChartData] = useState();
