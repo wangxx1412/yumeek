@@ -12,30 +12,28 @@ const useStyles = makeStyles(() => ({
 );
 
 const checkIfRecipeInTheList = function(savedRecipes, src) {
-console.log("!!!!", savedRecipes, src)
-  const found = savedRecipes.filter(item => item.recipe.src_url === src )
-  return found
+  const recipe = savedRecipes.filter(item => item.src_url === src );
+  return recipe;
 }
 
 export default function SaveRecipeButton(props) {
   const {recipe, savedRecipes, handleAdd } = props;
-  console.log("SAVEBUTTON", props)
   const classes = useStyles();
   const savedRecipe = checkIfRecipeInTheList(savedRecipes, recipe.recipe.src_url);
 
   return(
       <>
       { savedRecipe.length > 0 ? (
-          <Button variant="contained" size="medium" color="primary" >
+          <Button variant="contained" size="medium" color="primary" onClick={() => props.deleteRecipe(recipe)}>
             Delete From List
           </Button>
-        ) : (
+        ) : ( 
           <Button color="secondary" component="div" className={classes.root} onClick={() => handleAdd(recipe)}> 
             <CalendarTodayOutlinedIcon className={classes.style}/>
               Save to My List
           </Button>
-        )
-      }
+        ) 
+     } 
       </>
   );
 }

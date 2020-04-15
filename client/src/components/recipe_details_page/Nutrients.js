@@ -1,14 +1,35 @@
 import React from 'react';
-
 import { Paper } from '@material-ui/core';
-// import { Chart, BarSeries, Title, ArgumentAxis, ValueAxis } from '@devexpress/dx-react-chart-material-ui';
-// import { Animation } from '@devexpress/dx-react-chart';
+import { Chart, BarSeries, Title, ArgumentAxis, ValueAxis, LineSeries } from '@devexpress/dx-react-chart-material-ui';
+// import {ValueScale} from '@devexpress/dx-react-chart-material-ui';
+import { Animation, ValueScale } from '@devexpress/dx-react-chart';
 
 export default function Nutrients(props) {
-  return (
-    <div>Nutrition
-     <Paper>
+  // const { nutrients } = props;
+  // console.log("INSIDE NUTRIENTS.JS", nutrients)
+const nutrients = [
+  {protein: 31719},
+  {fiber: 3060},
+  {carbs: 61998},
+  {fat: 59297},
+  {energies: 898}
+]
 
+   return (
+    <div>
+     <Paper>
+       <Chart data={nutrients}> 
+        <Title text="Nutrition Facts" />
+        <ValueScale name="fat"/>
+        <ArgumentAxis />
+        <ValueAxis scaleName="fat" showGrid={false} showLine showTicks/>
+        <BarSeries
+            name="Units Sold"
+            valueField="fat"
+            argumentField="month"
+            scaleName="fat"
+          />
+       </Chart>
      </Paper>
     </div>
   );

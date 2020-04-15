@@ -136,7 +136,6 @@ export default function App(props) {
 
   const clickRecipe = (recipe) => {
     //! need to go to recipe detail page
-
     console.log("to detail", recipe);
   };
 
@@ -235,7 +234,7 @@ export default function App(props) {
               />
               <Route exact path="/recipe" render={() => (
                 <Recipe handleAdd={(recipe) => handleAdd(recipe)} 
-                        savedRecipes={savedRecipes} />
+                        savedRecipes={savedRecipes} deleteRecipe={(recipe) => deleteRecipe(recipe)}/>
               )} 
               />
               <Route exact path="/login" component={Auth} />

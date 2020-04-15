@@ -63,12 +63,12 @@ const recipe ={
 
 export default function Recipe(props) {
   // const { recipe } = props;
-  // console.log("PROPS INSIDE RECIPE", props)
+  console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
   
   return(
         <div>
-          <SaveRecipeButton handleAdd={props.handleAdd} recipe={recipe} savedRecipes={props.savedRecipes}/>
+          <SaveRecipeButton handleAdd={props.handleAdd} recipe={recipe} savedRecipes={props.savedRecipes} deleteRecipe={props.deleteRecipe}/>
           <Typography variant="h5" align="center">{recipe.recipe.label}</Typography>
           <Box className={classes.root} >
             <CardMedia component="img" src={recipe.recipe.img_url} alt={recipe.recipe.label} className={classes.style}/>
