@@ -1,7 +1,6 @@
-import React, { useState , useEffect } from "react";
-import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography, CardMedia } from '@material-ui/core';
+import React from "react"
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Box, Typography, CardMedia, Container, Divider } from '@material-ui/core';
 
 import Labels from './recipe_details_page/Labels';
 import IngredientsList from './recipe_details_page/IngredientsList';
@@ -11,14 +10,33 @@ import Nutrients from './recipe_details_page/Nutrients';
 const useStyles = makeStyles(theme => ({
     root: {
           display: "flex" ,
-          flexDirection: "column",
-          alignItems: "center",      
+          flexDirection: "row-reverse",
+          width: "80%",
+          justifyContent: "space-around",
+          alignItems: "center", 
+          [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            flexDirection: "column",
+            margin: "auto"
+          },    
     },
     container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
+      display: "flex",
+      justifyContent: "space-around",
+      width: "33%",
+      [theme.breakpoints.down("sm")]: {
+        width: "45%"
+      }, 
     },
-    style: { width: "25em" }
+    info: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    typography: {
+      fontSize: 40
+    },
+    style: { width: "25em", margin: "3%" }
   })
 );
 
@@ -33,36 +51,42 @@ const recipe ={
                 "2 large onions (for about 2 cups chopped)",
                 "3 cloves fresh garlic, minced, or 1 tablespoon bottled minced garlic"]
 },
-
-nutrients: {
-  protein: 31719,
-  fiber: 3060,
-  carbs: 61998,
-  fat: 59297,
-  energies: 898
+  nutrients: {
+    protein: 31719,
+    fiber: 3060,
+    carbs: 61998,
+    fat: 59297,
+    energies: 898
+  }
 }
-}
 
-// IngredientsList, Steps, NutrientsList
+
 export default function Recipe(props) {
   // const { recipe } = props;
-  console.log("PROPS INSIDE RECIPE", props)
+  // console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
-
+  
   return(
         <div>
-          <SaveRecipeButton handleAdd={props.handleAdd} recipe={recipe}/>
+          <SaveRecipeButton handleAdd={props.handleAdd} recipe={recipe} savedRecipes={props.savedRecipes}/>
+          <Typography variant="h5" align="center">{recipe.recipe.label}</Typography>
           <Box className={classes.root} >
-            <Typography variant="h5">{recipe.recipe.label}</Typography>
             <CardMedia component="img" src={recipe.recipe.img_url} alt={recipe.recipe.label} className={classes.style}/>
-            <div>
-              <p>{recipe.recipe.ingredients.length} Ingredients</p>
-              <p>{recipe.nutrients.energies} Energies</p>
-            </div>
-            <Labels labels={recipe.recipe.health_labels} className={classes.container}/>
+            <Container className={classes.container}>
+              <div className={classes.info}>
+                <span className={classes.typography}>{recipe.recipe.ingredients.length}</span>
+                <span>Ingredients</span>
+              </div>
+              <Divider orientation="vertical" flexItem />
+              <div className={classes.info}>
+                <span className={classes.typography}>{recipe.nutrients.energies}</span>
+                <span>Calories</span>
+              </div>
+            </Container>
           </Box>
-          <IngredientsList ingredients={recipe.recipe.ingredients}/>
-          <Nutrients nutrients={recipe.nutrients}/>
+          {/* <Labels labels={recipe.recipe.health_labels} className={classes.container}/> */}
+        <IngredientsList ingredients={recipe.recipe.ingredients}/>
+        <Nutrients nutrients={recipe.nutrients}/>
         </div>
       );
 }

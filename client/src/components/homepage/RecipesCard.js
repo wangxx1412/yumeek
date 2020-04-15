@@ -24,9 +24,6 @@ export default function RecipesCard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-
-  // const handleClick = (recipe) => { 
-  //   console.log("to detail", recipe); //! to detail page
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;

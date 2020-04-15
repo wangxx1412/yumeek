@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const defaultProps = {
   bgcolor: 'background.paper',
   borderColor: 'grey.300',
-  m: 1,
+  margin: "6%",
   p: 2,
   border: 1,
   boxShadow: 1

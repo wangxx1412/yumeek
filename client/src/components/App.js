@@ -209,7 +209,8 @@ export default function App(props) {
                 )}
               />
               <Route exact path="/recipe" render={() => (
-                <Recipe handleAdd={(recipe) => handleAdd(recipe)} />
+                <Recipe handleAdd={(recipe) => handleAdd(recipe)} 
+                        savedRecipes={savedRecipes} />
               )} 
               />
               <Route exact path="/login" component={Auth} />
