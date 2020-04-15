@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Avatar from "@material-ui/core/Avatar";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SavedRecipes(props) {
-  const { savedRecipes, clickRecipe, deleteRecipe } = props;
+  const { savedRecipes, deleteRecipe } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -38,6 +39,12 @@ export default function SavedRecipes(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const history = useHistory();
+
+  const handleRedirect = (recipe) => {
+    history.push("/login", { recipe });
   };
 
   return (
@@ -72,7 +79,8 @@ export default function SavedRecipes(props) {
                     onDelete={() => deleteRecipe(recipe)}
                     className={classes.chip}
                     onClick={() => {
-                      clickRecipe(recipe);
+                      handleRedirect(recipe);
+                      setOpen(false);
                     }}
                   />
                 );
