@@ -74,8 +74,17 @@ export default function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [savedRecipes, setSavedRecipes] = React.useState([]); //! init is hard coded to empty arr, need data from db
+  const [savedRecipes, setSavedRecipes] = React.useState([]);
   const [sessionUser, setSessionUser] = React.useState(null);
+
+  React.useEffect(() => {
+    if (sessionUser) {
+      axios.get(`/api/users/${sessionUser.user_id}`).then((response) => {
+        console.log(response.data);
+        setSavedRecipes(response.data.data);
+      });
+    }
+  }, [sessionUser]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -85,18 +94,27 @@ export default function App(props) {
     console.log("add to saved list", recipe); //! pass to Home
 
     if (duplcateRecipe(savedRecipes, recipe)) {
-      setSavedRecipes((prev) => [recipe, ...uniqueRecipe(prev, recipe)]);
+      setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
     } else {
-      setSavedRecipes((prev) => [recipe, ...prev]);
+      setSavedRecipes((prev) => [
+        { ...recipe.recipe, ...recipe.nutrients, weekday: null },
+        ...prev,
+      ]);
 
-      axios.post("api/recipe", recipe).then(() => console.log("saved"));
+      axios
+        .post("api/recipe", recipe)
+        .then((response) => console.log("saved", response));
     }
   };
 
   const userSignup = (user) => {
     //! user signup, some session logic, db logic
     console.log("signup", user);
-    axios.post("api/users", { user }).then(() => setSessionUser(user));
+    axios.post("api/users", { user }).then((response) => {
+      console.log(response);
+      const user_id = response.data.data.id;
+      setSessionUser({ user_id, ...user });
+    });
   };
 
   const userLogin = (user) => {
@@ -104,25 +122,30 @@ export default function App(props) {
     console.log("login", user);
     axios.post("api/login", user).then((response) => {
       console.log(response);
-      setSessionUser(user);
+      const user_id = response.data.data.id;
+      setSessionUser({ user_id, ...user });
     });
   };
 
   const userLogout = () => {
     console.log("logout");
-    axios.get("api/logout");
+    setSessionUser(null);
+    setSavedRecipes([]);
+    axios.get("api/logout").then((response) => console.log("logout", response));
   };
 
   const clickRecipe = (recipe) => {
     //! need to go to recipe detail page
+
     console.log("to detail", recipe);
   };
 
   const deleteRecipe = (recipe) => {
     //! delete saved recipe in db
     console.log("delete recipe", recipe);
+    setSavedRecipes((prev) => prev.filter((item) => item.id !== recipe.id));
     axios
-      .delete(`api/recipe/${1}`, recipe) //! hard coded here, need recipe id from db
+      .delete(`api/recipe/${recipe.id}`, recipe)
       .then((response) => console.log("deleted", response));
   };
 
@@ -171,6 +194,7 @@ export default function App(props) {
               userLogin={(user) => {
                 userLogin(user);
               }}
+              userLogout={userLogout}
             />
           </Drawer>
         </Hidden>
@@ -188,6 +212,7 @@ export default function App(props) {
               sessionUser={sessionUser}
               userSignup={(user) => userSignup(user)}
               userLogin={(user) => userLogin(user)}
+              userLogout={userLogout}
               clickRecipe={(recipe) => clickRecipe(recipe)}
               deleteRecipe={(recipe) => deleteRecipe(recipe)}
             />

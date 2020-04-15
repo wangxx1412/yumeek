@@ -23,6 +23,7 @@ export default function Sidebar(props) {
     sessionUser,
     userSignup,
     userLogin,
+    userLogout,
     clickRecipe,
     deleteRecipe,
   } = props;
@@ -30,6 +31,7 @@ export default function Sidebar(props) {
 
   return (
     <div>
+      {/* change to our app logo later */}
       <Avatar
         alt="logo"
         src="https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
@@ -40,6 +42,7 @@ export default function Sidebar(props) {
         user={sessionUser}
         handleLogin={userLogin}
         handleSignup={userSignup}
+        handleLogout={userLogout}
       />
       <Divider variant="middle" />
       {/* <SavedRecipes savedRecipes={savedRecipes} clickRecipe={clickRecipe} /> */}

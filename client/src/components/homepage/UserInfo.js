@@ -21,15 +21,33 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(2),
   },
+  infoContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    margin: theme.spacing(2),
+  },
+  avatar: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+  },
   userEmail: {
     height: theme.spacing(3),
-    marginLeft: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  logout: {
+    height: theme.spacing(3),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
 export default function UserInfo(props) {
-  const { user, handleSignup, handleLogin } = props;
+  const { user, handleSignup, handleLogin, handleLogout } = props;
   const [open, setOpen] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState("");
@@ -56,17 +74,22 @@ export default function UserInfo(props) {
   return (
     <div>
       {user ? (
-        <>
+        <div className={classes.infoContainer}>
           <Avatar
             alt="logo"
             src={
               user.img_url ||
               "https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
             }
-            className={classes.logo}
+            className={classes.avatar}
           />
           <Chip label={`Welcome ${user.email}`} className={classes.userEmail} />
-        </>
+          <Chip
+            label="logout"
+            className={classes.logout}
+            onClick={handleLogout}
+          />
+        </div>
       ) : (
         <Button
           variant="contained"
