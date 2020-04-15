@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    // backgroundColor: theme.palette.background.paper,
   },
 }));
 
@@ -25,17 +24,19 @@ export default function RecipesCardsLists(props) {
       <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
           <ListSubheader component="div">
-            {searchResultRecipes.length} Recipes For You!
+            {searchResultRecipes &&
+              `${searchResultRecipes.length} Recipes For You!`}
           </ListSubheader>
         </GridListTile>
-        {searchResultRecipes.map((recipe, index) => (
-          <RecipesCard
-            key={index}
-            recipe={recipe}
-            handleAdd={handleAdd}
-            clickRecipe={clickRecipe}
-          />
-        ))}
+        {searchResultRecipes &&
+          searchResultRecipes.map((recipe, index) => (
+            <RecipesCard
+              key={index}
+              recipe={recipe}
+              handleAdd={handleAdd}
+              clickRecipe={clickRecipe}
+            />
+          ))}
       </GridList>
     </div>
   );
