@@ -43,10 +43,9 @@ const useSearchResult = () => {
   const handleSearch = (value, tags) => {
     const tagsArr = [];
     for (let tag in tags) {
-      tags[tag] && tagsArr.push(tag);
+      tags[tag] && tagsArr.push(`health=${tag}`);
     }
-    const healthTags =
-      tagsArr.length !== 0 ? `&health=${tagsArr.join("&")}` : "";
+    const healthTags = tagsArr.length !== 0 ? `&${tagsArr.join("&")}` : "";
 
     axios.get(apiBaseURL + value + appInfo + healthTags).then((response) => {
       setSearchResult(JSON.stringify(recipesDataHelper(response)));
