@@ -40,15 +40,22 @@ const useSearchResult = () => {
     }
   }, []);
 
-  const handleSearch = (value) => {
-    axios.get(apiBaseURL + value + appInfo).then((response) => {
+  const handleSearch = (value, tags) => {
+    const tagsArr = [];
+    for (let tag in tags) {
+      tags[tag] && tagsArr.push(tag);
+    }
+    const healthTags =
+      tagsArr.length !== 0 ? `&health=${tagsArr.join("&")}` : "";
+
+    axios.get(apiBaseURL + value + appInfo + healthTags).then((response) => {
       setSearchResult(JSON.stringify(recipesDataHelper(response)));
       localStorage.setItem(
         "searchResult",
         JSON.stringify(recipesDataHelper(response))
       );
     });
-    console.log("search", value);
+    console.log("search", value, healthTags);
   };
 
   return { searchResult: JSON.parse(searchResult), handleSearch };

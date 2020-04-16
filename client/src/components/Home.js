@@ -17,7 +17,7 @@ export default function Home(props) {
 
   return (
     <div>
-      <SearchBar handleSearch={(value) => handleSearch(value)} />
+      <SearchBar handleSearch={handleSearch} />
       <RecipesCardsLists
         searchResultRecipes={searchResult}
         handleAdd={handleAdd}
