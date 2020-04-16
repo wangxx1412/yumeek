@@ -23,7 +23,6 @@ const checkIfRecipeInTheList = function(savedRecipes, src) {
 
 export default function SaveRecipeButton(props) {
   const {recipe, savedRecipes, handleAdd, deleteRecipe } = props;
-  console.log("SAVERECIPE", props)
   const classes = useStyles();
   const history = useHistory();
   const handleClick = () => {
@@ -38,7 +37,7 @@ export default function SaveRecipeButton(props) {
             Delete From List
           </Button>
         ) : ( 
-          <Button color="secondary" component="div" className={classes.saveButton} onClick={() => handleAdd(recipe)}> 
+          <Button color="secondary" component="div" className={classes.saveButton} onClick={() => handleAdd(props)}> 
             <CalendarTodayOutlinedIcon className={classes.style}/>
               Save to My List
           </Button>

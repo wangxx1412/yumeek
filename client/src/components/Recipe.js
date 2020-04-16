@@ -42,34 +42,19 @@ const useStyles = makeStyles(theme => ({
   })
 );
 
-const formatLocationState = (recipe) => {   // onject in location state is different
-  console.log("OBJECT", recipe.recipe.label)
-
-  recipe.nutrients = {
-    protein: recipe.recipe.protein,
-    fiber: recipe.recipe.fiber,
-    carbs: recipe.recipe.carbs, 
-    fat: recipe.recipe.fat,
-    energies: recipe.recipe.energies
-  }
-  console.log(recipe)
-
-}
-
 
 export default function Recipe(props) {
   const location = useLocation();
   const { savedRecipes, deleteRecipe, handleAdd } = props;
   // console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
-  // formatLocationState(location.state)
   // console.log("LOCATION", location)
   // console.log("LOCALSTORAGE", localStorage)
-  let { userid } = useParams();
-  console.log("PARAMS", userid)
+  // let { userid } = useParams();
+  // console.log("PARAMS", userid)
   return(
         <div>
-          <SaveRecipeButton handleAdd={handleAdd} recipe={location.state} savedRecipes={savedRecipes} deleteRecipe={deleteRecipe}/>
+          <SaveRecipeButton handleAdd={handleAdd} recipe={location.state.recipe} savedRecipes={savedRecipes} deleteRecipe={deleteRecipe}/>
           <Typography variant="h5" align="center">{location.state.recipe.label}</Typography>
           <Box className={classes.root} >
             <CardMedia component="img" src={location.state.recipe.img_url} alt={location.state.recipe.label} className={classes.style}/>
