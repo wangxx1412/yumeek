@@ -1,7 +1,7 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
 import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined';
 
 const useStyles = makeStyles(() => ({
@@ -12,14 +12,6 @@ const useStyles = makeStyles(() => ({
   saveButton: {
         width: "4 em"
   },
-  // search: {
-  //   fontSize: "large",
-  //   float: "right",
-  //   position: "absolute",
-  //   right: "106px",
-  //   top: "45px",
-  //   color: "grey.300"
-  // },
   style: { fontSize: 40 }
 })
 );
@@ -32,6 +24,10 @@ const checkIfRecipeInTheList = function(savedRecipes, src) {
 export default function SaveRecipeButton(props) {
   const {recipe, savedRecipes, handleAdd, deleteRecipe } = props;
   const classes = useStyles();
+  const history = useHistory();
+  const handleClick = () => {
+    history.push('/');
+  };
   const savedRecipe = checkIfRecipeInTheList(savedRecipes, recipe.recipe.src_url);
 
   return(
@@ -47,7 +43,7 @@ export default function SaveRecipeButton(props) {
           </Button>
         ) 
      } 
-        <Button size="medium" color="secondary">
+        <Button size="medium" color="secondary" onClick={handleClick}>
           Search Recipe
         </Button>
       </div>

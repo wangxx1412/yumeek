@@ -63,7 +63,6 @@ const recipe ={
 
 export default function Recipe(props) {
   // const { recipe } = props;
-  console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
 
   return(
