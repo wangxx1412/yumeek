@@ -23,12 +23,13 @@ const checkIfRecipeInTheList = function(savedRecipes, src) {
 
 export default function SaveRecipeButton(props) {
   const {recipe, savedRecipes, handleAdd, deleteRecipe } = props;
+  console.log("SAVERECIPE", props)
   const classes = useStyles();
   const history = useHistory();
   const handleClick = () => {
     history.push('/');
   };
-  const savedRecipe = checkIfRecipeInTheList(savedRecipes, recipe.recipe.src_url);
+  const savedRecipe = checkIfRecipeInTheList(savedRecipes, recipe.src_url);
 
   return(
       <div className={classes.root}>

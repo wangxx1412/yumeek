@@ -87,64 +87,6 @@ export default function App(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  // const handleAdd = (recipe) => {
-  //   console.log("add to saved list", recipe); //! pass to Home
-
-  //   if (duplcateRecipe(savedRecipes, recipe)) {
-  //     setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
-  //   } else {
-  //     setSavedRecipes((prev) => [
-  //       { ...recipe.recipe, ...recipe.nutrients, weekday: null },
-  //       ...prev,
-  //     ]);
-
-  //     axios
-  //       .post("api/recipe", recipe)
-  //       .then((response) => console.log("saved", response));
-  //   }
-  // };
-
-  // const userSignup = (user) => {
-  //   //! user signup, some session logic, db logic
-  //   console.log("signup", user);
-  //   axios.post("api/users", { user }).then((response) => {
-  //     console.log(response);
-  //     const user_id = response.data.data.id;
-  //     setSessionUser({ user_id, ...user });
-  //   });
-  // };
-
-  // const userLogin = (user) => {
-  //   //! user login, some session logic, db validation logic
-  //   console.log("login", user);
-  //   axios.post("api/login", user).then((response) => {
-  //     console.log(response);
-  //     const user_id = response.data.data.id;
-  //     setSessionUser({ user_id, ...user });
-  //   });
-  // };
-
-  // const userLogout = () => {
-  //   console.log("logout");
-  //   setSessionUser(null);
-  //   setSavedRecipes([]);
-  //   axios.get("api/logout").then((response) => console.log("logout", response));
-  // };
-
-  // const clickRecipe = (recipe) => {
-  //   //! need to go to recipe detail page
-  //   console.log("to detail", recipe);
-  // };
-
-  // const deleteRecipe = (recipe) => {
-  //   //! delete saved recipe in db
-  //   console.log("delete recipe", recipe);
-  //   setSavedRecipes((prev) => prev.filter((item) => item.id !== recipe.id));
-  //   axios
-  //     .delete(`api/recipe/${recipe.id}`, recipe)
-  //     .then((response) => console.log("deleted", response));
-  // };
-
   return (
     <BrowserRouter>
       <div className={clsx("App", classes.root)}>
@@ -227,7 +169,7 @@ export default function App(props) {
               />
               <Route exact path="/recipe" render={() => (
                 <Recipe handleAdd={(recipe) => handleAdd(recipe)} 
-                        savedRecipes={savedRecipes} deleteRecipe={(recipe) => deleteRecipe(recipe)}/>
+                        savedRecipes={savedRecipes} deleteRecipe={(recipe) => deleteRecipe(recipe)} />
               )} 
               />
               <Route exact path="/login" component={Auth} />

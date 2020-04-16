@@ -14,19 +14,23 @@ const useStyles = makeStyles({
   }
 });
 
-const nutrients = [
-  {name: "protein", value: 31719},
-  {name: "fiber", value: 3060},
-  {name: "carbs", value: 61998},
-  {name: "fat", value: 59297},
-  {name: "energies", value: 898}
-]
+const formatNutrients = (recipe) => {
+  const nutrientsArray = [
+  {name: "protein", value: recipe["protein"]},
+  {name: "fiber", value: recipe["fiber"]},
+  {name: "carbs", value: recipe["carbs"]},
+  {name: "fat", value: recipe["fat"]},
+  {name: "energies", value: recipe["energies"]}
+  ]
+  return nutrientsArray;
+}
 
-export default function Nutrients() {
+export default function Nutrients(props) {
+  const { recipe } = props;
   const classes = useStyles();
+  const nutrients = formatNutrients(recipe);
 
   return (
-
     <div className={classes.root}>
      <Paper className={classes.paper}>
         <Chart data={nutrients} > 

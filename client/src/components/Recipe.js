@@ -1,4 +1,6 @@
 import React from "react"
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Box, Typography, CardMedia, Container, Divider, Button } from '@material-ui/core';
 
@@ -40,52 +42,52 @@ const useStyles = makeStyles(theme => ({
   })
 );
 
-const recipe ={
-  recipe: {
-  label: "Basic Beef",
-  steps: null,
-  img_url: "https://www.edamam.com/web-img/c68/c6815d01c110e5fd03c8c6f5c4824db8.jpg",
-  src_url: "http://www.cookstr.com/recipes/basic-beef",
-  health_labels: ["Sugar-Conscious", "Peanut-Free", "Tree-Nut-Free", "Alcohol-Free"],   
-  ingredients:["2 pounds ground beef",
-                "2 large onions (for about 2 cups chopped)",
-                "3 cloves fresh garlic, minced, or 1 tablespoon bottled minced garlic"]
-},
-  nutrients: {
-    protein: 31719,
-    fiber: 3060,
-    carbs: 61998,
-    fat: 59297,
-    energies: 898
+const formatLocationState = (recipe) => {   // onject in location state is different
+  console.log("OBJECT", recipe.recipe.label)
+
+  recipe.nutrients = {
+    protein: recipe.recipe.protein,
+    fiber: recipe.recipe.fiber,
+    carbs: recipe.recipe.carbs, 
+    fat: recipe.recipe.fat,
+    energies: recipe.recipe.energies
   }
+  console.log(recipe)
+
 }
 
 
 export default function Recipe(props) {
-  // const { recipe } = props;
+  const location = useLocation();
+  const { savedRecipes, deleteRecipe, handleAdd } = props;
+  // console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
-
+  // formatLocationState(location.state)
+  // console.log("LOCATION", location)
+  // console.log("LOCALSTORAGE", localStorage)
+  let { userid } = useParams();
+  console.log("PARAMS", userid)
   return(
         <div>
-          <SaveRecipeButton handleAdd={props.handleAdd} recipe={recipe} savedRecipes={props.savedRecipes} deleteRecipe={props.deleteRecipe}/>
-          <Typography variant="h5" align="center">{recipe.recipe.label}</Typography>
+          <SaveRecipeButton handleAdd={handleAdd} recipe={location.state} savedRecipes={savedRecipes} deleteRecipe={deleteRecipe}/>
+          <Typography variant="h5" align="center">{location.state.recipe.label}</Typography>
           <Box className={classes.root} >
-            <CardMedia component="img" src={recipe.recipe.img_url} alt={recipe.recipe.label} className={classes.style}/>
+            <CardMedia component="img" src={location.state.recipe.img_url} alt={location.state.recipe.label} className={classes.style}/>
             <Container className={classes.container}>
               <div className={classes.info}>
-                <span className={classes.typography}>{recipe.recipe.ingredients.length}</span>
+                <span className={classes.typography}>{location.state.recipe.ingredients.length}</span>
                 <span>Ingredients</span>
               </div>
               <Divider orientation="vertical" flexItem />
               <div className={classes.info}>
-                <span className={classes.typography}>{recipe.nutrients.energies}</span>
+                <span className={classes.typography}>{location.state.recipe.energies}</span>
                 <span>Calories</span>
               </div>
             </Container>
           </Box>
-          {/* <Labels labels={recipe.recipe.health_labels} className={classes.container}/> */}
-        <IngredientsList ingredients={recipe.recipe.ingredients}/>
-        <Nutrients nutrients={recipe.nutrients}/>
+          <Labels labels={location.state.recipe.health_labels} className={classes.container}/>
+        <IngredientsList ingredients={location.state.recipe.ingredients}/>
+        <Nutrients recipe={location.state.recipe}/>
         </div>
       );
 }

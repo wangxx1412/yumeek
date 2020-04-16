@@ -12,7 +12,7 @@ export default function Home(props) {
   let history = useHistory();
 
   const handleRedirect = (recipe) => {
-    history.push("/login", { recipe });
+    history.push("/recipe", { recipe }); //changed the path to '/recipe'
   };
 
   return (
