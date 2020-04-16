@@ -22,8 +22,6 @@ import Auth from "./Auth";
 
 import useUserData from "../hooks/useUserData";
 
-const drawerWidth = 200;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -31,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     position: "relative",
     whiteSpace: "nowrap",
-    width: drawerWidth,
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    paddingLeft: theme.spacing(1),
-    background: "#535454",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "start",
+    alignItems: "center",
+    width: 200,
+    background: "#DCDCD9",
     color: "#fff",
     [theme.breakpoints.up("md")]: {
       width: 240,

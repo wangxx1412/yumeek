@@ -17,16 +17,12 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: theme.spacing(7),
     height: theme.spacing(7),
-    marginLeft: theme.spacing(10),
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(2),
   },
   infoContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",
-    margin: theme.spacing(2),
   },
   avatar: {
     width: theme.spacing(7),
@@ -83,11 +79,16 @@ export default function UserInfo(props) {
             }
             className={classes.avatar}
           />
-          <Chip label={`Welcome ${user.email}`} className={classes.userEmail} />
+          <Chip
+            label={`Welcome ${user.email}`}
+            className={classes.userEmail}
+            variant="outlined"
+          />
           <Chip
             label="logout"
             className={classes.logout}
             onClick={handleLogout}
+            variant="outlined"
           />
         </div>
       ) : (
