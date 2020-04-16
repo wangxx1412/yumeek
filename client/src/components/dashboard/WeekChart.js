@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Skeleton from "@material-ui/lab/Skeleton";
 import {
   Chart,
   BarSeries,
@@ -12,7 +14,13 @@ import {
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
 
-import { ValueScale, Stack } from "@devexpress/dx-react-chart";
+import {
+  Animation,
+  ValueScale,
+  Stack,
+  EventTracker,
+  SelectionState,
+} from "@devexpress/dx-react-chart";
 
 const Label = (symbol) => (props) => {
   const { text } = props;
@@ -25,8 +33,9 @@ const GramLabel = Label(" g");
 const modifyGramDomain = (domain) => [domain[0], 1000];
 const modifyKCalDomain = () => [0, 5000];
 
-export default function Demo() {
+export default function WeekChart(props) {
   const [chartRecipeData, setChartRecipeData] = useState();
+  const [selection, setSelection] = useState();
 
   let { userid } = useParams();
 
@@ -62,6 +71,12 @@ export default function Demo() {
       })
     );
   }, []);
+
+  const handleSelect = ({ targets }) => {
+    if (targets[0] !== undefined) {
+      props.handleSelectDay(chartRecipeData[targets[0].point]);
+    }
+  };
 
   return (
     <div>
@@ -128,12 +143,19 @@ export default function Demo() {
                   },
                 ]}
               />
+              <Animation />
               <Legend />
+              <EventTracker onClick={handleSelect} />
+              <SelectionState selection={selection} />
             </Chart>
           </Paper>
         </div>
       ) : (
-        <div>Loading</div>
+        <div>
+          <Skeleton variant="text" width={1200} height={100} animation="wave" />
+          <Skeleton variant="rect" width={1200} height={400} animation="wave" />
+          <Skeleton variant="text" width={1200} height={100} animation="wave" />
+        </div>
       )}
     </div>
   );
