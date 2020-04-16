@@ -25,9 +25,9 @@ export default function RecipesCard(props) {
   return (
     <Card className={classes.root}>
       <CardActionArea
-        onClick={() =>
-          clickRecipe({ ...recipe.recipe, ...recipe.nutrients, weekday: null })
-        }
+        onClick={() => {
+          clickRecipe({ ...recipe.recipe, ...recipe.nutrients, weekday: null });
+        }}
       >
         <CardMedia
           className={classes.media}

@@ -156,6 +156,7 @@ export default function UserInfo(props) {
               id="confirm-password"
               label="confirm password"
               type="password"
+              fullWidth
               value={password_confirmation}
               onChange={(e) => setPassword_confirmation(e.target.value)}
             />

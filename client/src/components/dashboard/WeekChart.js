@@ -12,7 +12,13 @@ import {
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
 
-import { ValueScale, Stack } from "@devexpress/dx-react-chart";
+import {
+  Animation,
+  ValueScale,
+  Stack,
+  EventTracker,
+  SelectionState,
+} from "@devexpress/dx-react-chart";
 
 const Label = (symbol) => (props) => {
   const { text } = props;
@@ -25,8 +31,9 @@ const GramLabel = Label(" g");
 const modifyGramDomain = (domain) => [domain[0], 1000];
 const modifyKCalDomain = () => [0, 5000];
 
-export default function Demo() {
+export default function WeekChart(props) {
   const [chartRecipeData, setChartRecipeData] = useState();
+  const [selection, setSelection] = useState();
 
   let { userid } = useParams();
 
@@ -40,10 +47,34 @@ export default function Demo() {
           el["fat"] = el["fat"] / 1000;
           return el;
         });
-        setChartRecipeData(newData);
+        let result = [];
+
+        const sunday = newData.filter((el) => el["weekday"] === "Sunday");
+        const monday = newData.filter((el) => el["weekday"] === "Monday");
+        const tuesday = newData.filter((el) => el["weekday"] === "Tuesday");
+        const wednesday = newData.filter((el) => el["weekday"] === "Wednesday");
+        const thursday = newData.filter((el) => el["weekday"] === "Thursday");
+        const friday = newData.filter((el) => el["weekday"] === "Friday");
+        const saturday = newData.filter((el) => el["weekday"] === "Saturday");
+
+        result.push(...sunday);
+        result.push(...monday);
+        result.push(...tuesday);
+        result.push(...wednesday);
+        result.push(...thursday);
+        result.push(...friday);
+        result.push(...saturday);
+
+        setChartRecipeData(result);
       })
     );
   }, []);
+
+  const handleSelect = ({ targets }) => {
+    if (targets[0] !== undefined) {
+      props.handleSelectDay(chartRecipeData[targets[0].point]);
+    }
+  };
 
   return (
     <div>
@@ -71,7 +102,7 @@ export default function Demo() {
                 labelComponent={KCalLabel}
               />
 
-              <Title text="Oil production vs Oil price" />
+              <Title text="Nutrients grams vs Energies kCal" />
 
               <BarSeries
                 name="Carbs"
@@ -110,7 +141,10 @@ export default function Demo() {
                   },
                 ]}
               />
+              <Animation />
               <Legend />
+              <EventTracker onClick={handleSelect} />
+              <SelectionState selection={selection} />
             </Chart>
           </Paper>
         </div>
@@ -120,5 +154,3 @@ export default function Demo() {
     </div>
   );
 }
-
-// const [chartData, setChartData] = useState();
