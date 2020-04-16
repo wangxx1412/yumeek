@@ -7,7 +7,7 @@ import duplcateRecipe from "../helper/duplicateRecipe";
 const useUserData = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
   const [sessionUser, setSessionUser] = useState(
-    JSON.parse(localStorage.getItem("sessionUser"))
+    JSON.parse(localStorage.getItem("sessionUser")) || null
   );
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const useUserData = () => {
 
   const userSignup = (user) => {
     console.log("signup", user);
-    axios.post("api/users", { user }).then((response) => {
+    axios.post("/api/users", { user }).then((response) => {
       console.log(response);
       setSessionUser(response.data.data);
       localStorage.setItem("sessionUser", JSON.stringify(response.data.data));
@@ -30,7 +30,7 @@ const useUserData = () => {
 
   const userLogin = (user) => {
     console.log("login", user);
-    axios.post("api/login", user).then((response) => {
+    axios.post("/api/login", user).then((response) => {
       console.log(response);
       setSessionUser(response.data.data);
       localStorage.setItem("sessionUser", JSON.stringify(response.data.data));
@@ -42,14 +42,16 @@ const useUserData = () => {
     setSessionUser(null);
     setSavedRecipes([]);
     localStorage.removeItem("sessionUser");
-    axios.get("api/logout").then((response) => console.log("logout", response));
+    axios
+      .get("/api/logout")
+      .then((response) => console.log("logout", response));
   };
 
   const deleteRecipe = (recipe) => {
     console.log("delete recipe", recipe);
     setSavedRecipes((prev) => prev.filter((item) => item.id !== recipe.id));
     axios
-      .delete(`api/recipe/${recipe.id}`, recipe)
+      .delete(`/api/recipe/${recipe.id}`, recipe)
       .then((response) => console.log("deleted", response));
   };
 
@@ -65,7 +67,7 @@ const useUserData = () => {
       ]);
 
       axios
-        .post("api/recipe", recipe)
+        .post("/api/recipe", recipe)
         .then((response) => console.log("saved", response));
     }
   };
