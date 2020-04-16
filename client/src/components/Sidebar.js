@@ -1,6 +1,6 @@
 import React from "react";
 import UserInfo from "./homepage/UserInfo";
-// import SavedRecipes from "./homepage/SavedRecipes";
+import { Link } from "react-router-dom";
 import SavedRecipes2 from "./homepage/SavedRecipes2";
 
 import Divider from "@material-ui/core/Divider";
@@ -31,11 +31,13 @@ export default function Sidebar(props) {
   return (
     <div>
       {/* change to our app logo later */}
-      <Avatar
-        alt="logo"
-        src="https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
-        className={classes.logo}
-      />
+      <Link to="/">
+        <Avatar
+          alt="logo"
+          src="https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
+          className={classes.logo}
+        />
+      </Link>
       <Divider variant="middle" />
       <UserInfo
         user={sessionUser}

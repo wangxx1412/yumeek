@@ -1,5 +1,5 @@
 export default (savedRecipes, newRecipe) => {
-  const uniqueURL = newRecipe.recipe.src_url;
+  const uniqueURL = newRecipe.src_url;
   const duplicateRecipe = savedRecipes.find(
     (recipe) => recipe.src_url === uniqueURL
   );
