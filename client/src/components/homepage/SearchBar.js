@@ -5,6 +5,11 @@ import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { green } from "@material-ui/core/colors";
+import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: "100%",
+    marginRight: theme.spacing(1),
+    width: "25%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
     },
@@ -43,10 +49,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const GreenCheckbox = withStyles({
+  root: {
+    color: green[400],
+    "&$checked": {
+      color: green[600],
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
 export default function SearchBar(props) {
   const { handleSearch } = props;
   const classes = useStyles();
   const [searchValue, setsearchValue] = useState("");
+  const [healthTag, setHealthTag] = useState({
+    vegetarian: false,
+    "gluten-free": false,
+    "dairy-free": false,
+  });
+
+  const handleChange = (event) => {
+    setHealthTag({ ...healthTag, [event.target.name]: event.target.checked });
+  };
 
   return (
     <div className={classes.root}>
@@ -57,7 +82,7 @@ export default function SearchBar(props) {
             size="medium"
             color="primary"
             onClick={() => {
-              handleSearch(searchValue);
+              handleSearch(searchValue, healthTag);
               setsearchValue("");
             }}
           >
@@ -78,6 +103,38 @@ export default function SearchBar(props) {
               onChange={(e) => setsearchValue(e.target.value)}
             />
           </div>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={healthTag["vegetarian"]}
+                  name="vegetarian"
+                />
+              }
+              onChange={handleChange}
+              label="vegetarian"
+            />
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={healthTag["gluten-free"]}
+                  name="gluten-free"
+                />
+              }
+              onChange={handleChange}
+              label="gluten-free"
+            />
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={healthTag["dairy-free"]}
+                  name="dairy-free"
+                />
+              }
+              onChange={handleChange}
+              label="dairy-free"
+            />
+          </FormGroup>
         </Toolbar>
       </AppBar>
     </div>

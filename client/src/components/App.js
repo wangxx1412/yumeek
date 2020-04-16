@@ -20,7 +20,7 @@ import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
 import Auth from "./Auth";
 
-import useUserData from "../hooks/userUserData";
+import useUserData from "../hooks/useUserData";
 
 const drawerWidth = 200;
 
