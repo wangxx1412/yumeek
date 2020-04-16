@@ -2,7 +2,6 @@ import React from "react";
 import UserInfo from "./homepage/UserInfo";
 import { Link } from "react-router-dom";
 import SavedRecipes2 from "./homepage/SavedRecipes2";
-import ShoppingCart from "./homepage/ShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../assets/image/logo.png";
 
@@ -42,7 +41,6 @@ export default function Sidebar(props) {
         handleLogout={userLogout}
       />
       <SavedRecipes2 savedRecipes={savedRecipes} deleteRecipe={deleteRecipe} />
-      <ShoppingCart />
     </div>
   );
 }
