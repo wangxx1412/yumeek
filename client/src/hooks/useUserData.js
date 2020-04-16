@@ -3,6 +3,7 @@ import axios from "axios";
 
 import uniqueRecipe from "../helper/uniqueRecipe";
 import duplcateRecipe from "../helper/duplicateRecipe";
+import recipeFormatter from "../helper/recipeFormatter";
 
 const useUserData = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -61,13 +62,14 @@ const useUserData = () => {
     if (duplcateRecipe(savedRecipes, recipe)) {
       setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
     } else {
-      setSavedRecipes((prev) => [
-        { ...recipe.recipe, ...recipe.nutrients, weekday: null },
-        ...prev,
-      ]);
+      setSavedRecipes((prev) => [recipe, ...prev]);
+
+      const formattedRecipe = recipeFormatter(recipe);
+
+      console.log("formattedRecipe", formattedRecipe);
 
       axios
-        .post("/api/recipe", recipe)
+        .post("/api/recipe", formattedRecipe)
         .then((response) => console.log("saved", response));
     }
   };
