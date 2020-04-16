@@ -80,7 +80,7 @@ export default function UserInfo(props) {
             className={classes.avatar}
           />
           <Chip
-            label={`Welcome ${user.email}`}
+            label={user.email.length > 30 ? user.first_name : user.email}
             className={classes.userEmail}
             variant="outlined"
           />
