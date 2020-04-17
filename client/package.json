@@ -31,5 +31,23 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^8.0.7",
+    "@testing-library/react-hooks": "^3.2.1",
+    "prop-types": "^15.7.2",
+    "react-test-renderer": "^16.9.0"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ]
+  },
   "proxy": "http://localhost:3001"
 }
