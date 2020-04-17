@@ -10,11 +10,23 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    width: "23%",
+    width: "18%",
     margin: "1%",
   },
   media: {
     height: 200,
+  },
+  label: {
+    height: 48,
+  },
+  cardRoot: {
+    padding: "8px 16px 0 16px",
+    overflow: "auto",
+  },
+  cardActionArea: {
+    padding: 0,
+    display: "flex",
+    justifyContent: "space-evenly",
   },
 });
 
@@ -34,11 +46,11 @@ export default function RecipesCard(props) {
           image={recipe.img_url}
           title={recipe.label}
         />
-        <CardContent>
-          <Typography>{recipe.label}</Typography>
+        <CardContent className={classes.cardRoot}>
+          <Typography className={classes.label}>{recipe.label}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.cardActionArea}>
         <Button size="small" color="primary" onClick={() => handleAdd(recipe)}>
           Add
         </Button>
