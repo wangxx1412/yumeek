@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginLeft: 0,
     marginRight: theme.spacing(1),
-    width: "25%",
+    width: "22%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
     },
@@ -65,8 +65,11 @@ export default function SearchBar(props) {
   const [searchValue, setsearchValue] = useState("");
   const [healthTag, setHealthTag] = useState({
     vegetarian: false,
-    "gluten-free": false,
-    "dairy-free": false,
+    vegan: false,
+    "alcohol-free": false,
+    "tree-nut-free": false,
+    "peanut-free": false,
+    "sugar-conscious": false,
   });
 
   const handleChange = (event) => {
@@ -116,23 +119,50 @@ export default function SearchBar(props) {
             />
             <FormControlLabel
               control={
-                <GreenCheckbox
-                  checked={healthTag["gluten-free"]}
-                  name="gluten-free"
-                />
+                <GreenCheckbox checked={healthTag["vegan"]} name="vegan" />
               }
               onChange={handleChange}
-              label="gluten-free"
+              label="vegan"
             />
             <FormControlLabel
               control={
                 <GreenCheckbox
-                  checked={healthTag["dairy-free"]}
-                  name="dairy-free"
+                  checked={healthTag["alcohol-free"]}
+                  name="alcohol-free"
                 />
               }
               onChange={handleChange}
-              label="dairy-free"
+              label="alcohol-free"
+            />
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={healthTag["peanut-free"]}
+                  name="peanut-free"
+                />
+              }
+              onChange={handleChange}
+              label="peanut-free"
+            />
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={healthTag["tree-nut-free"]}
+                  name="tree-nut-free"
+                />
+              }
+              onChange={handleChange}
+              label="tree-nut-free"
+            />
+            <FormControlLabel
+              control={
+                <GreenCheckbox
+                  checked={healthTag["sugar-conscious"]}
+                  name="sugar-conscious"
+                />
+              }
+              onChange={handleChange}
+              label="sugar-conscious"
             />
           </FormGroup>
         </Toolbar>

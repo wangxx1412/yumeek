@@ -1,7 +1,7 @@
 import React from "react";
 import UserInfo from "./homepage/UserInfo";
 import { Link } from "react-router-dom";
-import SavedRecipes2 from "./homepage/SavedRecipes2";
+import SavedRecipes from "./homepage/SavedRecipes";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../assets/image/logo.png";
 
@@ -40,7 +40,7 @@ export default function Sidebar(props) {
         handleSignup={userSignup}
         handleLogout={userLogout}
       />
-      <SavedRecipes2 savedRecipes={savedRecipes} deleteRecipe={deleteRecipe} />
+      <SavedRecipes savedRecipes={savedRecipes} deleteRecipe={deleteRecipe} />
     </div>
   );
 }

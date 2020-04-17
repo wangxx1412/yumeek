@@ -57,20 +57,16 @@ const useUserData = () => {
   };
 
   const handleAdd = (recipe) => {
-    console.log("add to saved list", recipe);
-
     if (duplcateRecipe(savedRecipes, recipe)) {
       setSavedRecipes((prev) => [...uniqueRecipe(prev, recipe)]);
     } else {
-      setSavedRecipes((prev) => [recipe, ...prev]);
-
       const formattedRecipe = recipeFormatter(recipe);
 
-      console.log("formattedRecipe", formattedRecipe);
+      console.log("saved formattedRecipe", formattedRecipe);
 
-      axios
-        .post("/api/recipe", formattedRecipe)
-        .then((response) => console.log("saved", response));
+      axios.post("/api/recipe", formattedRecipe).then((response) => {
+        setSavedRecipes((prev) => [response.data.data, ...prev]);
+      });
     }
   };
 
