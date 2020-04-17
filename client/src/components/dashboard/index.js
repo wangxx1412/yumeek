@@ -18,7 +18,7 @@ export default function Dashboard() {
   const theme = useTheme();
 
   const [selectWeek, setSelectWeek] = useState("week");
-  const [dayData, setdayData] = useState({ weekday: "" });
+  const [dayData, setdayData] = useState({ weekday: null });
   const [chartRecipeData, setChartRecipeData] = useState();
   const [recipeList, setRecipeList] = useState();
 
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   const handleSelectWeek = (target) => {
     setSelectWeek("week");
-    setdayData({ weekday: "" });
+    setdayData({ weekday: null });
   };
 
   const selectDay = (day) => {
