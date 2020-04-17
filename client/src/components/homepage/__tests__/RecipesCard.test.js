@@ -38,11 +38,6 @@ describe("RecipeCard", () => {
     render(<RecipesCard recipe={recipe} />);
   });
 
-  it("renders recipes label", () => {
-    const { getByText } = render(<RecipesCard recipe={recipe} />);
-    expect(getByText("Bagel Bruschetta")).toBeInTheDocument();
-  });
-
   it("renders clickable label", () => {
     const handleClick = jest.fn();
     const { getByText } = render(
@@ -54,6 +49,7 @@ describe("RecipeCard", () => {
     fireEvent.click(label);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalledWith(recipe);
   });
 
   it("renders clickable 'Learn More' button", () => {
@@ -67,6 +63,7 @@ describe("RecipeCard", () => {
     fireEvent.click(label);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalledWith(recipe);
   });
 
   it("renders clickable image", () => {
@@ -80,6 +77,7 @@ describe("RecipeCard", () => {
     fireEvent.click(image);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenCalledWith(recipe);
   });
 
   it("calls handleAdd function when click 'add' button", () => {
