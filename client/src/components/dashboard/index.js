@@ -51,19 +51,18 @@ export default function Dashboard() {
   }, []);
 
   const handleSelectDay = (target) => {
-    console.log(target);
     setSelectWeek("day");
     setdayData(target);
   };
 
   const handleSelectWeek = (target) => {
-    console.log(target);
     setSelectWeek("week");
     setdayData();
   };
 
   const selectDay = (day) => {
-    console.log(day);
+    setdayData(chartRecipeData.filter((el) => el["weekday"] === day)[0]);
+    setSelectWeek("day");
   };
 
   return (
