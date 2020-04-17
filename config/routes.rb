@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     # Save a recipe
     post '/recipe' => 'recipes#create'
     # Recipe detial
-    get '/recipe/:id' => 'recipes#show'
+    get '/recipe/:id' => 'recipes#show' 
     # Remove a saved recipe
     delete '/recipe/:id' => 'recipes#destroy'
 
@@ -34,4 +34,4 @@ Rails.application.routes.draw do
 
 end
 
-# curl -d 'email=test1@test.com&password=test' http://localhost:3001/api/login -c cookie.txt
+

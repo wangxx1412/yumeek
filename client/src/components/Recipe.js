@@ -1,61 +1,81 @@
-import React, { useState , useEffect } from "react";
-import axios from 'axios';
+import React from "react"
+import { useLocation } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
+import { Typography, CardMedia, Container, Divider } from '@material-ui/core';
 
-import Steps from './Steps';
-import IngredientsList from './IngredientsList';
-import SaveRecipeButton from './SaveRecipeButton';
+import Labels from './recipe_details_page/Labels';
+import IngredientsList from './recipe_details_page/IngredientsList';
+import SaveRecipeButton from './recipe_details_page/SaveRecipeButton';
+import Nutrients from './recipe_details_page/Nutrients';
 
 const useStyles = makeStyles(theme => ({
     root: {
           display: "flex" ,
-          flexDirection: "column",
-          alignItems: "center"       
-    }
+          flexDirection: "row-reverse",
+          width: "85%",
+          justifyContent: "space-around",
+          alignItems: "center", 
+          [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            flexDirection: "column",
+            margin: "auto"
+          },    
+    },
+    container: {
+      display: "flex",
+      justifyContent: "space-around",
+      width: "33%",
+      [theme.breakpoints.down("sm")]: {
+        width: "45%"
+      }, 
+    },
+    info: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    typography: {
+      fontSize: "2.1rem"
+    },
+    labels: {
+      [theme.breakpoints.down("sm")]: {
+        display: "flex",
+        margin: "5%"    
+      }, 
+    },
+    style: { width: "25em", margin: "3%" }
   })
 );
 
-// IngredientsList, Steps, NutrientsList
-export default function Detail() {
-  const recipeId = 8;
 
-  const [ recipe, setRecipe ] = useState({
-    label: "",
-    steps: "",
-    ingredients: [],
-    img: "",
-    health_labels: [],
-    src_url: ""
-  });
- 
-  useEffect(() => {
-    axios.get(`/api/recipe/${recipeId}`)
-      .then(res => 
-        setRecipe(recipe => ({...recipe, label: res.data.recipe.label, 
-                                          steps: res.data.recipe.steps, 
-                                          ingredients: res.data.recipe.ingredients,
-                                          img: res.data.recipe.img_url,
-                                          health_labels: res.data.recipe.health_labels,
-                                          src_url: res.data.recipe.src_url
-                                          }))
-      )
-      .catch(err => console.log('Error: ', err))
-  }, []);
+export default function Recipe(props) {
+  const location = useLocation();
+  const { savedRecipes, deleteRecipe, handleAdd } = props;
+  const classes = useStyles(); 
 
-  console.log(recipe.health_labels)
-
-  const classes = useStyles()
   return(
-        <div>
-          <SaveRecipeButton />
-          <Box className={classes.root}>
-          <h2>{recipe.label}</h2>
-          <img src={recipe.img} alt={recipe.img} />
-          <p>{recipe.health_labels}</p>
-          </Box>
-          <IngredientsList ingredients={recipe.ingredients}/>
-          <Steps steps={recipe.steps}/>
-        </div>
+        <Container>
+          <SaveRecipeButton handleAdd={handleAdd} recipe={location.state.recipe} savedRecipes={savedRecipes} deleteRecipe={deleteRecipe}/>
+          <Typography variant="h5" align="center">{location.state.recipe.label}</Typography>
+          <Container className={classes.root} >
+            <CardMedia component="img" src={location.state.recipe.img_url} alt={location.state.recipe.label} className={classes.style}/>
+            <Container className={classes.container}>
+              <div className={classes.info}>
+                <span className={classes.typography}>{location.state.recipe.ingredients.length}</span>
+                <span>Ingredients</span>
+              </div>
+              <Divider orientation="vertical" flexItem />
+              <div className={classes.info}>
+                <span className={classes.typography}>{location.state.recipe.energies}</span>
+                <span>Calories</span>
+              </div>
+            </Container>
+          </Container>
+          <div className={classes.labels}>
+            <Labels labels={location.state.recipe.health_labels} className={classes.container}/>
+            <IngredientsList ingredients={location.state.recipe.ingredients}/>
+          </div>
+          <Nutrients recipe={location.state.recipe}/>
+        </Container>
       );
 }

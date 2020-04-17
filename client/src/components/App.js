@@ -166,7 +166,11 @@ export default function App(props) {
                   <Home handleAdd={(recipe) => handleAdd(recipe)} />
                 )}
               />
-              <Route exact path="/recipe/:recipeid" component={Recipe} />
+              <Route exact path="/recipe" render={() => (
+                <Recipe handleAdd={(recipe) => handleAdd(recipe)} 
+                        savedRecipes={savedRecipes} deleteRecipe={(recipe) => deleteRecipe(recipe)} />
+              )} 
+              />
               <Route exact path="/login" component={Auth} />
             </Switch>
           </Container>
