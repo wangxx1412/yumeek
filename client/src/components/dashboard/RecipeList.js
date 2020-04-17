@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDrag, useDrop, DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
+import Grid from "@material-ui/core/Grid";
 
 const style = {
   display: "inline-block",
-  border: "1px dashed gray",
+  border: "1px gray",
   padding: "0.5rem 1rem",
   backgroundColor: "white",
   cursor: "move",
@@ -26,11 +27,11 @@ function getStyle(backgroundColor) {
   };
 }
 
-const Box = () => {
-  const [, drag] = useDrag({ item: { type: "box" } });
+const Item = (props) => {
+  const [, drag] = useDrag({ item: { type: "item" } });
   return (
     <div ref={drag} style={style}>
-      Drag me
+      {props.recipe.label}
     </div>
   );
 };
@@ -39,7 +40,7 @@ const Dustbin = ({ greedy, children }) => {
   const [hasDropped, setHasDropped] = useState(false);
   const [hasDroppedOnChild, setHasDroppedOnChild] = useState(false);
   const [{ isOver, isOverCurrent }, drop] = useDrop({
-    accept: "box",
+    accept: "item",
     drop(item, monitor) {
       const didDrop = monitor.didDrop();
       if (didDrop && !greedy) {
@@ -70,12 +71,53 @@ const Dustbin = ({ greedy, children }) => {
 };
 
 export default function RecipeList(props) {
+  const [dayRecipleList, setDayRecipeList] = useState({
+    day: "",
+    recipeList: [],
+  });
+
+  useEffect(() => {
+    if (props.recipeList) {
+      setDayRecipeList((prev) => ({
+        ...prev,
+        recipeList: props.recipeList,
+      }));
+    }
+    setDayRecipeList((prev) => ({
+      ...prev,
+      day: props.day["weekday"],
+    }));
+  }, [props.recipeList, props.day]);
+
   return (
     <div>
-      <DndProvider backend={Backend}>
-        <Dustbin></Dustbin>
-        <Box></Box>
-      </DndProvider>
+      {dayRecipleList.recipeList ? (
+        <DndProvider backend={Backend}>
+          <Grid container spacing={3} direction="row" alignItems="center">
+            <Grid item xs={6}>
+              <Grid
+                container
+                spacing={1}
+                direction="column"
+                alignItems="center"
+              >
+                {dayRecipleList.recipeList.map((el) => {
+                  return (
+                    <Grid key={el.id} item xs={6}>
+                      <Item recipe={el} />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Grid>
+            <Grid item xs={6}>
+              <Dustbin></Dustbin>
+            </Grid>
+          </Grid>
+        </DndProvider>
+      ) : (
+        <div>Loading</div>
+      )}
     </div>
   );
 }
