@@ -4,9 +4,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // width: "80%",
     display: "flex",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      flexDirection: "column",
+      width: "30%"
+    }
+     
   },
   label: {
     display: "flex"

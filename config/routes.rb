@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     # Save a recipe
     post '/recipe' => 'recipes#create'
     # Recipe detial
-    get '/recipe' => 'recipes#show'  # get '/recipe/:id' => 'recipes#show'
+    get '/recipe/:id' => 'recipes#show' 
     # Remove a saved recipe
     delete '/recipe/:id' => 'recipes#destroy'
 

@@ -1,8 +1,7 @@
 import React from "react"
 import { useLocation } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Box, Typography, CardMedia, Container, Divider, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography, CardMedia, Container, Divider } from '@material-ui/core';
 
 import Labels from './recipe_details_page/Labels';
 import IngredientsList from './recipe_details_page/IngredientsList';
@@ -36,7 +35,13 @@ const useStyles = makeStyles(theme => ({
       alignItems: "center"
     },
     typography: {
-      fontSize: 40
+      fontSize: "2.1rem"
+    },
+    labels: {
+      [theme.breakpoints.down("sm")]: {
+        display: "flex",
+        margin: "5%"    
+      }, 
     },
     style: { width: "25em", margin: "3%" }
   })
@@ -46,17 +51,13 @@ const useStyles = makeStyles(theme => ({
 export default function Recipe(props) {
   const location = useLocation();
   const { savedRecipes, deleteRecipe, handleAdd } = props;
-  // console.log("PROPS INSIDE RECIPE", props)
   const classes = useStyles(); 
-  // console.log("LOCATION", location)
-  // console.log("LOCALSTORAGE", localStorage)
-  // let { userid } = useParams();
-  // console.log("PARAMS", userid)
+
   return(
-        <div>
+        <Container>
           <SaveRecipeButton handleAdd={handleAdd} recipe={location.state.recipe} savedRecipes={savedRecipes} deleteRecipe={deleteRecipe}/>
           <Typography variant="h5" align="center">{location.state.recipe.label}</Typography>
-          <Box className={classes.root} >
+          <Container className={classes.root} >
             <CardMedia component="img" src={location.state.recipe.img_url} alt={location.state.recipe.label} className={classes.style}/>
             <Container className={classes.container}>
               <div className={classes.info}>
@@ -69,10 +70,12 @@ export default function Recipe(props) {
                 <span>Calories</span>
               </div>
             </Container>
-          </Box>
-          <Labels labels={location.state.recipe.health_labels} className={classes.container}/>
-        <IngredientsList ingredients={location.state.recipe.ingredients}/>
-        <Nutrients recipe={location.state.recipe}/>
-        </div>
+          </Container>
+          <div className={classes.labels}>
+            <Labels labels={location.state.recipe.health_labels} className={classes.container}/>
+            <IngredientsList ingredients={location.state.recipe.ingredients}/>
+          </div>
+          <Nutrients recipe={location.state.recipe}/>
+        </Container>
       );
 }
