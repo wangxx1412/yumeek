@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import WeekChart from "./WeekChart";
 import DayChart from "./DayChart";
+import RecipeList from "./RecipeList";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -141,6 +142,7 @@ export default function Dashboard() {
           selectDay={selectDay}
         />
       )}
+      <RecipeList />
     </div>
   );
 }
