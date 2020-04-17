@@ -54,7 +54,6 @@ const useSearchResult = () => {
         JSON.stringify(recipesDataHelper(response))
       );
     });
-    console.log("search", value, healthTags);
   };
 
   return { searchResult: JSON.parse(searchResult), handleSearch };
