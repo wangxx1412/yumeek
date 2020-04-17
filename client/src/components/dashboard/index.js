@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import clsx from "clsx";
+
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+
 import WeekChart from "./WeekChart";
 import DayChart from "./DayChart";
 
@@ -11,8 +14,9 @@ const useStyles = makeStyles((theme) => ({}));
 export default function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
+
   const [selectWeek, setSelectWeek] = useState("week");
-  const [dayData, setdayData] = useState();
+  const [dayData, setdayData] = useState({ weekday: "" });
   const [chartRecipeData, setChartRecipeData] = useState();
 
   let { userid } = useParams();
@@ -50,6 +54,8 @@ export default function Dashboard() {
     );
   }, []);
 
+  let weekday = dayData["weekday"];
+
   const handleSelectDay = (target) => {
     setSelectWeek("day");
     setdayData(target);
@@ -57,7 +63,7 @@ export default function Dashboard() {
 
   const handleSelectWeek = (target) => {
     setSelectWeek("week");
-    setdayData();
+    setdayData({ weekday: "" });
   };
 
   const selectDay = (day) => {
@@ -67,6 +73,62 @@ export default function Dashboard() {
 
   return (
     <div className={clsx("Dashboard", classes.root)}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Sunday")}
+        disabled={weekday === "Sunday"}
+      >
+        Sunday
+      </Button>
+      <Button
+        size="large"
+        onClick={() => selectDay("Monday")}
+        disabled={weekday === "Monday"}
+      >
+        Monday
+      </Button>
+      <Button
+        size="large"
+        onClick={() => selectDay("Tuesday")}
+        disabled={weekday === "Tuesday"}
+      >
+        Tuesday
+      </Button>
+      <Button
+        size="large"
+        onClick={() => selectDay("Wednesday")}
+        disabled={weekday === "Wednesday"}
+      >
+        Wednesday
+      </Button>
+      <Button
+        size="large"
+        onClick={() => selectDay("Thursday")}
+        disabled={weekday === "Thursday"}
+      >
+        Thursday
+      </Button>
+      <Button
+        size="large"
+        onClick={() => selectDay("Friday")}
+        disabled={weekday === "Friday"}
+      >
+        Friday
+      </Button>
+      <Button
+        size="large"
+        onClick={() => selectDay("Saturday")}
+        disabled={weekday === "Saturday"}
+      >
+        Saturday
+      </Button>
+      <Button
+        size="large"
+        onClick={handleSelectWeek}
+        disabled={selectWeek === "week"}
+      >
+        Week Overview
+      </Button>
       {selectWeek === "week" ? (
         <WeekChart
           handleSelectDay={handleSelectDay}

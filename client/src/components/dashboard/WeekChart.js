@@ -45,15 +45,6 @@ export default function WeekChart(props) {
     <div>
       {chartRecipeData ? (
         <div>
-          <button
-            onClick={() => {
-              console.log(chartRecipeData);
-              console.log(Array.isArray(chartRecipeData));
-              console.log(chartRecipeData[0]);
-            }}
-          >
-            click
-          </button>
           <Paper>
             <Chart data={chartRecipeData}>
               <ValueScale name="gram" modifyDomain={modifyGramDomain} />
