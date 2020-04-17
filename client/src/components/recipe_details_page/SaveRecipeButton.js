@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
 
 const checkIfRecipeInTheList = function(savedRecipes, src, label) {
   const recipe = savedRecipes.filter(item => item.src_url === src && item.label === label);
-  console.log("FILTER", recipe)
   return recipe;
 }
 

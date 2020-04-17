@@ -38,10 +38,15 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.1rem"
     },
     labels: {
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("md")]: {
         display: "flex",
         margin: "5%"    
       }, 
+    },
+    background: {
+      width: "100 wh",
+      height: "100 vh",
+      backgroundImage: "url(" + "..." + ")", //image
     },
     style: { width: "25em", margin: "3%" }
   })
@@ -54,7 +59,7 @@ export default function Recipe(props) {
   const classes = useStyles(); 
 
   return(
-        <Container>
+        <Container className={classes.background}>
           <SaveRecipeButton handleAdd={handleAdd} recipe={location.state.recipe} savedRecipes={savedRecipes} deleteRecipe={deleteRecipe}/>
           <Typography variant="h5" align="center">{location.state.recipe.label}</Typography>
           <Container className={classes.root} >
