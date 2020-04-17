@@ -16,8 +16,8 @@ const useStyles = makeStyles(() => ({
 })
 );
 
-const checkIfRecipeInTheList = function(savedRecipes, src) {
-  const recipe = savedRecipes.filter(item => item.src_url === src);
+const checkIfRecipeInTheList = function(savedRecipes, src, label) {
+  const recipe = savedRecipes.filter(item => item.src_url === src && item.label === label);
   console.log("FILTER", recipe)
   return recipe;
 }
@@ -29,7 +29,7 @@ export default function SaveRecipeButton(props) {
   const handleClick = () => {
     history.push('/');
   };
-  const savedRecipe = checkIfRecipeInTheList(savedRecipes, recipe.src_url);
+  const savedRecipe = checkIfRecipeInTheList(savedRecipes, recipe.src_url, recipe.label);
 
   return(
       <div className={classes.root}>
