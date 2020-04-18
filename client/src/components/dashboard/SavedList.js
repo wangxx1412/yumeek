@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ItemTypes from "./ItemTypes";
-import AddedItem from "./AddedItem";
+import SavedItem from "./SavedItem";
 import { useDrop } from "react-dnd";
 
 import Grid from "@material-ui/core/Grid";
@@ -24,7 +24,7 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#222";
   }
 }
-export default function Dustbin({ recipeList, allowedDropEffect }) {
+export default function SavedList({ recipeList, allowedDropEffect }) {
   useEffect(() => {
     if (recipeList) {
       console.log(recipeList);
@@ -32,7 +32,7 @@ export default function Dustbin({ recipeList, allowedDropEffect }) {
   }, []);
 
   const [{ canDrop, isOver }, drop] = useDrop({
-    accept: ItemTypes.SAVED,
+    accept: ItemTypes.ADDED,
     drop: () => ({
       name: `${allowedDropEffect} Dustbin`,
       allowedDropEffect,
@@ -55,7 +55,7 @@ export default function Dustbin({ recipeList, allowedDropEffect }) {
           {recipeList.map((el) => {
             return (
               <Grid key={el.id} item xs={6}>
-                <AddedItem recipe={el} />
+                <SavedItem recipe={el} />
               </Grid>
             );
           })}

@@ -1,3 +1,4 @@
 export default {
-  BOX: "box",
+  SAVED: "saved",
+  ADDED: "added",
 };

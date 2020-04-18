@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import Grid from "@material-ui/core/Grid";
-import Box from "./Box";
+import Box from "./AddedItem";
 import Dustbin from "./Dustbin";
+import SavedList from "./SavedList";
 
 export default function RecipeList(props) {
   const [dayRecipleList, setDayRecipeList] = useState({
@@ -25,16 +26,25 @@ export default function RecipeList(props) {
     }));
   }, [props.recipeList, props.day]);
 
-  const handleDragBox = (label) => {
-    const result = dayRecipleList.recipeList.filter(
-      (el) => el["label"] !== label
-    );
+  // const addList = (label) => {
+  //   const result = dayRecipleList.recipeList.filter(
+  //     (el) => el["label"] !== label
+  //   );
+  //   setDayRecipeList((prev) => ({
+  //     ...prev,
+  //     recipeList: result,
+  //   }));
+  // };
 
-    setDayRecipeList((prev) => ({
-      ...prev,
-      recipeList: result,
-    }));
-  };
+  // const removeList = (label) => {
+  //   const result = dayRecipleList.recipeList.filter(
+  //     (el) => el["label"] !== label
+  //   );
+  //   setDayRecipeList((prev) => ({
+  //     ...prev,
+  //     recipeList: result,
+  //   }));
+  // };
 
   return (
     <div>
@@ -42,27 +52,17 @@ export default function RecipeList(props) {
         <DndProvider backend={Backend}>
           <Grid container spacing={1} direction="row" alignItems="center">
             <Grid item xs={6}>
-              <Grid
-                container
-                spacing={1}
-                direction="column"
-                alignItems="center"
-              >
-                {dayRecipleList.recipeList
-                  .filter((el) => el["weekday"] === null)
-                  .map((el) => {
-                    return (
-                      <Grid key={el.id} item xs={6}>
-                        <Box recipe={el} handleDragBox={handleDragBox} />
-                      </Grid>
-                    );
-                  })}
-              </Grid>
+              <SavedList
+                allowedDropEffect="any"
+                recipeList={dayRecipleList.recipeList.filter(
+                  (el) => el["weekday"] === null
+                )}
+              ></SavedList>
             </Grid>
             <Grid item xs={6}>
               <Dustbin
                 allowedDropEffect="any"
-                addedRecipeList={dayRecipleList.recipeList.filter(
+                recipeList={dayRecipleList.recipeList.filter(
                   (el) => el["weekday"] !== null
                 )}
               ></Dustbin>
