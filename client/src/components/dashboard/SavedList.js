@@ -15,7 +15,7 @@ const style = {
   lineHeight: "normal",
   float: "left",
 };
-function selectBackgroundColor(isActive, canDrop) {
+function selectBackgroundColor(isActive, canDrop, handlePut) {
   if (isActive) {
     return "darkgreen";
   } else if (canDrop) {
@@ -28,6 +28,7 @@ export default function SavedList({
   recipeList,
   allowedDropEffect,
   weekorday,
+  handlePut,
 }) {
   useEffect(() => {
     if (recipeList) {
@@ -58,7 +59,11 @@ export default function SavedList({
           {recipeList.map((el) => {
             return (
               <Grid key={el.id} item xs={6}>
-                <SavedItem recipe={el} weekorday={weekorday} />
+                <SavedItem
+                  recipe={el}
+                  weekorday={weekorday}
+                  handlePut={handlePut}
+                />
               </Grid>
             );
           })}

@@ -24,7 +24,12 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#222";
   }
 }
-export default function Dustbin({ recipeList, allowedDropEffect, weekorday }) {
+export default function Dustbin({
+  recipeList,
+  allowedDropEffect,
+  weekorday,
+  handlePut,
+}) {
   useEffect(() => {
     if (recipeList) {
       console.log(recipeList);
@@ -57,7 +62,7 @@ export default function Dustbin({ recipeList, allowedDropEffect, weekorday }) {
             .map((el) => {
               return (
                 <Grid key={el.id} item xs={6}>
-                  <AddedItem recipe={el} />
+                  <AddedItem recipe={el} handlePut={handlePut} />
                 </Grid>
               );
             })}

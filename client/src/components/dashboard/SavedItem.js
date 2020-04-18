@@ -33,6 +33,9 @@ const SavedItem = (props) => {
             .put(`/api/userrecipe/${userid}/recipe/${recipeid}`, {
               weekday: props.weekorday,
             })
+            .then(() => {
+              props.handlePut(item);
+            })
             .catch(function (error) {
               console.log(error);
             });

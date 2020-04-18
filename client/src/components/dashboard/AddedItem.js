@@ -34,6 +34,9 @@ const AddedItem = (props) => {
             .put(`/api/userrecipe/${userid}/recipe/${recipeid}`, {
               weekday: null,
             })
+            .then(() => {
+              props.handlePut(item);
+            })
             .catch(function (error) {
               console.log(error);
             });
