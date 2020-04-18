@@ -126,7 +126,11 @@ export default function Dashboard() {
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <RecipeList recipeList={recipeList} day={dayData} />
+          <RecipeList
+            recipeList={recipeList}
+            day={dayData}
+            weekorday={selectWeek}
+          />
         </Grid>
       </Grid>
     </div>

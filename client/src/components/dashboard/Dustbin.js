@@ -29,6 +29,7 @@ export default function Dustbin({ recipeList, allowedDropEffect }) {
     if (recipeList) {
       console.log(recipeList);
     }
+    console.log(recipeList);
   }, []);
 
   const [{ canDrop, isOver }, drop] = useDrop({

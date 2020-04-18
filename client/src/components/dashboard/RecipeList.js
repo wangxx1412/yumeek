@@ -62,12 +62,16 @@ export default function RecipeList(props) {
               ></SavedList>
             </Grid>
             <Grid item xs={6}>
-              <Dustbin
-                allowedDropEffect="any"
-                recipeList={dayRecipleList.recipeList.filter(
-                  (el) => el["weekday"] !== null
-                )}
-              ></Dustbin>
+              {props.weekorday === "week" ? (
+                <div>Add</div>
+              ) : (
+                <Dustbin
+                  allowedDropEffect="any"
+                  recipeList={dayRecipleList.recipeList.filter(
+                    (el) => el["weekday"] !== null
+                  )}
+                ></Dustbin>
+              )}
             </Grid>
           </Grid>
         </DndProvider>
