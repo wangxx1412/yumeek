@@ -30,13 +30,6 @@ export default function Dustbin({
   weekorday,
   handlePut,
 }) {
-  useEffect(() => {
-    if (recipeList) {
-      console.log(recipeList);
-    }
-    console.log(recipeList);
-  }, []);
-
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.SAVED,
     drop: () => ({

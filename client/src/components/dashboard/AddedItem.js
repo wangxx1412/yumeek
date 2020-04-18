@@ -35,6 +35,7 @@ const AddedItem = (props) => {
               weekday: null,
             })
             .then(() => {
+              item.recipe.weekday = null;
               props.handlePut(item);
             })
             .catch(function (error) {

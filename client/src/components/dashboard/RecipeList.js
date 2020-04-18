@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import Grid from "@material-ui/core/Grid";
-import Box from "./AddedItem";
 import Dustbin from "./Dustbin";
 import SavedList from "./SavedList";
 
@@ -14,42 +13,26 @@ export default function RecipeList(props) {
 
   useEffect(() => {
     if (props.recipeList) {
+      console.log(props.recipeList);
       setDayRecipeList((prev) => ({
         ...prev,
         recipeList: props.recipeList,
       }));
     }
+  }, [props.recipeList]);
+
+  useEffect(() => {
     if (props.day) {
       setDayRecipeList((prev) => ({
         ...prev,
         day: props.day["weekday"],
       }));
     }
-  }, [props.recipeList, props.day]);
-
-  // const addList = (label) => {
-  //   const result = dayRecipleList.recipeList.filter(
-  //     (el) => el["label"] !== label
-  //   );
-  //   setDayRecipeList((prev) => ({
-  //     ...prev,
-  //     recipeList: result,
-  //   }));
-  // };
-
-  // const removeList = (label) => {
-  //   const result = dayRecipleList.recipeList.filter(
-  //     (el) => el["label"] !== label
-  //   );
-  //   setDayRecipeList((prev) => ({
-  //     ...prev,
-  //     recipeList: result,
-  //   }));
-  // };
+  }, [props.day]);
 
   return (
     <div>
-      {dayRecipleList.recipeList ? (
+      {props.recipeList ? (
         <DndProvider backend={Backend}>
           <Grid container spacing={1} direction="row" alignItems="center">
             <Grid item xs={6}>

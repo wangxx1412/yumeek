@@ -15,7 +15,7 @@ const style = {
   lineHeight: "normal",
   float: "left",
 };
-function selectBackgroundColor(isActive, canDrop, handlePut) {
+function selectBackgroundColor(isActive, canDrop) {
   if (isActive) {
     return "darkgreen";
   } else if (canDrop) {

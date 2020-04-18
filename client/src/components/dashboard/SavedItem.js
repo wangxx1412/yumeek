@@ -34,6 +34,7 @@ const SavedItem = (props) => {
               weekday: props.weekorday,
             })
             .then(() => {
+              item.recipe.weekday = props.weekorday;
               props.handlePut(item);
             })
             .catch(function (error) {

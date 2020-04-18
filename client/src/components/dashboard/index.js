@@ -59,9 +59,7 @@ export default function Dashboard() {
       // For RecipeList
       setRecipeList(all[1].data.data);
     });
-  }, [recipeList, chartRecipeData]);
-
-  // let weekday = dayData["weekday"];
+  }, []);
 
   const handleSelectDay = (target) => {
     setSelectWeek("day");
@@ -81,8 +79,9 @@ export default function Dashboard() {
   const handlePut = (item) => {
     console.log(item);
     const newList = recipeList.filter((el) => el.id !== item.recipe.id);
-    newList.push(item);
+    newList.push(item.recipe);
     setRecipeList(newList);
+    console.log(recipeList);
   };
 
   return (
