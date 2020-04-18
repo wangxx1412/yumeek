@@ -1,53 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CircularBar from "./CicularBar";
 import Grid from "@material-ui/core/Grid";
 
 export default function DayChart(props) {
-  const [calPerDay, setcalPerDay] = useState(2400);
+  const [data, setData] = useState({
+    energies: 0,
+    carbs: 0,
+    fiber: 0,
+    protein: 0,
+    fat: 0,
+  });
 
-  let energies = 0;
-  let carbs = 0;
-  let fiber = 0;
-  let protein = 0;
-  let fat = 0;
+  useEffect(() => {
+    const newData = props.chartRecipeData.filter(
+      (el) => el["weekday"] === props.selectDay
+    );
+    const energies = newData[0]["energies"];
+    const carbs = newData[0]["carbs"];
+    const fiber = newData[0]["fiber"];
+    const protein = newData[0]["protein"];
+    const fat = newData[0]["fat"];
 
-  if (props.data) {
-    energies = props.data["energies"];
-    carbs = props.data["carbs"];
-    fiber = props.data["fiber"];
-    protein = props.data["protein"];
-    fat = props.data["fat"];
-  }
-
-  const calengergies = energies / calPerDay;
-  const calcarbs = carbs / 300;
-  const calfiber = fiber / 25;
-  const calprotein = protein / 50;
-  const calfat = fat / 65;
-
-  // calories for nutrients per gram
-  // fat:9 carbs:4 protein:4 fiber:2
-  // DV: fat:65g carbs:300g fiber:25g protein: 50g
+    setData({
+      energies: energies,
+      carbs: carbs,
+      fiber: fiber,
+      protein: protein,
+      fat: fat,
+    });
+  }, [props.selectDay, props.chartRecipeData]);
 
   return (
     <div>
-      <Grid container spacing={1}>
-        <Grid item xs>
-          <CircularBar text={calengergies} name="Calories" amount={energies} />
+      {props.selectDay ? (
+        <Grid container spacing={1}>
+          <Grid item xs>
+            <CircularBar
+              text={data.energies / 2400}
+              name="Calories"
+              amount={data.energies}
+            />
+          </Grid>
+          <Grid item xs>
+            <CircularBar
+              text={data.carbs / 300}
+              name="Carbs"
+              amount={data.carbs}
+            />
+          </Grid>
+          <Grid item xs>
+            <CircularBar
+              text={data.protein / 50}
+              name="Protein"
+              amount={data.protein}
+            />
+          </Grid>
+          <Grid item xs>
+            <CircularBar text={data.fat / 65} name="Fat" amount={data.fat} />
+          </Grid>
+          <Grid item xs>
+            <CircularBar
+              text={data.fiber / 25}
+              name="Fiber"
+              amount={data.fiber}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs>
-          <CircularBar text={calcarbs} name="Carbs" amount={carbs} />
-        </Grid>
-        <Grid item xs>
-          <CircularBar text={calprotein} name="Protein" amount={protein} />
-        </Grid>
-        <Grid item xs>
-          <CircularBar text={calfat} name="Fat" amount={fat} />
-        </Grid>
-        <Grid item xs>
-          <CircularBar text={calfiber} name="Fiber" amount={fiber} />
-        </Grid>
-      </Grid>
+      ) : (
+        <div>Loading</div>
+      )}
     </div>
   );
 }

@@ -13,7 +13,6 @@ export default function RecipeList(props) {
 
   useEffect(() => {
     if (props.recipeList) {
-      console.log(props.recipeList);
       setDayRecipeList((prev) => ({
         ...prev,
         recipeList: props.recipeList,

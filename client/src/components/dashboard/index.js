@@ -19,18 +19,20 @@ export default function Dashboard() {
 
   const [selectWeek, setSelectWeek] = useState("week");
   const [dayData, setdayData] = useState({ weekday: null });
-  const [chartRecipeData, setChartRecipeData] = useState();
+  const [chartRecipeData, setChartRecipeData] = useState([]);
   const [recipeList, setRecipeList] = useState();
 
   let { userid } = useParams();
 
   useEffect(() => {
-    Promise.all([
-      Promise.resolve(axios.get(`/api/users/${userid}/week`)),
-      Promise.resolve(axios.get(`/api/users/${userid}`)),
-    ]).then((all) => {
-      // For chartRecipeData
-      const newData = all[0].data.data.map((el) => {
+    Promise.resolve(axios.get(`/api/users/${userid}`)).then((res) => {
+      setRecipeList(res.data.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    Promise.resolve(axios.get(`/api/users/${userid}/week`)).then((res) => {
+      const newData = res.data.data.map((el) => {
         el["carbs"] = el["carbs"] / 1000;
         el["protein"] = el["protein"] / 1000;
         el["fiber"] = el["fiber"] / 1000;
@@ -55,11 +57,9 @@ export default function Dashboard() {
       result.push(...saturday);
 
       setChartRecipeData(result);
-
-      // For RecipeList
-      setRecipeList(all[1].data.data);
+      console.log(result);
     });
-  }, []);
+  }, [recipeList]);
 
   const handleSelectDay = (target) => {
     setSelectWeek("day");
@@ -72,32 +72,33 @@ export default function Dashboard() {
   };
 
   const selectDay = (day) => {
-    setdayData(chartRecipeData.filter((el) => el["weekday"] === day)[0]);
     setSelectWeek(day);
+    const newDayData = chartRecipeData.filter((el) => el["weekday"] === day)[0];
+    console.log(newDayData);
+    setdayData(newDayData);
   };
 
   const handlePut = (item) => {
-    console.log(item);
     const newList = recipeList.filter((el) => el.id !== item.recipe.id);
     newList.push(item.recipe);
     setRecipeList(newList);
-    console.log(recipeList);
   };
 
   return (
     <div className={clsx("Dashboard", classes.root)}>
       <Grid container spacing={1} direction="column">
         <Grid item xs={12}>
-          {selectWeek === "week" ? (
+          {selectWeek === "week" && (
             <WeekChart
               handleSelectDay={handleSelectDay}
               chartRecipeData={chartRecipeData}
             />
-          ) : (
+          )}
+          {selectWeek !== "week" && dayData && (
             <DayChart
               handleSelectWeek={handleSelectWeek}
-              data={dayData}
-              selectDay={selectDay}
+              chartRecipeData={chartRecipeData}
+              selectDay={selectWeek}
             />
           )}
         </Grid>
