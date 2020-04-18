@@ -15,19 +15,34 @@ export default function DayChart(props) {
     const newData = props.chartRecipeData.filter(
       (el) => el["weekday"] === props.selectDay
     );
-    const energies = newData[0]["energies"];
-    const carbs = newData[0]["carbs"];
-    const fiber = newData[0]["fiber"];
-    const protein = newData[0]["protein"];
-    const fat = newData[0]["fat"];
 
-    setData({
-      energies: energies,
-      carbs: carbs,
-      fiber: fiber,
-      protein: protein,
-      fat: fat,
-    });
+    if (newData.length === 0 || newData === undefined) {
+      const energies = 0;
+      const carbs = 0;
+      const fiber = 0;
+      const protein = 0;
+      const fat = 0;
+      setData({
+        energies: energies,
+        carbs: carbs,
+        fiber: fiber,
+        protein: protein,
+        fat: fat,
+      });
+    } else {
+      const energies = newData[0]["energies"];
+      const carbs = newData[0]["carbs"];
+      const fiber = newData[0]["fiber"];
+      const protein = newData[0]["protein"];
+      const fat = newData[0]["fat"];
+      setData({
+        energies: energies,
+        carbs: carbs,
+        fiber: fiber,
+        protein: protein,
+        fat: fat,
+      });
+    }
   }, [props.selectDay, props.chartRecipeData]);
 
   return (

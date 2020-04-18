@@ -41,7 +41,7 @@ export default function Dashboard() {
       });
       let result = [];
       const sunday = newData.filter((el) => el["weekday"] === "Sunday");
-      const monday = newData.filter((el) => el["weekday"] === "Monday");
+      const monday = newData.filter((el) => el["weekday"] === "Monday") || null;
       const tuesday = newData.filter((el) => el["weekday"] === "Tuesday");
       const wednesday = newData.filter((el) => el["weekday"] === "Wednesday");
       const thursday = newData.filter((el) => el["weekday"] === "Thursday");
@@ -57,7 +57,6 @@ export default function Dashboard() {
       result.push(...saturday);
 
       setChartRecipeData(result);
-      console.log(result);
     });
   }, [recipeList]);
 
@@ -74,7 +73,6 @@ export default function Dashboard() {
   const selectDay = (day) => {
     setSelectWeek(day);
     const newDayData = chartRecipeData.filter((el) => el["weekday"] === day)[0];
-    console.log(newDayData);
     setdayData(newDayData);
   };
 
@@ -94,9 +92,8 @@ export default function Dashboard() {
               chartRecipeData={chartRecipeData}
             />
           )}
-          {selectWeek !== "week" && dayData && (
+          {selectWeek !== "week" && (
             <DayChart
-              handleSelectWeek={handleSelectWeek}
               chartRecipeData={chartRecipeData}
               selectDay={selectWeek}
             />
