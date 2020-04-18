@@ -8,10 +8,13 @@
     "@devexpress/dx-react-core": "^2.6.1",
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.49",
     "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "react": "^16.10.2",
     "react-circular-progressbar": "^2.0.3",
+    "react-dnd": "^10.0.2",
+    "react-dnd-html5-backend": "^10.0.2",
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.8"
@@ -31,5 +34,25 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^8.0.7",
+    "@testing-library/react-hooks": "^3.2.1",
+    "prop-types": "^15.7.2",
+    "react-test-renderer": "^16.9.0"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/components/homepage/ShoppingCartButton.js",
+      "!src/components/dashboard/demo-data/data-vizualization.js"
+    ]
+  },
   "proxy": "http://localhost:3001"
 }

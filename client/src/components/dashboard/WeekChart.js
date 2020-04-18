@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
+import Skeleton from "@material-ui/lab/Skeleton";
+
 import {
   Chart,
   BarSeries,
@@ -32,43 +32,8 @@ const modifyGramDomain = (domain) => [domain[0], 1000];
 const modifyKCalDomain = () => [0, 5000];
 
 export default function WeekChart(props) {
-  const [chartRecipeData, setChartRecipeData] = useState();
   const [selection, setSelection] = useState();
-
-  let { userid } = useParams();
-
-  useEffect(() => {
-    Promise.resolve(
-      axios.get(`/api/users/${userid}/week`).then((res) => {
-        const newData = res.data.data.map((el) => {
-          el["carbs"] = el["carbs"] / 1000;
-          el["protein"] = el["protein"] / 1000;
-          el["fiber"] = el["fiber"] / 1000;
-          el["fat"] = el["fat"] / 1000;
-          return el;
-        });
-        let result = [];
-
-        const sunday = newData.filter((el) => el["weekday"] === "Sunday");
-        const monday = newData.filter((el) => el["weekday"] === "Monday");
-        const tuesday = newData.filter((el) => el["weekday"] === "Tuesday");
-        const wednesday = newData.filter((el) => el["weekday"] === "Wednesday");
-        const thursday = newData.filter((el) => el["weekday"] === "Thursday");
-        const friday = newData.filter((el) => el["weekday"] === "Friday");
-        const saturday = newData.filter((el) => el["weekday"] === "Saturday");
-
-        result.push(...sunday);
-        result.push(...monday);
-        result.push(...tuesday);
-        result.push(...wednesday);
-        result.push(...thursday);
-        result.push(...friday);
-        result.push(...saturday);
-
-        setChartRecipeData(result);
-      })
-    );
-  }, []);
+  const { chartRecipeData } = props;
 
   const handleSelect = ({ targets }) => {
     if (targets[0] !== undefined) {
@@ -80,15 +45,6 @@ export default function WeekChart(props) {
     <div>
       {chartRecipeData ? (
         <div>
-          <button
-            onClick={() => {
-              console.log(chartRecipeData);
-              console.log(Array.isArray(chartRecipeData));
-              console.log(chartRecipeData[0]);
-            }}
-          >
-            click
-          </button>
           <Paper>
             <Chart data={chartRecipeData}>
               <ValueScale name="gram" modifyDomain={modifyGramDomain} />
@@ -149,7 +105,11 @@ export default function WeekChart(props) {
           </Paper>
         </div>
       ) : (
-        <div>Loading</div>
+        <div>
+          <Skeleton variant="text" width={1200} height={100} animation="wave" />
+          <Skeleton variant="rect" width={1200} height={400} animation="wave" />
+          <Skeleton variant="text" width={1200} height={100} animation="wave" />
+        </div>
       )}
     </div>
   );
