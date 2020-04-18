@@ -39,7 +39,7 @@ export default function SaveRecipeButton(props) {
         ) : ( 
           <Button color="secondary" component="div" className={classes.saveButton} onClick={() => handleAdd(recipe)}> 
             <CalendarTodayOutlinedIcon className={classes.style}/>
-              Save to My List
+              Add To Saved Recipes
           </Button>
         ) 
      } 

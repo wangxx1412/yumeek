@@ -35,9 +35,11 @@ export default function Labels(props) {
     {name: "vegan", src: "https://img.icons8.com/color/50/000000/vegan-food.png"},
     {name: "alcohol-free", src: "https://img.icons8.com/color/50/000000/no-alcohol.png"},
     {name: "sugar-conscious", src: "https://img.icons8.com/offices/38/000000/sugar-cube.png"},
-    {name: "gluten-free", src: "https://img.icons8.com/color/50/000000/no-gluten.png"}
+    {name: "gluten-free", src: "https://www.vecteezy.com/free-vector/gluten-free-icon"}
   ];
-  
+  // <a href="https://www.vecteezy.com/free-vector/gluten-free-icon">Gluten Free Icon Vectors by Vecteezy</a>
+  // "https://img.icons8.com/color/50/000000/no-gluten.png"
+  // "https://img.icons8.com/offices/38/000000/sugar-cube.png"
   let src = '';
 
   return (
