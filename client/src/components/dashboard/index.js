@@ -75,7 +75,7 @@ export default function Dashboard() {
 
   const selectDay = (day) => {
     setdayData(chartRecipeData.filter((el) => el["weekday"] === day)[0]);
-    setSelectWeek("day");
+    setSelectWeek(day);
   };
 
   return (

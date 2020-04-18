@@ -24,7 +24,7 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#222";
   }
 }
-export default function Dustbin({ recipeList, allowedDropEffect }) {
+export default function Dustbin({ recipeList, allowedDropEffect, weekorday }) {
   useEffect(() => {
     if (recipeList) {
       console.log(recipeList);
@@ -47,19 +47,20 @@ export default function Dustbin({ recipeList, allowedDropEffect }) {
   const backgroundColor = selectBackgroundColor(isActive, canDrop);
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
-      {`Works with ${allowedDropEffect} drop effect`}
-      <br />
+      {`Your ${weekorday} Recipes`}
       <br />
       {isActive ? "Release to drop" : "Drag a box here"}
       {recipeList ? (
         <Grid container spacing={1} direction="column" alignItems="center">
-          {recipeList.map((el) => {
-            return (
-              <Grid key={el.id} item xs={6}>
-                <AddedItem recipe={el} />
-              </Grid>
-            );
-          })}
+          {recipeList
+            .filter((el) => el["weekday"] === weekorday)
+            .map((el) => {
+              return (
+                <Grid key={el.id} item xs={6}>
+                  <AddedItem recipe={el} />
+                </Grid>
+              );
+            })}
         </Grid>
       ) : (
         <div>Loading</div>

@@ -13,6 +13,7 @@ export default function RecipeList(props) {
   });
 
   useEffect(() => {
+    console.log(props.weekorday);
     if (props.recipeList) {
       setDayRecipeList((prev) => ({
         ...prev,
@@ -59,6 +60,7 @@ export default function RecipeList(props) {
                 recipeList={dayRecipleList.recipeList.filter(
                   (el) => el["weekday"] === null
                 )}
+                weekorday={props.weekorday}
               ></SavedList>
             </Grid>
             <Grid item xs={6}>
@@ -70,6 +72,7 @@ export default function RecipeList(props) {
                   recipeList={dayRecipleList.recipeList.filter(
                     (el) => el["weekday"] !== null
                   )}
+                  weekorday={props.weekorday}
                 ></Dustbin>
               )}
             </Grid>

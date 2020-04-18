@@ -1,6 +1,8 @@
 import React from "react";
 import ItemTypes from "./ItemTypes";
 import { useDrag } from "react-dnd";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const style = {
   border: "1px dashed gray",
@@ -12,6 +14,7 @@ const style = {
 
 const AddedItem = (props) => {
   const item = { recipe: props.recipe, type: ItemTypes.ADDED };
+  let { userid } = useParams();
   const [, drag] = useDrag({
     item,
     end(item, monitor) {
@@ -23,9 +26,17 @@ const AddedItem = (props) => {
 
         if (isDropAllowed) {
           // Make axios put request
-          console.log(item.recipe["weekday"]);
-          console.log(item.recipe);
+          // console.log(item.recipe["weekday"]);
+          // console.log(item.recipe);
           // props.handleDragBox(item.recipe.label);
+          const recipeid = item.recipe.id;
+          axios
+            .put(`/api/userrecipe/${userid}/recipe/${recipeid}`, {
+              weekday: null,
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
       }
     },

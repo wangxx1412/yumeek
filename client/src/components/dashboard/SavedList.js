@@ -24,7 +24,11 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#222";
   }
 }
-export default function SavedList({ recipeList, allowedDropEffect }) {
+export default function SavedList({
+  recipeList,
+  allowedDropEffect,
+  weekorday,
+}) {
   useEffect(() => {
     if (recipeList) {
       console.log(recipeList);
@@ -46,8 +50,7 @@ export default function SavedList({ recipeList, allowedDropEffect }) {
   const backgroundColor = selectBackgroundColor(isActive, canDrop);
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
-      {`Works with ${allowedDropEffect} drop effect`}
-      <br />
+      {`Saved Recipes`}
       <br />
       {isActive ? "Release to drop" : "Drag a box here"}
       {recipeList ? (
@@ -55,7 +58,7 @@ export default function SavedList({ recipeList, allowedDropEffect }) {
           {recipeList.map((el) => {
             return (
               <Grid key={el.id} item xs={6}>
-                <SavedItem recipe={el} />
+                <SavedItem recipe={el} weekorday={weekorday} />
               </Grid>
             );
           })}
