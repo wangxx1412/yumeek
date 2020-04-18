@@ -10,6 +10,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Avatar from "@material-ui/core/Avatar";
 import { useHistory } from "react-router-dom";
+import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -55,6 +56,7 @@ export default function SavedRecipes(props) {
           size="medium"
           color="primary"
           onClick={handleClickOpen}
+          startIcon={<RestaurantMenuIcon />}
         >
           Saved Recipes
         </Button>
