@@ -46,7 +46,9 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.js",
-      "!src/index.js"
+      "!src/index.js",
+      "!src/components/homepage/ShoppingCartButton.js",
+      "!src/components/dashboard/demo-data/data-vizualization.js"
     ]
   },
   "proxy": "http://localhost:3001"

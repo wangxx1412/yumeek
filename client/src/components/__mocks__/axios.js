@@ -167,6 +167,13 @@ export default {
         data: fixtures.singleRecipe,
       });
     }
+    if (/^(\/api\/users)/.test(url)) {
+      return Promise.resolve({
+        status: 200,
+        statusText: "OK",
+        data: fixtures.user,
+      });
+    }
   }),
   put: jest.fn(() =>
     Promise.resolve({ status: 204, statusText: "No Content" })

@@ -86,6 +86,23 @@ describe("App", () => {
 
         expect(getByText("2")).toBeInTheDocument();
 
+        // list detail
+        fireEvent.click(savedRecipes);
+
+        const singleRecipe = getByText("Bagel Bruschetta");
+
+        fireEvent.click(singleRecipe);
+
+        expect(getByText("Search Recipe")).toBeInTheDocument();
+        expect(getByText("Delete From List")).toBeInTheDocument();
+
+        // delete recipe
+        const deleteButton = getByText("Delete From List");
+
+        fireEvent.click(deleteButton);
+
+        await waitForElement(() => getByText("Save to My List"));
+
         // logout user
         const logout = getByText("logout");
 
@@ -94,6 +111,30 @@ describe("App", () => {
         await waitForElement(() => getByText("Sign Up / Log In"));
 
         expect(getByText("Empty")).toBeInTheDocument();
+      });
+
+      it("can sign up new user", async () => {
+        // load search result
+        const { getByText } = render(<App />);
+
+        await waitForElement(() => getByText("Empty"));
+
+        // log in user
+        const loginButton = getByText("Sign Up / Log In");
+
+        fireEvent.click(loginButton);
+
+        const signup = getByText("Sign up");
+
+        fireEvent.click(signup);
+
+        const secondSignup = getByText("Sign up");
+
+        fireEvent.click(secondSignup);
+
+        await waitForElement(() => getByText("fake@gmail.com"));
+
+        expect(getByText("logout")).toBeInTheDocument();
       });
     });
   });
