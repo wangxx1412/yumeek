@@ -20,10 +20,12 @@ export default function RecipeList(props) {
       }));
       console.log(props.recipeList);
     }
-    setDayRecipeList((prev) => ({
-      ...prev,
-      day: props.day["weekday"],
-    }));
+    if (props.day) {
+      setDayRecipeList((prev) => ({
+        ...prev,
+        day: props.day["weekday"],
+      }));
+    }
   }, [props.recipeList, props.day]);
 
   // const addList = (label) => {

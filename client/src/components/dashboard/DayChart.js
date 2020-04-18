@@ -5,11 +5,25 @@ import Grid from "@material-ui/core/Grid";
 export default function DayChart(props) {
   const [calPerDay, setcalPerDay] = useState(2400);
 
-  const engergies = props.data["energies"] / calPerDay;
-  const carbs = props.data["carbs"] / 300;
-  const fiber = props.data["fiber"] / 25;
-  const protein = props.data["protein"] / 50;
-  const fat = props.data["fat"] / 65;
+  let energies = 0;
+  let carbs = 0;
+  let fiber = 0;
+  let protein = 0;
+  let fat = 0;
+
+  if (props.data) {
+    energies = props.data["energies"];
+    carbs = props.data["carbs"];
+    fiber = props.data["fiber"];
+    protein = props.data["protein"];
+    fat = props.data["fat"];
+  }
+
+  const calengergies = energies / calPerDay;
+  const calcarbs = carbs / 300;
+  const calfiber = fiber / 25;
+  const calprotein = protein / 50;
+  const calfat = fat / 65;
 
   // calories for nutrients per gram
   // fat:9 carbs:4 protein:4 fiber:2
@@ -19,27 +33,19 @@ export default function DayChart(props) {
     <div>
       <Grid container spacing={1}>
         <Grid item xs>
-          <CircularBar
-            text={engergies}
-            name="Calories"
-            amount={props.data["energies"]}
-          />
+          <CircularBar text={calengergies} name="Calories" amount={energies} />
         </Grid>
         <Grid item xs>
-          <CircularBar text={carbs} name="Carbs" amount={props.data["carbs"]} />
+          <CircularBar text={calcarbs} name="Carbs" amount={carbs} />
         </Grid>
         <Grid item xs>
-          <CircularBar
-            text={protein}
-            name="Protein"
-            amount={props.data["protein"]}
-          />
+          <CircularBar text={calprotein} name="Protein" amount={protein} />
         </Grid>
         <Grid item xs>
-          <CircularBar text={fat} name="Fat" amount={props.data["fat"]} />
+          <CircularBar text={calfat} name="Fat" amount={fat} />
         </Grid>
         <Grid item xs>
-          <CircularBar text={fiber} name="Fiber" amount={props.data["fiber"]} />
+          <CircularBar text={calfiber} name="Fiber" amount={fiber} />
         </Grid>
       </Grid>
     </div>

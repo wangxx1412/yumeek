@@ -24,6 +24,7 @@ const SavedItem = (props) => {
         if (isDropAllowed) {
           // Make axios put request
           console.log(item.recipe["weekday"]);
+          console.log(item.recipe);
           // props.handleDragBox(item.recipe.label);
         }
       }

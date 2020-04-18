@@ -61,7 +61,7 @@ export default function Dashboard() {
     });
   }, []);
 
-  let weekday = dayData["weekday"];
+  // let weekday = dayData["weekday"];
 
   const handleSelectDay = (target) => {
     setSelectWeek("day");
@@ -96,53 +96,25 @@ export default function Dashboard() {
           )}
         </Grid>
         <Grid item xs={12}>
-          <Button
-            size="large"
-            onClick={() => selectDay("Sunday")}
-            disabled={weekday === "Sunday"}
-          >
+          <Button size="large" onClick={() => selectDay("Sunday")}>
             Sunday
           </Button>
-          <Button
-            size="large"
-            onClick={() => selectDay("Monday")}
-            disabled={weekday === "Monday"}
-          >
+          <Button size="large" onClick={() => selectDay("Monday")}>
             Monday
           </Button>
-          <Button
-            size="large"
-            onClick={() => selectDay("Tuesday")}
-            disabled={weekday === "Tuesday"}
-          >
+          <Button size="large" onClick={() => selectDay("Tuesday")}>
             Tuesday
           </Button>
-          <Button
-            size="large"
-            onClick={() => selectDay("Wednesday")}
-            disabled={weekday === "Wednesday"}
-          >
+          <Button size="large" onClick={() => selectDay("Wednesday")}>
             Wednesday
           </Button>
-          <Button
-            size="large"
-            onClick={() => selectDay("Thursday")}
-            disabled={weekday === "Thursday"}
-          >
+          <Button size="large" onClick={() => selectDay("Thursday")}>
             Thursday
           </Button>
-          <Button
-            size="large"
-            onClick={() => selectDay("Friday")}
-            disabled={weekday === "Friday"}
-          >
+          <Button size="large" onClick={() => selectDay("Friday")}>
             Friday
           </Button>
-          <Button
-            size="large"
-            onClick={() => selectDay("Saturday")}
-            disabled={weekday === "Saturday"}
-          >
+          <Button size="large" onClick={() => selectDay("Saturday")}>
             Saturday
           </Button>
           <Button
