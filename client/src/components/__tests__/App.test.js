@@ -24,12 +24,12 @@ describe("App", () => {
         fireEvent.click(label);
 
         expect(getByText("Search Recipe")).toBeInTheDocument();
-        expect(getByText("Save to My List")).toBeInTheDocument();
+        expect(getByText("Add To Saved Recipes")).toBeInTheDocument();
 
         // add recipe to saved list
         expect(getByText("Empty")).toBeInTheDocument();
 
-        const addButton = getByText("Save to My List");
+        const addButton = getByText("Add To Saved Recipes");
 
         fireEvent.click(addButton);
 
@@ -105,7 +105,7 @@ describe("App", () => {
 
         fireEvent.click(deleteButton);
 
-        await waitForElement(() => getByText("Save to My List"));
+        await waitForElement(() => getByText("Add To Saved Recipes"));
 
         // logout user
         const logout = getByText("logout");
