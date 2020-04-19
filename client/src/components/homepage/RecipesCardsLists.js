@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipesCardsLists(props) {
-  const { searchResultRecipes, handleAdd, clickRecipe } = props;
+  const { searchResultRecipes, handleAdd, clickRecipe, searchInfo } = props;
   const classes = useStyles();
 
   return (
@@ -25,7 +25,8 @@ export default function RecipesCardsLists(props) {
         <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
           <ListSubheader component="div">
             {searchResultRecipes &&
-              `${searchResultRecipes.length} Recipes For You!`}
+              `${searchResultRecipes.length} Recipes For You!  `}
+            {searchInfo.length !== 0 && `(${searchInfo.join(" + ")})`}
           </ListSubheader>
         </GridListTile>
         {searchResultRecipes &&
