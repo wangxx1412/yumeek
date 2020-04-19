@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
@@ -40,6 +40,10 @@ export default function WeekChart(props) {
       props.handleSelectDay(chartRecipeData[targets[0].point]);
     }
   };
+
+  useEffect(() => {
+    console.log(chartRecipeData);
+  }, []);
 
   return (
     <div>
