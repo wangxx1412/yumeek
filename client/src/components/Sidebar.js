@@ -1,11 +1,10 @@
 import React from "react";
 import UserInfo from "./homepage/UserInfo";
-import { Link, useHistory } from "react-router-dom";
+import DashboardButton from "./homepage/DashboardButton";
+import { Link } from "react-router-dom";
 import SavedRecipes from "./homepage/SavedRecipes";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../assets/image/logo.png";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,12 +30,6 @@ export default function Sidebar(props) {
   } = props;
   const classes = useStyles();
 
-  let history = useHistory();
-
-  const handleClickDashboard = () => {
-    history.push(`/user/${sessionUser.id}/stats`); //changed the path to '/recipe'
-  };
-
   return (
     <div className={classes.container}>
       <Link to="/">
@@ -49,15 +42,7 @@ export default function Sidebar(props) {
         handleLogout={userLogout}
       />
       <SavedRecipes savedRecipes={savedRecipes} deleteRecipe={deleteRecipe} />
-      <Button
-        variant="contained"
-        size="medium"
-        color="primary"
-        onClick={handleClickDashboard}
-        startIcon={<DashboardIcon />}
-      >
-        My Dashboard
-      </Button>
+      {sessionUser && <DashboardButton sessionUser={sessionUser} />}
     </div>
   );
 }
