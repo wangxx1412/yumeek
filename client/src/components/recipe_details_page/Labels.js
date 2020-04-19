@@ -1,35 +1,62 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-around",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       display: "flex",
       flexDirection: "column",
+      width: "30%"
+    },
+    [theme.breakpoints.down("sm")]: {
       width: "30%"
     }
      
   },
   label: {
     display: "flex"
+  },
+  icon: {
+    [theme.breakpoints.down("sm")]: {
+      width: "25 em"
+    }
   }
 }));
 
 export default function Labels(props) {
   const { labels } = props;
   const classes = useStyles();
-
+  const icons = [
+    {name: "peanut-free", src: "https://img.icons8.com/offices/38/000000/peanuts.png"},
+    {name: "tree-nut-free", src: "https://img.icons8.com/offices/38/000000/no-nuts.png"}, 
+    {name: "vegetarian", src: `https://img.icons8.com/color/50/000000/vegan-symbol.png`},
+    {name: "vegan", src: "https://img.icons8.com/color/50/000000/vegan-food.png"},
+    {name: "alcohol-free", src: "https://img.icons8.com/color/50/000000/no-alcohol.png"},
+    {name: "sugar-conscious", src: "https://img.icons8.com/offices/38/000000/sugar-cube.png"},
+    {name: "gluten-free", src: "https://www.vecteezy.com/free-vector/gluten-free-icon"}
+  ];
+  // <a href="https://www.vecteezy.com/free-vector/gluten-free-icon">Gluten Free Icon Vectors by Vecteezy</a>
+  // "https://img.icons8.com/color/50/000000/no-gluten.png"
+  // "https://img.icons8.com/offices/38/000000/sugar-cube.png"
+  let src = '';
 
   return (
     <section className={classes.root}>
-        {labels.map((label, index) => 
-        <div className={classes.label}>
-          <Checkbox defaultChecked color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }}/>
-          <p key={index}>{label}</p>
-        </div>
+        {labels.map((label, index) => {
+          icons.filter(item => {
+            if (label.toLowerCase() === item.name){
+              src = item.src;
+            }
+          })
+            return (
+            <div className={classes.label} key={index}>
+              <img src={src} alt={label} className={classes.icon}/>
+              <p>{label}</p>
+            </div>
+            );
+          }
         )}
     </section>
   );

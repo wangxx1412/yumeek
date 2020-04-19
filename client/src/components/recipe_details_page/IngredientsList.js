@@ -11,11 +11,27 @@ const defaultProps = {
   width: 1/2,
 };
 
+const defaultPropsBadge = {
+  bgcolor: "grey.500",
+  color: "white",
+  p: 2,
+  position: "absolute",
+  top: -25,
+  left: "5%",
+  zIndex: "module",
+  boxShadow: 2
+};
+
 const useStyles = makeStyles(theme => ({
   box: {
-    [theme.breakpoints.down("sm")]: {
-     width: "340px"
+    position: "relative",
+    borderRadius: "borderRadius",
+    [theme.breakpoints.down("md")]: {
+     width: "400px"
    },
+   [theme.breakpoints.down("sm")]: {
+    width: "340px"
+  }
   }
 }))
 
@@ -25,18 +41,9 @@ export default function IngredientsList(props) {
 
   return (
     <Box display="flex" justifyContent="center">
-      <Box borderRadius="borderRadius" {...defaultProps} position="relative" className={classes.box}>
+      <Box {...defaultProps}  className={classes.box}>
         <Typography component="h2" variant="body1"  style={{ height: 50, width: '100%' , position: 'relative' }}>
-        <Box
-          bgcolor="grey.500"
-          color="white"
-          p={2}
-          position="absolute"
-          top={-25}
-          left="5%"
-          zIndex="module"
-          boxShadow={2}
-        >
+        <Box {...defaultPropsBadge}>
           Ingredients
         </Box>
         </Typography>
