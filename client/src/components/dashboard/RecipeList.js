@@ -7,6 +7,8 @@ import SavedList from "./SavedList";
 
 import axios from "axios";
 
+import Skeleton from "@material-ui/lab/Skeleton";
+
 export default function RecipeList(props) {
   const [dayRecipleList, setDayRecipeList] = useState({
     day: "",
@@ -63,7 +65,7 @@ export default function RecipeList(props) {
             </Grid>
             <Grid item xs={5}>
               {props.weekorday === "week" ? (
-                <div>Add</div>
+                <div></div>
               ) : (
                 <Dustbin
                   allowedDropEffect="any"
@@ -79,7 +81,7 @@ export default function RecipeList(props) {
           </Grid>
         </DndProvider>
       ) : (
-        <div>Loading</div>
+        <Skeleton variant="rect" width={1000} height={400} animation="wave" />
       )}
     </div>
   );

@@ -1,5 +1,8 @@
 import React from "react";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function CircularBar(props) {
@@ -7,7 +10,13 @@ export default function CircularBar(props) {
 
   return (
     <div style={{ width: "80%" }}>
-      <CircularProgressbarWithChildren value={value} maxValue={100}>
+      <CircularProgressbarWithChildren
+        value={value}
+        maxValue={100}
+        styles={buildStyles({
+          pathColor: "#42ABD5",
+        })}
+      >
         <div style={{ fontSize: 16, marginTop: -5 }}>
           <div>
             {props.name === "Calories" ? (

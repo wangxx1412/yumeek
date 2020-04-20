@@ -5,6 +5,7 @@ import clsx from "clsx";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 import WeekChart from "./WeekChart";
 import DayChart from "./DayChart";
@@ -80,6 +81,10 @@ export default function Dashboard() {
     <div className={clsx("Dashboard", classes.root)}>
       <Grid container spacing={5} direction="column">
         <Grid item xs={10}>
+          <Typography variant="h3" gutterBottom>
+            {`Nutrient Table`}
+          </Typography>
+
           {selectOption === "week" && (
             <WeekChart chartRecipeData={chartRecipeData} />
           )}

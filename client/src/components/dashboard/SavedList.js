@@ -5,6 +5,7 @@ import { useDrop } from "react-dnd";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const style = {
   marginRight: "1.5rem",
@@ -17,15 +18,15 @@ const style = {
   float: "left",
   width: "100%",
   minHeight: "400px",
-  borderRadius: "5px",
+  borderRadius: "10px",
 };
 function selectBackgroundColor(isActive, canDrop) {
   if (isActive) {
-    return "darkgreen";
+    return "#F17E75";
   } else if (canDrop) {
-    return "darkkhaki";
+    return "#F59E7A";
   } else {
-    return "#F2F2F4";
+    return "#DCF3F3";
   }
 }
 export default function SavedList({
@@ -75,7 +76,7 @@ export default function SavedList({
           })}
         </Grid>
       ) : (
-        <div>Loading</div>
+        <Skeleton variant="rect" width={440} height={400} animation="wave" />
       )}
     </div>
   );
