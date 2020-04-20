@@ -10,6 +10,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { green } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import ingredientsArray from "../../helper/autoCompleteHelperArray";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,16 +22,23 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    backgroundColor: fade(theme.palette.common.white, 0.75),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(theme.palette.common.white, 0.85),
     },
+    // backgroundColor: fade(theme.palette.common.white, 0.15),
+    // "&:hover": {
+    //   backgroundColor: fade(theme.palette.common.white, 0.25),
+    // },
     marginLeft: 0,
     marginRight: theme.spacing(1),
     width: "22%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
     },
+  },
+  test: {
+    padding: 0,
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -92,6 +103,23 @@ export default function SearchBar(props) {
             Go!
           </Button>
           <div className={classes.search}>
+            <Autocomplete
+              id="search"
+              freeSolo
+              color="primary"
+              onChange={(e, value) => setsearchValue(value)}
+              options={ingredientsArray.map((option) => option.title)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Search"
+                  variant="filled"
+                  value={searchValue}
+                  onChange={(e) => setsearchValue(e.target.value)}
+                />
+              )}
+            />
+            {/* 
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -104,7 +132,7 @@ export default function SearchBar(props) {
               inputProps={{ "aria-label": "search" }}
               value={searchValue}
               onChange={(e) => setsearchValue(e.target.value)}
-            />
+            /> */}
           </div>
           <FormGroup row>
             <FormControlLabel
