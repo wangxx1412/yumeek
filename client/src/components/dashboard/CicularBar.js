@@ -13,9 +13,15 @@ export default function CircularBar(props) {
       <CircularProgressbarWithChildren
         value={value}
         maxValue={100}
-        styles={buildStyles({
-          backgroundColor: "#42ABD5",
-        })}
+        styles={
+          value > 100
+            ? buildStyles({
+                pathColor: "#f17e75",
+              })
+            : buildStyles({
+                pathColor: "#72d1dc",
+              })
+        }
       >
         <div style={{ fontSize: 16, marginTop: -5 }}>
           <div>
