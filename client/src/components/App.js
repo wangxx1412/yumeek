@@ -19,7 +19,7 @@ import Home from "./Home";
 import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
 import Auth from "./Auth";
-
+import lemon from "../assets/image/lemon.jpg";
 import useUserData from "../hooks/useUserData";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: "100vh",
     overflow: "auto",
+    backgroundImage: `url(${lemon})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "auto 720px",
   },
   container: {
     paddingTop: theme.spacing(9),
