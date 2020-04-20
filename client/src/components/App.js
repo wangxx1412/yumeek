@@ -58,11 +58,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   container: {
-    paddingTop: theme.spacing(9),
     paddingBottom: theme.spacing(4),
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: theme.spacing(4),
-    },
+    backgroundColor: "#F5F6F8",
   },
 }));
 
@@ -166,10 +163,16 @@ export default function App(props) {
                   <Home handleAdd={(recipe) => handleAdd(recipe)} />
                 )}
               />
-              <Route exact path="/recipe" render={() => (
-                <Recipe handleAdd={(recipe) => handleAdd(recipe)} 
-                        savedRecipes={savedRecipes} deleteRecipe={(recipe) => deleteRecipe(recipe)} />
-              )} 
+              <Route
+                exact
+                path="/recipe"
+                render={() => (
+                  <Recipe
+                    handleAdd={(recipe) => handleAdd(recipe)}
+                    savedRecipes={savedRecipes}
+                    deleteRecipe={(recipe) => deleteRecipe(recipe)}
+                  />
+                )}
               />
               <Route exact path="/login" component={Auth} />
             </Switch>
