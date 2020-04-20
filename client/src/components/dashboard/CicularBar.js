@@ -6,7 +6,7 @@ export default function CircularBar(props) {
   const value = Math.round(props.text * 10000) / 100;
 
   return (
-    <div style={{ width: "150px" }}>
+    <div style={{ width: "200px" }}>
       <CircularProgressbarWithChildren value={value} maxValue={100}>
         <div style={{ fontSize: 12, marginTop: -5 }}>
           <div>

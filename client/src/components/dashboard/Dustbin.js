@@ -4,6 +4,7 @@ import AddedItem from "./AddedItem";
 import { useDrop } from "react-dnd";
 
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 const style = {
   marginRight: "1.5rem",
@@ -14,6 +15,9 @@ const style = {
   fontSize: "1rem",
   lineHeight: "normal",
   float: "left",
+  width: "100%",
+  minHeight: "400px",
+  top: "0",
 };
 function selectBackgroundColor(isActive, canDrop) {
   if (isActive) {
@@ -29,6 +33,7 @@ export default function Dustbin({
   allowedDropEffect,
   weekorday,
   handlePut,
+  deleteRecipe,
 }) {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.SAVED,
@@ -45,17 +50,21 @@ export default function Dustbin({
   const backgroundColor = selectBackgroundColor(isActive, canDrop);
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
-      <Grid>{`Your ${weekorday} Recipes`}</Grid>
+      <Typography variant="h5">{`${weekorday} Recipes`}</Typography>
       <br />
       {/* {isActive ? "Release to drop" : "Drag a box here"} */}
       {recipeList ? (
-        <Grid container spacing={1} direction="column" alignItems="center">
+        <Grid container spacing={1} direction="column">
           {recipeList
             .filter((el) => el["weekday"] === weekorday)
             .map((el) => {
               return (
                 <Grid key={el.id} item xs={12}>
-                  <AddedItem recipe={el} handlePut={handlePut} />
+                  <AddedItem
+                    recipe={el}
+                    handlePut={handlePut}
+                    deleteRecipe={deleteRecipe}
+                  />
                 </Grid>
               );
             })}

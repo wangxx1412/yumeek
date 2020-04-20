@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
   controls: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
   icon: {
@@ -46,7 +48,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SavedItem({ recipe, weekorday, handlePut }) {
+export default function SavedItem({
+  recipe,
+  weekorday,
+  handlePut,
+  deleteRecipe,
+}) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -93,11 +100,16 @@ export default function SavedItem({ recipe, weekorday, handlePut }) {
         </CardContent>
 
         <div className={classes.controls}>
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
+          {/* <Tooltip title="Delete">
+            <IconButton
+              aria-label="delete"
+              onClick={() => {
+                deleteRecipe(recipe);
+              }}
+            >
               <HighlightOffIcon className={classes.icon} />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Detail">
             <IconButton
               onClick={() => {
@@ -107,6 +119,7 @@ export default function SavedItem({ recipe, weekorday, handlePut }) {
               <VisibilityIcon className={classes.icon} />
             </IconButton>
           </Tooltip>
+          <Typography variant="subtitle2">{recipe.energies} kCal</Typography>
         </div>
       </div>
       {recipe ? (

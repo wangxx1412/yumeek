@@ -5,6 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Dustbin from "./Dustbin";
 import SavedList from "./SavedList";
 
+import axios from "axios";
+
 export default function RecipeList(props) {
   const [dayRecipleList, setDayRecipeList] = useState({
     day: "",
@@ -29,6 +31,20 @@ export default function RecipeList(props) {
     }
   }, [props.day]);
 
+  const deleteRecipe = (recipe) => {
+    const newList = dayRecipleList.recipeList.filter(
+      (el) => el.id !== recipe.id
+    );
+    setDayRecipeList((prev) => ({
+      ...prev,
+      recipeList: newList,
+    }));
+
+    axios
+      .delete(`/api/recipe/${recipe.id}`, recipe)
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div>
       {props.recipeList ? (
@@ -42,6 +58,7 @@ export default function RecipeList(props) {
                 )}
                 weekorday={props.weekorday}
                 handlePut={props.handlePut}
+                deleteRecipe={deleteRecipe}
               ></SavedList>
             </Grid>
             <Grid item xs={6}>
@@ -55,6 +72,7 @@ export default function RecipeList(props) {
                   )}
                   weekorday={props.weekorday}
                   handlePut={props.handlePut}
+                  deleteRecipe={deleteRecipe}
                 ></Dustbin>
               )}
             </Grid>
