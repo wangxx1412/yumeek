@@ -7,7 +7,7 @@ import useSearchResult from "../hooks/useSearchResult";
 // SearchBar, RecipesCardsLists
 export default function Home(props) {
   const { handleAdd } = props;
-  const { searchResult, handleSearch } = useSearchResult();
+  const { searchResult, handleSearch, searchInfo } = useSearchResult();
 
   let history = useHistory();
 
@@ -21,6 +21,7 @@ export default function Home(props) {
       <RecipesCardsLists
         searchResultRecipes={searchResult}
         handleAdd={handleAdd}
+        searchInfo={searchInfo}
         clickRecipe={(recipe) => {
           handleRedirect(recipe);
         }}

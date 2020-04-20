@@ -1,35 +1,32 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import recipesDataHelper from "../helper/recipesDataHelper";
+import {
+  keyeordList,
+  mealTypeList,
+  healthLabelList,
+  random,
+} from "../helper/randomSearchArrays";
 
 const useSearchResult = () => {
   const [searchResult, setSearchResult] = useState(
     localStorage.getItem("searchResult")
   );
 
+  const [searchInfo, setSearchInfo] = useState([]);
+
   const appInfo = `&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_APP_KEY}&from=0&to=100`;
   const apiBaseURL = `https://api.edamam.com/search?q=`;
 
   useEffect(() => {
     if (!localStorage.getItem("searchResult")) {
-      const recipeList = [
-        "chicken",
-        "beef",
-        "fish",
-        "pepper",
-        "carrot",
-        "paste",
-        "french fries",
-        "ice cream",
-        "bread",
-        "pancakes",
-        "burger",
-        "pizza",
-        "appal pie",
-        "bagel",
-      ];
-      const randomRecipe =
-        recipeList[Math.floor(Math.random() * recipeList.length)];
+      const keyword = random(keyeordList);
+      const mealType = random(mealTypeList);
+      const healthLabel = random(healthLabelList);
+      const randomRecipe = `${keyword}&mealtype=${mealType}&health=${healthLabel}`;
+
+      setSearchInfo([keyword, mealType, healthLabel]);
+
       axios.get(apiBaseURL + randomRecipe + appInfo).then((response) => {
         setSearchResult(JSON.stringify(recipesDataHelper(response)));
         localStorage.setItem(
@@ -42,10 +39,13 @@ const useSearchResult = () => {
 
   const handleSearch = (value, tags) => {
     const tagsArr = [];
+    const infoArr = [];
     for (let tag in tags) {
-      tags[tag] && tagsArr.push(`health=${tag}`);
+      tags[tag] && tagsArr.push(`health=${tag}`) && infoArr.push(tag);
     }
     const healthTags = tagsArr.length !== 0 ? `&${tagsArr.join("&")}` : "";
+
+    setSearchInfo([value, ...infoArr]);
 
     axios.get(apiBaseURL + value + appInfo + healthTags).then((response) => {
       setSearchResult(JSON.stringify(recipesDataHelper(response)));
@@ -56,7 +56,11 @@ const useSearchResult = () => {
     });
   };
 
-  return { searchResult: JSON.parse(searchResult), handleSearch };
+  return {
+    searchResult: JSON.parse(searchResult),
+    handleSearch,
+    searchInfo,
+  };
 };
 
 export default useSearchResult;
