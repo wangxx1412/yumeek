@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   },
   label: {
     height: 48,
+    fontFamily: "'Baloo Paaji 2', cursive",
   },
   cardRoot: {
     padding: "8px 16px 0 16px",
