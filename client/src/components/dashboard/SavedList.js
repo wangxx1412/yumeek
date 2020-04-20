@@ -4,6 +4,8 @@ import SavedItem from "./SavedItem";
 import { useDrop } from "react-dnd";
 
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const style = {
   marginRight: "1.5rem",
@@ -14,14 +16,17 @@ const style = {
   fontSize: "1rem",
   lineHeight: "normal",
   float: "left",
+  width: "100%",
+  minHeight: "400px",
+  borderRadius: "10px",
 };
 function selectBackgroundColor(isActive, canDrop) {
   if (isActive) {
-    return "darkgreen";
+    return "#F17E75";
   } else if (canDrop) {
-    return "darkkhaki";
+    return "#F59E7A";
   } else {
-    return "#F2F2F4";
+    return "#DCF3F3";
   }
 }
 export default function SavedList({
@@ -29,6 +34,7 @@ export default function SavedList({
   allowedDropEffect,
   weekorday,
   handlePut,
+  deleteRecipe,
 }) {
   useEffect(() => {
     if (recipeList) {
@@ -51,7 +57,7 @@ export default function SavedList({
   const backgroundColor = selectBackgroundColor(isActive, canDrop);
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
-      <Grid container>{`Saved Recipes`}</Grid>
+      <Typography variant="h5">{`Saved Recipes`}</Typography>
       <br />
       {/* {isActive ? "Release to drop" : "Drag a box here"} */}
       {recipeList ? (
@@ -63,13 +69,14 @@ export default function SavedList({
                   recipe={el}
                   weekorday={weekorday}
                   handlePut={handlePut}
+                  deleteRecipe={deleteRecipe}
                 />
               </Grid>
             );
           })}
         </Grid>
       ) : (
-        <div>Loading</div>
+        <Skeleton variant="rect" width={440} height={400} animation="wave" />
       )}
     </div>
   );

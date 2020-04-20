@@ -48,32 +48,32 @@ export default function DayChart(props) {
   return (
     <div>
       {props.selectDay ? (
-        <Grid container spacing={1}>
-          <Grid item xs>
+        <Grid container spacing={6}>
+          <Grid item xs={4}>
             <CircularBar
               text={data.energies / 2400}
               name="Calories"
               amount={data.energies}
             />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={4}>
             <CircularBar
               text={data.carbs / 300}
               name="Carbs"
               amount={data.carbs}
             />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={4}>
             <CircularBar
               text={data.protein / 50}
               name="Protein"
               amount={data.protein}
             />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={4}>
             <CircularBar text={data.fat / 65} name="Fat" amount={data.fat} />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={4}>
             <CircularBar
               text={data.fiber / 25}
               name="Fiber"

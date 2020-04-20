@@ -5,6 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import Dustbin from "./Dustbin";
 import SavedList from "./SavedList";
 
+import axios from "axios";
+
+import Skeleton from "@material-ui/lab/Skeleton";
+
 export default function RecipeList(props) {
   const [dayRecipleList, setDayRecipeList] = useState({
     day: "",
@@ -29,12 +33,26 @@ export default function RecipeList(props) {
     }
   }, [props.day]);
 
+  const deleteRecipe = (recipe) => {
+    const newList = dayRecipleList.recipeList.filter(
+      (el) => el.id !== recipe.id
+    );
+    setDayRecipeList((prev) => ({
+      ...prev,
+      recipeList: newList,
+    }));
+
+    axios
+      .delete(`/api/recipe/${recipe.id}`, recipe)
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div>
       {props.recipeList ? (
         <DndProvider backend={Backend}>
-          <Grid container spacing={1} direction="row" alignItems="center">
-            <Grid item xs={6}>
+          <Grid container spacing={6} direction="row" alignItems="center">
+            <Grid item xs={5}>
               <SavedList
                 allowedDropEffect="any"
                 recipeList={dayRecipleList.recipeList.filter(
@@ -42,11 +60,12 @@ export default function RecipeList(props) {
                 )}
                 weekorday={props.weekorday}
                 handlePut={props.handlePut}
+                deleteRecipe={deleteRecipe}
               ></SavedList>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               {props.weekorday === "week" ? (
-                <div>Add</div>
+                <div></div>
               ) : (
                 <Dustbin
                   allowedDropEffect="any"
@@ -55,13 +74,14 @@ export default function RecipeList(props) {
                   )}
                   weekorday={props.weekorday}
                   handlePut={props.handlePut}
+                  deleteRecipe={deleteRecipe}
                 ></Dustbin>
               )}
             </Grid>
           </Grid>
         </DndProvider>
       ) : (
-        <div>Loading</div>
+        <Skeleton variant="rect" width={1000} height={400} animation="wave" />
       )}
     </div>
   );

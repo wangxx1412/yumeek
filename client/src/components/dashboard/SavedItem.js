@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import ItemTypes from "./ItemTypes";
 import { useDrag } from "react-dnd";
@@ -13,7 +13,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+// import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import Tooltip from "@material-ui/core/Tooltip";
 
@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
   controls: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
   icon: {
@@ -46,9 +48,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SavedItem({ recipe, weekorday, handlePut }) {
+export default function SavedItem({
+  recipe,
+  weekorday,
+  handlePut,
+  deleteRecipe,
+}) {
   const classes = useStyles();
-  const theme = useTheme();
 
   const item = { recipe: recipe, type: ItemTypes.SAVED };
   let { userid } = useParams();
@@ -93,11 +99,16 @@ export default function SavedItem({ recipe, weekorday, handlePut }) {
         </CardContent>
 
         <div className={classes.controls}>
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
+          {/* <Tooltip title="Delete">
+            <IconButton
+              aria-label="delete"
+              onClick={() => {
+                deleteRecipe(recipe);
+              }}
+            >
               <HighlightOffIcon className={classes.icon} />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Detail">
             <IconButton
               onClick={() => {
@@ -107,6 +118,7 @@ export default function SavedItem({ recipe, weekorday, handlePut }) {
               <VisibilityIcon className={classes.icon} />
             </IconButton>
           </Tooltip>
+          <Typography variant="subtitle2">{recipe.energies} kCal</Typography>
         </div>
       </div>
       {recipe ? (
