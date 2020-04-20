@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     background: {
       width: "100 wh",
       height: "100 vh",
-      backgroundImage: "url(" + "" + ")", //image
+      backgroundImage: "url(" + "" + ")", //image?
     },
     style: { width: "25em", margin: "3%" }
   })
