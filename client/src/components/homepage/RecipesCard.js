@@ -12,6 +12,7 @@ const useStyles = makeStyles({
   root: {
     width: "18%",
     margin: "1%",
+    backgroundColor: "#F8F8F8",
   },
   media: {
     height: 200,
