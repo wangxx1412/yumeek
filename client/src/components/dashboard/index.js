@@ -6,7 +6,6 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 
 import WeekChart from "./WeekChart";
 import DayChart from "./DayChart";
@@ -108,7 +107,6 @@ export default function Dashboard() {
           selectOption={selectOption}
         />
       </Grid>
-      <Divider />
       <Grid item xs={10}>
         <Typography variant="h3" gutterBottom>
           {`Nutrient Table`}
