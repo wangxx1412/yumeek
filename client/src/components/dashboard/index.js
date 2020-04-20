@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 import WeekChart from "./WeekChart";
 import DayChart from "./DayChart";
@@ -17,7 +18,19 @@ const useStyles = makeStyles((theme) => ({}));
 export default function Dashboard() {
   const classes = useStyles();
 
-  const [selectOption, setSelectOption] = useState("week");
+  const today = new Date();
+  const dayIndex = today.getDay();
+  const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const [selectOption, setSelectOption] = useState(weekdays[dayIndex]);
   const [dayData, setdayData] = useState({ weekday: null });
   const [chartRecipeData, setChartRecipeData] = useState([]);
   const [recipeList, setRecipeList] = useState();
@@ -81,6 +94,14 @@ export default function Dashboard() {
     <div className={clsx("Dashboard", classes.root)}>
       <Grid container spacing={5} direction="column">
         <Grid item xs={10}>
+          <ButtonList
+            selectDay={selectDay}
+            handleSelectWeek={handleSelectWeek}
+            selectOption={selectOption}
+          />
+        </Grid>
+        <Divider />
+        <Grid item xs={10}>
           <Typography variant="h3" gutterBottom>
             {`Nutrient Table`}
           </Typography>
@@ -95,14 +116,10 @@ export default function Dashboard() {
             />
           )}
         </Grid>
-        <Grid item xs={10}>
-          <ButtonList
-            selectDay={selectDay}
-            handleSelectWeek={handleSelectWeek}
-            selectOption={selectOption}
-          />
-        </Grid>
         <Grid item xs={12}>
+          <Typography variant="h3" gutterBottom>
+            {`Recipe List`}
+          </Typography>
           <RecipeList
             recipeList={recipeList}
             day={dayData}
