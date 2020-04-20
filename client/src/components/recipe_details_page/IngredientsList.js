@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
   box: {
     position: "relative",
     borderRadius: "borderRadius",
+    width: "500px",
+    marginLeft: "15%",
     [theme.breakpoints.down("md")]: {
      width: "400px"
    },

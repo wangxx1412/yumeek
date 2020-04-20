@@ -171,6 +171,7 @@ export default function App(props) {
                 path="/recipe"
                 render={() => (
                   <Recipe
+                    sessionUser={sessionUser}
                     handleAdd={(recipe) => handleAdd(recipe)}
                     savedRecipes={savedRecipes}
                     deleteRecipe={(recipe) => deleteRecipe(recipe)}

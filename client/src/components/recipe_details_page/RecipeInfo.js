@@ -5,12 +5,14 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import * as emailjs from 'emailjs-com';
 import { useLocation } from 'react-router-dom';
+import useSendEmail from '../../hooks/useSendEmail';
+import { withStyles } from '@material-ui/core/styles'; 
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex" ,
     flexDirection: "row-reverse",
-    width: "85%",
+    width: "100%",
     justifyContent: "space-around",
     alignItems: "center", 
     [theme.breakpoints.down("sm")]: {
@@ -23,8 +25,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-around",
     width: "100%",
-    margin: "10 em",
+    margin: "10%",
     [theme.breakpoints.down("sm")]: {
+      margin: "4%",
       width: "45%"
     }, 
   },
@@ -35,33 +38,50 @@ const useStyles = makeStyles(theme => ({
     margin: "10%"
   },
   typography: {
-    fontSize: "2.1rem"
+    fontSize: "2.1rem",
   },
   likeButton: {
-    margin: "10%"
+    margin: "3%"
   },
   info_like: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-around"
   },
-  style: { width: "100%", margin: "3%" }
+  style: { width: "100%", margin: "3%", borderRadius: "20px" }
 })
 );
+// const ButtonDiabled = withStyles({
+//   root: {
+//     color: "primary",
+//     "&$disabled": {
+//       color: "secondary"
+//     },
+//   },
+//   disabled: {}
+// })((props) => <Button {...props} />);
+
 
 export default function RecipeInfo(props) {
-  const { recipe } = props;
+  const { recipe, sessionUser } = props;
   const classes = useStyles();
-  const [icon, setIcon] = useState(<FavoriteBorderIcon />);
-
-  let receiverEmail = JSON.parse(localStorage.getItem("sessionUser")).email;
-  let first_name = JSON.parse(localStorage.getItem("sessionUser")).first_name;
-  let link = recipe.src_url; //`http://localhost:3002${location.pathname}`
-  let recipeLabel = recipe.label;
-  let message = `Link for recipe "${recipeLabel}": ${link}`;
-  const senderEmail = "yumeek@test.com";
-
+  const [disabled, setDisabled] = useState(true);
+  
+  // const handleDisabled = (disabled) => {
+  //   if (sessionUser === null) {
+  //     disabled = setDisabled(false);
+  //   }
+  //   return disabled;
+  // }
+  
   const handleShare = () => { //if no user disable send button
+    let receiverEmail = JSON.parse(localStorage.getItem("sessionUser")).email;
+    let first_name = JSON.parse(localStorage.getItem("sessionUser")).first_name;
+    let link = recipe.src_url; 
+    let recipeLabel = recipe.label;
+    let message = `Link for recipe "${recipeLabel}": ${link}`;
+    const senderEmail = "yumeek@test.com";
     let templateParams = {
       to_name: first_name,
       form_name: "Yumeek",
@@ -69,23 +89,24 @@ export default function RecipeInfo(props) {
       recieverEmail: receiverEmail,
       senderEmail: senderEmail
     }
-    emailjs.send(
-      'gmail',
-      process.env.REACT_APP_TEMPELATE_ID_EMAILJS,
-      templateParams,
-      process.env.REACT_APP_USER_ID_EMAILJS
-    )
-    .then((res) => {
-      console.log("Response text: ", res.text);
-    })
-    .catch((err) => console.log("Error:", err))
+      emailjs.send(
+        'gmail',
+        process.env.REACT_APP_TEMPELATE_ID_EMAILJS,
+        templateParams,
+        process.env.REACT_APP_USER_ID_EMAILJS
+      )
+      .then((res) => {
+        console.log("Response text: ", res.text);
+      })
+      .catch((err) => console.log("Error:", err))
   }
+
   return (
     <>
-      <Typography variant="h5" align="center">{recipe.label}</Typography>
       <Container className={classes.root} >
         <CardMedia component="img" src={recipe.img_url} alt={recipe.label} className={classes.style}/>
         <Container className={classes.info_like}>
+        <Typography variant="h5" align="center">{recipe.label}</Typography>
           <div className={classes.container}>
             <div className={classes.info}>
               <span className={classes.typography}>{recipe.ingredients.length}</span>
@@ -100,8 +121,7 @@ export default function RecipeInfo(props) {
           <div className={classes.likeButton}>
             <Button 
               variant="contained"
-              color="secondary"
-              endIcon={icon}
+              // disabled={handleDisabled}
               onClick={() => handleShare()}
             >
               Yumeek

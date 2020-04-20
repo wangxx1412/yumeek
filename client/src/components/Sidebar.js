@@ -31,7 +31,7 @@ export default function Sidebar(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} >
       <Link to="/">
         <img src={logo} alt="logo" className={classes.logo} />
       </Link>

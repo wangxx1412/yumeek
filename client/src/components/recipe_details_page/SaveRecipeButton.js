@@ -43,9 +43,6 @@ export default function SaveRecipeButton(props) {
           </Button>
         ) 
      } 
-        <Button size="medium" color="secondary" onClick={handleClick}>
-          Search Recipe
-        </Button>
       </div>
   );
 }
