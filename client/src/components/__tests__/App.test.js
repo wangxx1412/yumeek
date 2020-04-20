@@ -24,12 +24,12 @@ describe("App", () => {
         fireEvent.click(label);
 
         expect(getByText("Search Recipe")).toBeInTheDocument();
-        expect(getByText("Save to My List")).toBeInTheDocument();
+        expect(getByText("Add To Saved Recipes")).toBeInTheDocument();
 
         // add recipe to saved list
         expect(getByText("Empty")).toBeInTheDocument();
 
-        const addButton = getByText("Save to My List");
+        const addButton = getByText("Add To Saved Recipes");
 
         fireEvent.click(addButton);
 
@@ -47,7 +47,7 @@ describe("App", () => {
     });
 
     describe("SideBar", () => {
-      it("renders user email and the amount of recipe in the saved recipes", async () => {
+      it("renders user email,dashboard button and the amount of recipe in the saved recipes", async () => {
         // load home page
         const { getByText } = render(<App />);
 
@@ -65,6 +65,10 @@ describe("App", () => {
         fireEvent.click(login);
 
         await waitForElement(() => getByText("fake@gmail.com"));
+
+        // show my dashboard button
+
+        expect(getByText("My Dashboard")).toBeInTheDocument();
 
         // get saved recipes list
         expect(getByText("1")).toBeInTheDocument();
@@ -101,7 +105,7 @@ describe("App", () => {
 
         fireEvent.click(deleteButton);
 
-        await waitForElement(() => getByText("Save to My List"));
+        await waitForElement(() => getByText("Add To Saved Recipes"));
 
         // logout user
         const logout = getByText("logout");
@@ -114,12 +118,12 @@ describe("App", () => {
       });
 
       it("can sign up new user", async () => {
-        // load search result
+        // load page
         const { getByText } = render(<App />);
 
         await waitForElement(() => getByText("Empty"));
 
-        // log in user
+        // sign up user
         const loginButton = getByText("Sign Up / Log In");
 
         fireEvent.click(loginButton);

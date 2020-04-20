@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 
@@ -12,13 +12,7 @@ import {
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
 
-import {
-  Animation,
-  ValueScale,
-  Stack,
-  EventTracker,
-  SelectionState,
-} from "@devexpress/dx-react-chart";
+import { Animation, ValueScale, Stack } from "@devexpress/dx-react-chart";
 
 const Label = (symbol) => (props) => {
   const { text } = props;
@@ -29,17 +23,10 @@ const KCalLabel = Label(" kCal");
 const GramLabel = Label(" g");
 
 const modifyGramDomain = (domain) => [domain[0], 1000];
-const modifyKCalDomain = () => [0, 5000];
+const modifyKCalDomain = () => [0, 10000];
 
 export default function WeekChart(props) {
-  const [selection, setSelection] = useState();
   const { chartRecipeData } = props;
-
-  const handleSelect = ({ targets }) => {
-    if (targets[0] !== undefined) {
-      props.handleSelectDay(chartRecipeData[targets[0].point]);
-    }
-  };
 
   return (
     <div>
@@ -99,8 +86,6 @@ export default function WeekChart(props) {
               />
               <Animation />
               <Legend />
-              <EventTracker onClick={handleSelect} />
-              <SelectionState selection={selection} />
             </Chart>
           </Paper>
         </div>

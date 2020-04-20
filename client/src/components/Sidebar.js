@@ -1,5 +1,6 @@
 import React from "react";
 import UserInfo from "./homepage/UserInfo";
+import DashboardButton from "./homepage/DashboardButton";
 import { Link } from "react-router-dom";
 import SavedRecipes from "./homepage/SavedRecipes";
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,6 +42,7 @@ export default function Sidebar(props) {
         handleLogout={userLogout}
       />
       <SavedRecipes savedRecipes={savedRecipes} deleteRecipe={deleteRecipe} />
+      {sessionUser && <DashboardButton sessionUser={sessionUser} />}
     </div>
   );
 }

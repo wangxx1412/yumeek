@@ -3,21 +3,21 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import clsx from "clsx";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 import WeekChart from "./WeekChart";
 import DayChart from "./DayChart";
 import RecipeList from "./RecipeList";
+import ButtonList from "./ButtonList";
 
 const useStyles = makeStyles((theme) => ({}));
 
 export default function Dashboard() {
   const classes = useStyles();
-  const theme = useTheme();
 
-  const [selectWeek, setSelectWeek] = useState("week");
+  const [selectOption, setSelectOption] = useState("week");
   const [dayData, setdayData] = useState({ weekday: null });
   const [chartRecipeData, setChartRecipeData] = useState([]);
   const [recipeList, setRecipeList] = useState();
@@ -60,18 +60,13 @@ export default function Dashboard() {
     });
   }, [recipeList]);
 
-  const handleSelectDay = (target) => {
-    setSelectWeek("day");
-    setdayData(target);
-  };
-
   const handleSelectWeek = (target) => {
-    setSelectWeek("week");
+    setSelectOption("week");
     setdayData({ weekday: null });
   };
 
   const selectDay = (day) => {
-    setSelectWeek(day);
+    setSelectOption(day);
     const newDayData = chartRecipeData.filter((el) => el["weekday"] === day)[0];
     setdayData(newDayData);
   };
@@ -84,56 +79,34 @@ export default function Dashboard() {
 
   return (
     <div className={clsx("Dashboard", classes.root)}>
-      <Grid container spacing={1} direction="column">
-        <Grid item xs={12}>
-          {selectWeek === "week" && (
-            <WeekChart
-              handleSelectDay={handleSelectDay}
-              chartRecipeData={chartRecipeData}
-            />
+      <Grid container spacing={5} direction="column">
+        <Grid item xs={10}>
+          <Typography variant="h3" gutterBottom>
+            {`Nutrient Table`}
+          </Typography>
+
+          {selectOption === "week" && (
+            <WeekChart chartRecipeData={chartRecipeData} />
           )}
-          {selectWeek !== "week" && (
+          {selectOption !== "week" && (
             <DayChart
               chartRecipeData={chartRecipeData}
-              selectDay={selectWeek}
+              selectDay={selectOption}
             />
           )}
         </Grid>
-        <Grid item xs={12}>
-          <Button size="large" onClick={() => selectDay("Sunday")}>
-            Sunday
-          </Button>
-          <Button size="large" onClick={() => selectDay("Monday")}>
-            Monday
-          </Button>
-          <Button size="large" onClick={() => selectDay("Tuesday")}>
-            Tuesday
-          </Button>
-          <Button size="large" onClick={() => selectDay("Wednesday")}>
-            Wednesday
-          </Button>
-          <Button size="large" onClick={() => selectDay("Thursday")}>
-            Thursday
-          </Button>
-          <Button size="large" onClick={() => selectDay("Friday")}>
-            Friday
-          </Button>
-          <Button size="large" onClick={() => selectDay("Saturday")}>
-            Saturday
-          </Button>
-          <Button
-            size="large"
-            onClick={handleSelectWeek}
-            disabled={selectWeek === "week"}
-          >
-            Week Overview
-          </Button>
+        <Grid item xs={10}>
+          <ButtonList
+            selectDay={selectDay}
+            handleSelectWeek={handleSelectWeek}
+            selectOption={selectOption}
+          />
         </Grid>
         <Grid item xs={12}>
           <RecipeList
             recipeList={recipeList}
             day={dayData}
-            weekorday={selectWeek}
+            weekorday={selectOption}
             handlePut={handlePut}
           />
         </Grid>
