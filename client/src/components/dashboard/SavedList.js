@@ -26,7 +26,7 @@ function selectBackgroundColor(isActive, canDrop) {
   } else if (canDrop) {
     return "#F59E7A";
   } else {
-    return "#DCF3F3";
+    return "#72D1DC";
   }
 }
 export default function SavedList({

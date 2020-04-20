@@ -14,7 +14,7 @@ export default function CircularBar(props) {
         value={value}
         maxValue={100}
         styles={buildStyles({
-          pathColor: "#42ABD5",
+          backgroundColor: "#42ABD5",
         })}
       >
         <div style={{ fontSize: 16, marginTop: -5 }}>

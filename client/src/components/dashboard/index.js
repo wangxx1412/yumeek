@@ -17,7 +17,19 @@ const useStyles = makeStyles((theme) => ({}));
 export default function Dashboard() {
   const classes = useStyles();
 
-  const [selectOption, setSelectOption] = useState("week");
+  const today = new Date();
+  const dayIndex = today.getDay();
+  const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const [selectOption, setSelectOption] = useState(weekdays[dayIndex]);
   const [dayData, setdayData] = useState({ weekday: null });
   const [chartRecipeData, setChartRecipeData] = useState([]);
   const [recipeList, setRecipeList] = useState();
