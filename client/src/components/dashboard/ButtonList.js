@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-between",
+    color: "#41333B",
+    paddingTop: "20px",
   },
 }));
 

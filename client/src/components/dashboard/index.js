@@ -13,7 +13,11 @@ import DayChart from "./DayChart";
 import RecipeList from "./RecipeList";
 import ButtonList from "./ButtonList";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: "#Fafafa",
+  },
+}));
 
 export default function Dashboard() {
   const classes = useStyles();
@@ -91,43 +95,46 @@ export default function Dashboard() {
   };
 
   return (
-    <div className={clsx("Dashboard", classes.root)}>
-      <Grid container spacing={5} direction="column">
-        <Grid item xs={10}>
-          <ButtonList
-            selectDay={selectDay}
-            handleSelectWeek={handleSelectWeek}
-            selectOption={selectOption}
-          />
-        </Grid>
-        <Divider />
-        <Grid item xs={10}>
-          <Typography variant="h3" gutterBottom>
-            {`Nutrient Table`}
-          </Typography>
-
-          {selectOption === "week" && (
-            <WeekChart chartRecipeData={chartRecipeData} />
-          )}
-          {selectOption !== "week" && (
-            <DayChart
-              chartRecipeData={chartRecipeData}
-              selectDay={selectOption}
-            />
-          )}
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h3" gutterBottom>
-            {`Recipe List`}
-          </Typography>
-          <RecipeList
-            recipeList={recipeList}
-            day={dayData}
-            weekorday={selectOption}
-            handlePut={handlePut}
-          />
-        </Grid>
+    <Grid
+      container
+      spacing={5}
+      direction="column"
+      className={clsx("Dashboard", classes.root)}
+    >
+      <Grid item xs={10}>
+        <ButtonList
+          selectDay={selectDay}
+          handleSelectWeek={handleSelectWeek}
+          selectOption={selectOption}
+        />
       </Grid>
-    </div>
+      <Divider />
+      <Grid item xs={10}>
+        <Typography variant="h3" gutterBottom>
+          {`Nutrient Table`}
+        </Typography>
+
+        {selectOption === "week" && (
+          <WeekChart chartRecipeData={chartRecipeData} />
+        )}
+        {selectOption !== "week" && (
+          <DayChart
+            chartRecipeData={chartRecipeData}
+            selectDay={selectOption}
+          />
+        )}
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h3" gutterBottom>
+          {`Recipe List`}
+        </Typography>
+        <RecipeList
+          recipeList={recipeList}
+          day={dayData}
+          weekorday={selectOption}
+          handlePut={handlePut}
+        />
+      </Grid>
+    </Grid>
   );
 }
