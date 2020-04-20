@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import ItemTypes from "./ItemTypes";
 import { useDrag } from "react-dnd";
@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AddedItem = ({ recipe, weekorday, handlePut, deleteRecipe }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   const item = { recipe: recipe, type: ItemTypes.ADDED };
   let { userid } = useParams();

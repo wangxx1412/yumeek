@@ -49,8 +49,8 @@ export default function RecipeList(props) {
     <div>
       {props.recipeList ? (
         <DndProvider backend={Backend}>
-          <Grid container spacing={1} direction="row" alignItems="center">
-            <Grid item xs={6}>
+          <Grid container spacing={6} direction="row" alignItems="center">
+            <Grid item xs={5}>
               <SavedList
                 allowedDropEffect="any"
                 recipeList={dayRecipleList.recipeList.filter(
@@ -61,7 +61,7 @@ export default function RecipeList(props) {
                 deleteRecipe={deleteRecipe}
               ></SavedList>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               {props.weekorday === "week" ? (
                 <div>Add</div>
               ) : (

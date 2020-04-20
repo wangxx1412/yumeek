@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import clsx from "clsx";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import WeekChart from "./WeekChart";
@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({}));
 
 export default function Dashboard() {
   const classes = useStyles();
-  const theme = useTheme();
 
   const [selectOption, setSelectOption] = useState("week");
   const [dayData, setdayData] = useState({ weekday: null });
@@ -79,8 +78,8 @@ export default function Dashboard() {
 
   return (
     <div className={clsx("Dashboard", classes.root)}>
-      <Grid container spacing={1} direction="column">
-        <Grid item xs={12}>
+      <Grid container spacing={5} direction="column">
+        <Grid item xs={10}>
           {selectOption === "week" && (
             <WeekChart chartRecipeData={chartRecipeData} />
           )}
@@ -91,7 +90,7 @@ export default function Dashboard() {
             />
           )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={10}>
           <ButtonList
             selectDay={selectDay}
             handleSelectWeek={handleSelectWeek}

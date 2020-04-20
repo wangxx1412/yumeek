@@ -48,7 +48,7 @@ export default function DayChart(props) {
   return (
     <div>
       {props.selectDay ? (
-        <Grid container spacing={1}>
+        <Grid container spacing={6}>
           <Grid item xs={4}>
             <CircularBar
               text={data.energies / 2400}
