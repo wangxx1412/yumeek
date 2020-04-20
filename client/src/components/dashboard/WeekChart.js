@@ -1,7 +1,7 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
-
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Chart,
   BarSeries,
@@ -25,14 +25,22 @@ const GramLabel = Label(" g");
 const modifyGramDomain = (domain) => [domain[0], 1000];
 const modifyKCalDomain = () => [0, 10000];
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    boxShadow: "none",
+    backgroundColor: "transparent",
+  },
+}));
+
 export default function WeekChart(props) {
   const { chartRecipeData } = props;
+  const classes = useStyles();
 
   return (
     <div>
       {chartRecipeData ? (
         <div>
-          <Paper>
+          <Paper className={classes.root}>
             <Chart data={chartRecipeData}>
               <ValueScale name="gram" modifyDomain={modifyGramDomain} />
               <ValueScale name="kCal" modifyDomain={modifyKCalDomain} />

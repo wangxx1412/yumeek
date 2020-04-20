@@ -18,25 +18,53 @@ export default function ButtonList({
 
   return (
     <div className={classes.root}>
-      <Button size="large" onClick={() => selectDay("Sunday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Sunday")}
+        disabled={selectOption === "Sunday"}
+      >
         Sunday
       </Button>
-      <Button size="large" onClick={() => selectDay("Monday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Monday")}
+        disabled={selectOption === "Monday"}
+      >
         Monday
       </Button>
-      <Button size="large" onClick={() => selectDay("Tuesday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Tuesday")}
+        disabled={selectOption === "Tuesday"}
+      >
         Tuesday
       </Button>
-      <Button size="large" onClick={() => selectDay("Wednesday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Wednesday")}
+        disabled={selectOption === "Wednesday"}
+      >
         Wednesday
       </Button>
-      <Button size="large" onClick={() => selectDay("Thursday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Thursday")}
+        disabled={selectOption === "Thursday"}
+      >
         Thursday
       </Button>
-      <Button size="large" onClick={() => selectDay("Friday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Friday")}
+        disabled={selectOption === "Firday"}
+      >
         Friday
       </Button>
-      <Button size="large" onClick={() => selectDay("Saturday")}>
+      <Button
+        size="large"
+        onClick={() => selectDay("Saturday")}
+        disabled={selectOption === "Saturday"}
+      >
         Saturday
       </Button>
       <Button
