@@ -12,7 +12,7 @@ const defaultProps = {
 };
 
 const defaultPropsBadge = {
-  bgcolor: "grey.500",
+  bgcolor: "#9a8e6e",
   color: "white",
   p: 2,
   position: "absolute",
@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
    [theme.breakpoints.down("sm")]: {
     width: "340px"
   }
+  },
+  font: {
+    fontSize: "1rem"
   }
 }))
 
@@ -49,7 +52,7 @@ export default function IngredientsList(props) {
           Ingredients
         </Box>
         </Typography>
-        {ingredients.map((ingredient, index) => <p key={index}>{ingredient}</p>)}
+        {ingredients.map((ingredient, index) => <p key={index} className={classes.font}>{ingredient}</p>)}
       </Box>
     </Box>
   );

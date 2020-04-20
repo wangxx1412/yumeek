@@ -14,7 +14,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "30%"
     }
-     
+  },
+  font: {
+    fontSize: "1rem"
   },
   label: {
     display: "flex",
@@ -53,7 +55,7 @@ export default function Labels(props) {
             return (
             <div className={classes.label} key={index}>
               <img src={src} alt={label} className={classes.icon}/>
-              <p>{label}</p>
+              <p className={classes.font}>{label}</p>
             </div>
             );
           }

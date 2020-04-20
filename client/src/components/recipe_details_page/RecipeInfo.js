@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     justifyContent: "space-around",
     alignItems: "center", 
+    fontSize: "2.5 rem",
     [theme.breakpoints.down("sm")]: {
       display: "flex",
       flexDirection: "column",
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-around",
     width: "100%",
-    margin: "10%",
+    margin: "15%",
     [theme.breakpoints.down("sm")]: {
       margin: "4%",
       width: "45%"
@@ -48,6 +49,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around"
+  },
+  font: {
+    fontSize: "1.3rem"
   },
   style: { width: "100%", margin: "3%", borderRadius: "20px" }
 })
@@ -106,16 +110,16 @@ export default function RecipeInfo(props) {
       <Container className={classes.root} >
         <CardMedia component="img" src={recipe.img_url} alt={recipe.label} className={classes.style}/>
         <Container className={classes.info_like}>
-        <Typography variant="h5" align="center">{recipe.label}</Typography>
+        <Typography variant="h3" align="left" width={1}>{recipe.label}</Typography>
           <div className={classes.container}>
             <div className={classes.info}>
               <span className={classes.typography}>{recipe.ingredients.length}</span>
-              <span>Ingredients</span>
+              <span className={classes.font}>Ingredients</span>
             </div>
             <Divider orientation="vertical" flexItem />
             <div className={classes.info}>
               <span className={classes.typography}>{recipe.energies}</span>
-              <span>Calories</span>
+              <span className={classes.font}>Calories</span>
             </div>
           </div>
           <div className={classes.likeButton}>
@@ -124,7 +128,7 @@ export default function RecipeInfo(props) {
               // disabled={handleDisabled}
               onClick={() => handleShare()}
             >
-              Yumeek
+              Share The Link
             </Button>
           </div>
         </Container>

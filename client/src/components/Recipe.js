@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     background: {
       width: "100 wh",
       height: "100 vh",
-      background: "linear-gradient(0deg, rgba(245,158,122,1) 48%, rgba(220,243,243,0.8141631652661064) 95%)",
+      background: "linear-gradient(0deg, rgba(115,190,119,1) 2%, rgba(254,254,246,1) 68%)",//"linear-gradient(0deg, rgba(115,190,119,1) 24%, rgba(248,238,221,1) 53%)",
       // backgroundImage: "url(" + "" + ")", //image?
     },
     style: { width: "25em", margin: "3%" }
@@ -40,8 +40,8 @@ export default function Recipe(props) {
 
   return(
         <Container className={classes.background}>
-          <Button size="medium" color="secondary" onClick={handleClick}>
-            Search Recipe
+          <Button size="medium" color="primary" onClick={handleClick}>
+            Back To Search
           </Button>
           <RecipeInfo recipe={location.state.recipe} sessionUser={sessionUser}/>
           <SaveRecipeButton handleAdd={handleAdd} 
