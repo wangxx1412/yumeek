@@ -32,29 +32,28 @@ function selectBackgroundColor(isActive, canDrop) {
 }
 export default function Dustbin({
   recipeList,
-  allowedDropEffect,
   weekorday,
   handlePut,
   deleteRecipe,
 }) {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.SAVED,
-    drop: () => ({
-      name: `${allowedDropEffect} Dustbin`,
-      allowedDropEffect,
-    }),
+    // drop: () => ({
+    //   name: `${allowedDropEffect} Dustbin`,
+    //   allowedDropEffect,
+    // }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
   });
+
   const isActive = canDrop && isOver;
   const backgroundColor = selectBackgroundColor(isActive, canDrop);
   return (
     <div ref={drop} style={{ ...style, backgroundColor }}>
       <Typography variant="h5">{`${weekorday} Recipes`}</Typography>
       <br />
-      {/* {isActive ? "Release to drop" : "Drag a box here"} */}
       {recipeList ? (
         <Grid container spacing={1} direction="column">
           {recipeList

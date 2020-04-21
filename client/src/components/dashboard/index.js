@@ -57,7 +57,7 @@ export default function Dashboard() {
       });
       let result = [];
       const sunday = newData.filter((el) => el["weekday"] === "Sunday");
-      const monday = newData.filter((el) => el["weekday"] === "Monday") || null;
+      const monday = newData.filter((el) => el["weekday"] === "Monday");
       const tuesday = newData.filter((el) => el["weekday"] === "Tuesday");
       const wednesday = newData.filter((el) => el["weekday"] === "Wednesday");
       const thursday = newData.filter((el) => el["weekday"] === "Thursday");
@@ -76,7 +76,7 @@ export default function Dashboard() {
     });
   }, [recipeList]);
 
-  const handleSelectWeek = (target) => {
+  const selectWeek = (target) => {
     setSelectOption("week");
     setdayData({ weekday: null });
   };
@@ -103,7 +103,7 @@ export default function Dashboard() {
       <Grid item xs={10}>
         <ButtonList
           selectDay={selectDay}
-          handleSelectWeek={handleSelectWeek}
+          handleSelectWeek={selectWeek}
           selectOption={selectOption}
         />
       </Grid>
