@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "start",
     alignItems: "center",
     width: 200,
-    background: "#DCDCD9",
+    background: "#453033", //"#DCDCD9",
     color: "#fff",
     [theme.breakpoints.up("md")]: {
       width: 240,
@@ -167,6 +167,7 @@ export default function App(props) {
                 path="/recipe"
                 render={() => (
                   <Recipe
+                    sessionUser={sessionUser}
                     handleAdd={(recipe) => handleAdd(recipe)}
                     savedRecipes={savedRecipes}
                     deleteRecipe={(recipe) => deleteRecipe(recipe)}

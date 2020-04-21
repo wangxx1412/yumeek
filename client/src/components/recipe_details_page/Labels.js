@@ -4,19 +4,23 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    justifyContent: "space-around",
+    flexDirection: "column",
+    width: "28%",
     [theme.breakpoints.down("md")]: {
       display: "flex",
       flexDirection: "column",
       width: "30%"
     },
     [theme.breakpoints.down("sm")]: {
-      width: "30%"
+      width: "33%"
     }
-     
+  },
+  font: {
+    fontSize: "1rem"
   },
   label: {
-    display: "flex"
+    display: "flex",
+    margin: "10%"
   },
   icon: {
     [theme.breakpoints.down("sm")]: {
@@ -37,9 +41,7 @@ export default function Labels(props) {
     {name: "sugar-conscious", src: "https://img.icons8.com/offices/38/000000/sugar-cube.png"},
     {name: "gluten-free", src: "https://www.vecteezy.com/free-vector/gluten-free-icon"}
   ];
-  // <a href="https://www.vecteezy.com/free-vector/gluten-free-icon">Gluten Free Icon Vectors by Vecteezy</a>
-  // "https://img.icons8.com/color/50/000000/no-gluten.png"
-  // "https://img.icons8.com/offices/38/000000/sugar-cube.png"
+  
   let src = '';
 
   return (
@@ -53,7 +55,7 @@ export default function Labels(props) {
             return (
             <div className={classes.label} key={index}>
               <img src={src} alt={label} className={classes.icon}/>
-              <p>{label}</p>
+              <p className={classes.font}>{label}</p>
             </div>
             );
           }

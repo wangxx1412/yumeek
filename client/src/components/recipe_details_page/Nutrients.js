@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
       },
     },
     title: {
-      fontSize: "20px",
+      fontSize: "2.2rem",
       margin: "3%"
     },
     container: {  
@@ -45,13 +45,13 @@ export default function Nutrients(props) {
         {nutrients.map((item, index) => {
           let value = item.value / 1000;
           let text = `${(item.value / 1000).toFixed(0)}g`;
-          let pathColor = "#bedad9";
+          let pathColor = "#72d1dc";
           if (item.name === "Calories") {
               value = item.value;
               text = item.value;
           }
           if (value > item.maxValue) {
-            pathColor = "#e36d31";
+            pathColor = "#f17e75";
           }
           return (
               <Container key={index}className={classes.container}>
