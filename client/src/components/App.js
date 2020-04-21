@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     paddingBottom: theme.spacing(4),
-    backgroundColor: "#F5F6F8",
+    backgroundColor: "#Fafafa",
   },
 }));
 
