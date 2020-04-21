@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { green } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import ingredientsArray from "../../helper/autoCompleteHelperArray";
 import Background from "../../assets/image/lemon-background.jpg";
 
@@ -22,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     height: "500px",
   },
   appBar: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     height: "100%",
     backgroundImage: `url(${Background})`,
     backgroundPosition: "center",
@@ -30,20 +30,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
   },
   toolBar: {
-    height: "100%",
-    color: "green",
+    display: "flex",
+    width: "600px",
+    lineHeight: "56px",
+    zIndex: "1",
   },
   search: {
     position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    // backgroundColor: fade(theme.palette.common.white, 0.75),
-    // "&:hover": {
-    //   backgroundColor: fade(theme.palette.common.white, 0.85),
-    // },
-    // backgroundColor: fade(theme.palette.common.white, 0.15),
-    // "&:hover": {
-    //   backgroundColor: fade(theme.palette.common.white, 0.25),
-    // },
+    borderRadius: "3em",
     marginLeft: 0,
     marginRight: theme.spacing(1),
     // width: "22%",
@@ -51,6 +45,15 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
     },
+  },
+  searchInput: {
+    borderRadius: "24px",
+    border: "2px solid",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.05) inset",
+  },
+  textField: {
+    marginLeft: "15px",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -70,13 +73,16 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     width: "100%",
   },
+  tag: {
+    color: "#41333B",
+  },
 }));
 
 const GreenCheckbox = withStyles({
   root: {
-    color: green[400],
+    color: "#41333B",
     "&$checked": {
-      color: green[600],
+      color: "#41333B",
     },
   },
   checked: {},
@@ -103,20 +109,18 @@ export default function SearchBar(props) {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
-          <Button
-            variant="contained"
-            size="medium"
-            color="primary"
+          <IconButton
             onClick={() => {
               handleSearch(searchValue, healthTag);
               setsearchValue("");
             }}
           >
-            Go!
-          </Button>
+            <SearchIcon />
+          </IconButton>
           <div className={classes.search}>
             <Autocomplete
               id="search"
+              className={classes.searchInput}
               freeSolo
               color="primary"
               onChange={(e, value) => setsearchValue(value)}
@@ -125,87 +129,80 @@ export default function SearchBar(props) {
                 <TextField
                   {...params}
                   label="Search"
-                  variant="outlined"
+                  className={classes.textField}
                   value={searchValue}
+                  InputProps={{ disableUnderline: true }}
                   onChange={(e) => setsearchValue(e.target.value)}
                 />
               )}
             />
-            {/* 
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-              value={searchValue}
-              onChange={(e) => setsearchValue(e.target.value)}
-            /> */}
           </div>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={healthTag["vegetarian"]}
-                  name="vegetarian"
-                />
-              }
-              onChange={handleChange}
-              label="vegetarian"
-            />
-            <FormControlLabel
-              control={
-                <GreenCheckbox checked={healthTag["vegan"]} name="vegan" />
-              }
-              onChange={handleChange}
-              label="vegan"
-            />
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={healthTag["alcohol-free"]}
-                  name="alcohol-free"
-                />
-              }
-              onChange={handleChange}
-              label="alcohol-free"
-            />
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={healthTag["peanut-free"]}
-                  name="peanut-free"
-                />
-              }
-              onChange={handleChange}
-              label="peanut-free"
-            />
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={healthTag["tree-nut-free"]}
-                  name="tree-nut-free"
-                />
-              }
-              onChange={handleChange}
-              label="tree-nut-free"
-            />
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={healthTag["sugar-conscious"]}
-                  name="sugar-conscious"
-                />
-              }
-              onChange={handleChange}
-              label="sugar-conscious"
-            />
-          </FormGroup>
         </Toolbar>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <GreenCheckbox
+                checked={healthTag["vegetarian"]}
+                name="vegetarian"
+              />
+            }
+            className={classes.tag}
+            onChange={handleChange}
+            label="vegetarian"
+          />
+          <FormControlLabel
+            control={
+              <GreenCheckbox checked={healthTag["vegan"]} name="vegan" />
+            }
+            className={classes.tag}
+            onChange={handleChange}
+            label="vegan"
+          />
+          <FormControlLabel
+            control={
+              <GreenCheckbox
+                checked={healthTag["alcohol-free"]}
+                name="alcohol-free"
+              />
+            }
+            className={classes.tag}
+            onChange={handleChange}
+            label="alcohol-free"
+          />
+          <FormControlLabel
+            control={
+              <GreenCheckbox
+                checked={healthTag["peanut-free"]}
+                name="peanut-free"
+              />
+            }
+            className={classes.tag}
+            onChange={handleChange}
+            label="peanut-free"
+          />
+          <FormControlLabel
+            control={
+              <GreenCheckbox
+                checked={healthTag["tree-nut-free"]}
+                name="tree-nut-free"
+              />
+            }
+            className={classes.tag}
+            onChange={handleChange}
+            label="tree-nut-free"
+          />
+          <FormControlLabel
+            control={
+              <GreenCheckbox
+                checked={healthTag["sugar-conscious"]}
+                name="sugar-conscious"
+              />
+            }
+            className={classes.tag}
+            onChange={handleChange}
+            label="sugar-conscious"
+          />
+        </FormGroup>
       </AppBar>
     </div>
   );

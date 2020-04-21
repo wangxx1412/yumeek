@@ -19,7 +19,6 @@ import Home from "./Home";
 import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
 import Auth from "./Auth";
-
 import useUserData from "../hooks/useUserData";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     paddingBottom: theme.spacing(4),
-    backgroundColor: "#F5F6F8",
+    backgroundColor: "#Fafafa",
   },
 }));
 
