@@ -23,7 +23,7 @@ describe("App", () => {
 
         fireEvent.click(label);
 
-        expect(getByText("Search Recipe")).toBeInTheDocument();
+        expect(getByText("Back To Search")).toBeInTheDocument();
         expect(getByText("Add To Saved Recipes")).toBeInTheDocument();
 
         // add recipe to saved list
@@ -38,7 +38,7 @@ describe("App", () => {
         expect(getByText("1")).toBeInTheDocument();
 
         // back to home page and keep the search result
-        const backToSearch = getByText("Search Recipe");
+        const backToSearch = getByText("Back To Search");
 
         fireEvent.click(backToSearch);
 
@@ -97,7 +97,7 @@ describe("App", () => {
 
         fireEvent.click(singleRecipe);
 
-        expect(getByText("Search Recipe")).toBeInTheDocument();
+        expect(getByText("Back To Search")).toBeInTheDocument();
         expect(getByText("Delete From List")).toBeInTheDocument();
 
         // delete recipe
