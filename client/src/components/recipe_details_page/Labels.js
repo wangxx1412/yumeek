@@ -5,14 +5,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    width: "20%",
+    width: "28%",
     [theme.breakpoints.down("md")]: {
       display: "flex",
       flexDirection: "column",
       width: "30%"
     },
     [theme.breakpoints.down("sm")]: {
-      width: "30%"
+      width: "33%"
     }
   },
   font: {

@@ -20,10 +20,29 @@ const useStyles = makeStyles(theme => ({
     background: {
       width: "100 wh",
       height: "100 vh",
-      background: "linear-gradient(0deg, rgba(115,190,119,1) 2%, rgba(254,254,246,1) 68%)",//"linear-gradient(0deg, rgba(115,190,119,1) 24%, rgba(248,238,221,1) 53%)",
+      background: "linear-gradient(0deg, rgba(115,190,119,1) 0%, rgba(254,254,246,1) 61%)",
       // backgroundImage: "url(" + "" + ")", //image?
     },
-    style: { width: "25em", margin: "3%" }
+    button: {
+      size: "medium",
+      color: "linear-gradient(83deg, rgba(245,158,122,1) 6%, rgba(241,126,117,1) 76%)",
+      variant: "contained",
+      margin: "5%"
+    },
+    style: { width: "25em", margin: "3%" },
+    root: {
+      background: "#fdd770",
+      borderRadius: 25,
+      border: 0,
+      height: 41,
+      padding: '0 18px',
+      [theme.breakpoints.down("sm")]: {   
+        marginTop: "15%"    
+      },
+    },
+    label: {
+      textTransform: 'capitalized',
+    },
   })
 );
 
@@ -40,7 +59,13 @@ export default function Recipe(props) {
 
   return(
         <Container className={classes.background}>
-          <Button size="medium" color="primary" onClick={handleClick}>
+          <Button 
+            classes={{
+              root: classes.root,
+              label: classes.label, 
+            }} 
+            className={classes.button} 
+            onClick={handleClick}>
             Back To Search
           </Button>
           <RecipeInfo recipe={location.state.recipe} sessionUser={sessionUser}/>

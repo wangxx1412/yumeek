@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Typography, makeStyles } from '@material-ui/core';
+import { Box, Typography, makeStyles, Container } from '@material-ui/core';
 
 const defaultProps = {
-  bgcolor: 'background.paper',
-  borderColor: 'grey.300',
+  bgcolor: 'fefef6',
+  borderColor: 'fefef6',
   margin: "6%",
   p: 2,
   border: 1,
@@ -11,28 +11,17 @@ const defaultProps = {
   width: 1/2,
 };
 
-const defaultPropsBadge = {
-  bgcolor: "#9a8e6e",
-  color: "white",
-  p: 2,
-  position: "absolute",
-  top: -25,
-  left: "5%",
-  zIndex: "module",
-  boxShadow: 2
-};
-
 const useStyles = makeStyles(theme => ({
   box: {
-    position: "relative",
-    borderRadius: "borderRadius",
+    border: "#9a8e6e",
+    borderRadius: "10px",
     width: "500px",
     marginLeft: "15%",
     [theme.breakpoints.down("md")]: {
-     width: "400px"
+     width: "380px"
    },
    [theme.breakpoints.down("sm")]: {
-    width: "340px"
+    width: "280px"
   }
   },
   font: {
@@ -45,15 +34,19 @@ export default function IngredientsList(props) {
   const classes = useStyles();
 
   return (
-    <Box display="flex" justifyContent="center">
-      <Box {...defaultProps}  className={classes.box}>
-        <Typography component="h2" variant="body1"  style={{ height: 50, width: '100%' , position: 'relative' }}>
-        <Box {...defaultPropsBadge}>
+    <Container display="flex" justifycontent="center">
+        <Typography variant="body1"  
+        style={{ 
+          height: 50, 
+          width: '60%', 
+          fontSize: '2.3rem', 
+          marginLeft: '15%' 
+        }}>
           Ingredients
-        </Box>
         </Typography>
+      <Box {...defaultProps}  className={classes.box}>
         {ingredients.map((ingredient, index) => <p key={index} className={classes.font}>{ingredient}</p>)}
       </Box>
-    </Box>
+    </Container>
   );
 }

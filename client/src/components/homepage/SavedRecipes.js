@@ -27,6 +27,18 @@ const useStyles = makeStyles((theme) => ({
   chip: {
     margin: theme.spacing(0.5),
   },
+  root: {
+    background: "linear-gradient(83deg, rgba(217,158,31,1) 6%, rgba(211,155,93,0.9262079831932774) 91%)",
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 43,
+    padding: '0 18px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .2)',
+  },
+  label: {
+    textTransform: 'capitalized',
+  }
 }));
 
 export default function SavedRecipes(props) {
@@ -52,9 +64,10 @@ export default function SavedRecipes(props) {
     <div className={classes.margin}>
       <Badge color="secondary" badgeContent={savedRecipes.length || "Empty"}>
         <Button
-          variant="contained"
-          size="medium"
-          color="primary"
+          classes={{
+            root: classes.root,
+            label: classes.label, 
+          }}
           onClick={handleClickOpen}
           startIcon={<RestaurantMenuIcon />}
         >
