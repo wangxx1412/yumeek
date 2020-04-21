@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     background: {
       width: "100 wh",
       height: "100 vh",
-      background: "linear-gradient(0deg, rgba(115,190,119,1) 0%, rgba(254,254,246,1) 61%)",
+      background: "linear-gradient(0deg, rgba(115,190,119,1) 0%, rgba(254,254,246,0.9192051820728291) 20%)",
       // backgroundImage: "url(" + "" + ")", //image?
     },
     button: {
