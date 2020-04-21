@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, CardMedia, Container, Divider, Button, Icon } from '@material-ui/core';
-import * as emailjs from 'emailjs-com';
+import sendEmailWithLink from '../../helper/sendEmailWithLink';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,32 +67,6 @@ const useStyles = makeStyles(theme => ({
 export default function RecipeInfo(props) {
   const { recipe, sessionUser } = props;
   const classes = useStyles();
-  
-  const handleShare = () => { 
-    let receiverEmail = JSON.parse(localStorage.getItem("sessionUser")).email;
-    let first_name = JSON.parse(localStorage.getItem("sessionUser")).first_name;
-    let link = recipe.src_url; 
-    let recipeLabel = recipe.label;
-    let message = `Link for recipe "${recipeLabel}": ${link}`;
-    const senderEmail = "yumeek@test.com";
-    let templateParams = {
-      to_name: first_name,
-      form_name: "Yumeek",
-      message_html: message,
-      recieverEmail: receiverEmail,
-      senderEmail: senderEmail
-    }
-      emailjs.send(
-        'gmail',
-        process.env.REACT_APP_TEMPELATE_ID_EMAILJS,
-        templateParams,
-        process.env.REACT_APP_USER_ID_EMAILJS
-      )
-      .then((res) => {
-        console.log("Response text: ", res.text);
-      })
-      .catch((err) => console.log("Error:", err))
-  }
 
   return (
     <>
@@ -119,13 +93,13 @@ export default function RecipeInfo(props) {
                 label: classes.label, 
               }}
                 endIcon={<Icon>send</Icon>}
-                onClick={() => handleShare()}
+                onClick={() => sendEmailWithLink(recipe)}
               >
                 Share The Link
               </Button>
             </div>
-          ) : (
-            <span></span>
+            ) : (
+              <span></span>
           )}
         </Container>
       </Container>

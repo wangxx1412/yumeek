@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import checkIfRecipeInTheList from '../../helper/checkIfRecipeInTheList';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -22,11 +23,6 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
-const checkIfRecipeInTheList = function(savedRecipes, src, label) {
-  const recipe = savedRecipes.filter(item => item.src_url === src && item.label === label);
-  return recipe;
-}
 
 export default function SaveRecipeButton(props) {
   const {recipe, savedRecipes, handleAdd, deleteRecipe } = props;

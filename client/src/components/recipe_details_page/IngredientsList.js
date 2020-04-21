@@ -35,15 +35,15 @@ export default function IngredientsList(props) {
 
   return (
     <Container display="flex" justifycontent="center">
-        <Typography variant="body1"  
-        style={{ 
-          height: 50, 
-          width: '60%', 
-          fontSize: '2.3rem', 
-          marginLeft: '15%' 
-        }}>
-          Ingredients
-        </Typography>
+      <Typography variant="body1"  
+      style={{ 
+        height: 50, 
+        width: '60%', 
+        fontSize: '2.3rem', 
+        marginLeft: '15%' 
+      }}>
+        Ingredients
+      </Typography>
       <Box {...defaultProps}  className={classes.box}>
         {ingredients.map((ingredient, index) => <p key={index} className={classes.font}>{ingredient}</p>)}
       </Box>
