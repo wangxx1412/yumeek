@@ -6,10 +6,10 @@ export default (recipe) => {
   let link = recipe.src_url; 
   let recipeLabel = recipe.label;
   let message = `Link for recipe "${recipeLabel}": ${link}`;
-  const senderEmail = "yumeek@test.com";
+  const senderEmail = "yummeek@test.com";
   let templateParams = {
     to_name: first_name,
-    from_name: "Yumeek",
+    from_name: "Yummeek",
     message_html: message,
     recieverEmail: receiverEmail,
     senderEmail: senderEmail
