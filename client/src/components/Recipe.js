@@ -22,12 +22,6 @@ const useStyles = makeStyles(theme => ({
       height: "100 vh",
       background: "linear-gradient(0deg, rgba(115,190,119,1) 0%, rgba(254,254,246,0.9192051820728291) 20%)",
     },
-    button: {
-      size: "medium",
-      color: "linear-gradient(83deg, rgba(245,158,122,1) 6%, rgba(241,126,117,1) 76%)",
-      variant: "contained",
-      margin: "5%"
-    },
     style: { width: "25em", margin: "3%" },
     root: {
       background: "#fdd770",
@@ -35,8 +29,16 @@ const useStyles = makeStyles(theme => ({
       border: 0,
       height: 41,
       padding: '0 18px',
+      marginTop: "3%",
+      [theme.breakpoints.down("md")]: {   
+        marginTop: "3%",
+        marginBottom: "3%"    
+      },
       [theme.breakpoints.down("sm")]: {   
-        marginTop: "15%"    
+        marginTop: "7%"    
+      },
+      [theme.breakpoints.down("xs")]: {   
+        marginTop: "2%"    
       },
     },
     label: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, CardMedia, Container, Divider, Button, Icon } from '@material-ui/core';
+import { Typography, CardMedia, Container, Divider, Button, Icon, Tooltip } from '@material-ui/core';
 import sendEmailWithLink from '../../helper/sendEmailWithLink';
 
 const useStyles = makeStyles(theme => ({
@@ -12,10 +12,13 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center", 
     fontSize: "2.5 rem",
     [theme.breakpoints.down("sm")]: {
+      margin: "auto"
+    },   
+    [theme.breakpoints.down("xs")]: {
       display: "flex",
       flexDirection: "column",
       margin: "auto"
-    },    
+    },  
   },
   container: {
     display: "flex",
@@ -46,9 +49,19 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-around"
   },
   font: {
-    fontSize: "1.3rem"
+    fontSize: "1.3rem",
   },
-  style: { width: "100%", margin: "3%", borderRadius: "20px" },
+  style: { 
+    width: "100%", 
+    margin: "3%", 
+    borderRadius: "20px",
+    [theme.breakpoints.down("md")]: {
+      width: "70%"
+    }, 
+    [theme.breakpoints.down("sm")]: {
+      width: "65%"
+    }, 
+  },
   buttonRoot: {
       background: "#fdd770;",
       borderRadius: 5,
@@ -89,16 +102,18 @@ export default function RecipeInfo(props) {
           </div>
           {sessionUser && (
             <div className={classes.likeButton}>
-              <Button 
-              classes={{
-                root: classes.buttonRoot,
-                label: classes.label, 
-              }}
-                endIcon={<Icon>send</Icon>}
-                onClick={() => sendEmailWithLink(recipe)}
-              >
-                Send Link
-              </Button>
+              <Tooltip title="Click to Email recipe link" placement="bottom-end">
+                <Button 
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.label, 
+                }}
+                  endIcon={<Icon>send</Icon>}
+                  onClick={() => sendEmailWithLink(recipe)}
+                >
+                  Send Link
+                </Button>
+              </Tooltip>
             </div>
           )}
         </Container>
