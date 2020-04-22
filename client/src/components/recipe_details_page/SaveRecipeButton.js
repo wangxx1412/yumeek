@@ -10,9 +10,11 @@ const useStyles = makeStyles(() => ({
     margin: "5%"
   },
   style: { fontSize: 40 },
-  buttonRoot: {
+  addButton: {
     background: "#fdd770",
     borderRadius: 3,
+    color: "#51524e",
+    borderRadius: "20px",
     border: 0,
     height: 43,
     padding: '0 18px',
@@ -20,7 +22,17 @@ const useStyles = makeStyles(() => ({
   },
   label: {
     textTransform: 'capitalized',
-  }
+  },
+  deleteButton: {
+    background: "#c9935a",
+    borderRadius: 3,
+    border: 0,
+    color: "#51524e",
+    borderRadius: "20px",
+    height: 43,
+    padding: '0 18px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .2)',
+  },
 }));
 
 
@@ -35,7 +47,7 @@ export default function SaveRecipeButton(props) {
       { savedRecipe.length > 0 ? (
           <Button 
             classes={{
-              root: classes.buttonRoot,
+              root: classes.deleteButton,
               label: classes.label, 
             }}
             onClick={() => deleteRecipe(savedRecipe[0])}>
@@ -44,7 +56,7 @@ export default function SaveRecipeButton(props) {
         ) : ( 
           <Button 
             classes={{
-              root: classes.buttonRoot,
+              root: classes.addButton,
               label: classes.label, 
             }} 
             onClick={() => handleAdd(recipe)}> 

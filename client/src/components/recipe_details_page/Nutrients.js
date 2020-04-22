@@ -66,7 +66,7 @@ export default function Nutrients(props) {
           )
         })}
       </div>
-      <span>* Percent Daily Values are based on a 2,000 calorie diet. Your Daily Values may be higher or lower depending on your calorie needs.</span>
+      <div>* Percent Daily Values are based on a 2,400 calorie diet. Your Daily Values may be higher or lower depending on your calorie needs.</div>
     </>
   ); 
 }

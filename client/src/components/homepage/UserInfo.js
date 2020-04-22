@@ -90,7 +90,8 @@ export default function UserInfo(props) {
             alt="logo"
             src={
               user.img_url ||
-              "https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
+              "https://cpng.pikpng.com/pngl/s/286-2863405_original-png-clip-art-file-profile-icon-svg.png"
+              // "https://www.edamam.com/web-img/e12/e12b8c5581226d7639168f41d126f2ff.jpg"
             }
             className={classes.avatar}
           />
@@ -126,7 +127,7 @@ export default function UserInfo(props) {
         <DialogTitle id="form-dialog-title">SIGN UP / LOG IN</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you ready to start your yumeek?
+            Are you ready to start your yummeek?
           </DialogContentText>
           {showSignup && (
             <>

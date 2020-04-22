@@ -52,6 +52,8 @@ const useStyles = makeStyles(theme => ({
   buttonRoot: {
       background: "#fdd770;",
       borderRadius: 5,
+      color: "#51524e",
+      borderRadius: "20px",
       border: 0,
       height: 40,
       padding: '0 18px',
@@ -85,7 +87,7 @@ export default function RecipeInfo(props) {
               <span className={classes.font}>Calories</span>
             </div>
           </div>
-          {sessionUser ? (
+          {sessionUser && (
             <div className={classes.likeButton}>
               <Button 
               classes={{
@@ -95,11 +97,9 @@ export default function RecipeInfo(props) {
                 endIcon={<Icon>send</Icon>}
                 onClick={() => sendEmailWithLink(recipe)}
               >
-                Share The Link
+                Send Link
               </Button>
             </div>
-            ) : (
-              <span></span>
           )}
         </Container>
       </Container>

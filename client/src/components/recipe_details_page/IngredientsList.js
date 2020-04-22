@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
   },
   font: {
-    fontSize: "1rem"
+    fontSize: "1.2rem"
   }
 }))
 

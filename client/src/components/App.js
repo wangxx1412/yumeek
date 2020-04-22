@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   container: {
-    paddingBottom: theme.spacing(4),
+    // paddingBottom: theme.spacing(4),
     backgroundColor: "#Fafafa",
   },
 }));
@@ -99,7 +99,7 @@ export default function App(props) {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap>
-                Yumeek
+                Yummeek
               </Typography>
             </Toolbar>
           </AppBar>
