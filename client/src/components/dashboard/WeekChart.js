@@ -82,7 +82,6 @@ export default function WeekChart(props) {
               <LineSeries
                 name="Energies"
                 valueField="energies"
-                argumentField="weekday"
                 scaleName="kCal"
               />
               <Stack

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import Backend from "react-dnd-html5-backend";
 import Grid from "@material-ui/core/Grid";
-import Dustbin from "./Dustbin";
+import AddedList from "./AddedList";
 import SavedList from "./SavedList";
 
 import axios from "axios";
@@ -22,16 +22,16 @@ export default function RecipeList(props) {
         recipeList: props.recipeList,
       }));
     }
-  }, [props.recipeList]);
+  }, [props]);
 
   useEffect(() => {
-    if (props.day) {
+    if (props.weekorday) {
       setDayRecipeList((prev) => ({
         ...prev,
-        day: props.day["weekday"],
+        day: props.weekorday["weekday"],
       }));
     }
-  }, [props.day]);
+  }, [props]);
 
   const deleteRecipe = (recipe) => {
     const newList = dayRecipleList.recipeList.filter(
@@ -66,14 +66,14 @@ export default function RecipeList(props) {
               {props.weekorday === "week" ? (
                 <div></div>
               ) : (
-                <Dustbin
+                <AddedList
                   recipeList={dayRecipleList.recipeList.filter(
                     (el) => el["weekday"] !== null
                   )}
                   weekorday={props.weekorday}
                   handlePut={props.handlePut}
                   deleteRecipe={deleteRecipe}
-                ></Dustbin>
+                ></AddedList>
               )}
             </Grid>
           </Grid>

@@ -13,11 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonList({
-  selectDay,
-  handleSelectWeek,
-  selectOption,
-}) {
+export default function ButtonList({ selectDay, selectWeek, selectOption }) {
   const classes = useStyles();
 
   return (
@@ -61,7 +57,7 @@ export default function ButtonList({
         <Button
           size="large"
           onClick={() => selectDay("Friday")}
-          disabled={selectOption === "Firday"}
+          disabled={selectOption === "Friday"}
         >
           Friday
         </Button>
@@ -74,7 +70,7 @@ export default function ButtonList({
         </Button>
         <Button
           size="large"
-          onClick={handleSelectWeek}
+          onClick={selectWeek}
           disabled={selectOption === "week"}
         >
           Week Overview
