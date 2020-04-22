@@ -30,7 +30,7 @@ function selectBackgroundColor(isActive, canDrop) {
     return "#DCF3F3";
   }
 }
-export default function Dustbin({
+export default function AddedList({
   recipeList,
   weekorday,
   handlePut,
