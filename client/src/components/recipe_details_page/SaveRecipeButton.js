@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   style: { fontSize: 40 },
   addButton: {
     background: "#fdd770",
+    '&:hover': {
+      background: "#f1d170",
+    },
     borderRadius: 3,
     color: "#51524e",
     borderRadius: "20px",
@@ -28,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteButton: {
     background: "#c9935a",
+    '&:hover': {
+      background: "#f1d180",
+    },
     borderRadius: 3,
     border: 0,
     color: "#51524e",

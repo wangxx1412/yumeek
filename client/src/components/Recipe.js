@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     style: { width: "25em", margin: "3%" },
     root: {
       background: "#fdd770",
+      '&:hover': {
+        background: "#f1d170",
+      },
       borderRadius: 25,
       border: 0,
       height: 41,
