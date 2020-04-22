@@ -6,15 +6,15 @@ Yummeek is a meal planner app that allows you to search recipes with keyword and
 
 Home page
 
-!["Home Page"]()
+!["Home Page"](https://github.com/wangxx1412/yumeek/blob/master/client/src/assets/image/homepage.png)
 
 Detail page
 
-!["Detail page"]()
+!["Detail page"](https://github.com/wangxx1412/yumeek/blob/master/client/src/assets/image/details.png)
 
 Dashboard
 
-!["Dashboard"]()
+!["Dashboard"](https://github.com/wangxx1412/yumeek/blob/master/client/src/assets/image/dashboard.png)
 
 ## Setup
 
