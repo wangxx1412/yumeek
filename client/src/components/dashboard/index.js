@@ -34,7 +34,6 @@ export default function Dashboard() {
   ];
 
   const [selectOption, setSelectOption] = useState(weekdays[dayIndex]);
-  const [dayData, setdayData] = useState({ weekday: null });
   const [chartRecipeData, setChartRecipeData] = useState([]);
   const [recipeList, setRecipeList] = useState();
 
@@ -76,15 +75,14 @@ export default function Dashboard() {
     });
   }, [recipeList]);
 
-  const selectWeek = (target) => {
+  const selectWeek = () => {
     setSelectOption("week");
-    setdayData({ weekday: null });
   };
 
   const selectDay = (day) => {
     setSelectOption(day);
-    const newDayData = chartRecipeData.filter((el) => el["weekday"] === day)[0];
-    setdayData(newDayData);
+    // const newDayData = chartRecipeData.filter((el) => el["weekday"] === day)[0];
+    // // setdayData(newDayData);
   };
 
   const handlePut = (item) => {
@@ -103,7 +101,7 @@ export default function Dashboard() {
       <Grid item xs={10}>
         <ButtonList
           selectDay={selectDay}
-          handleSelectWeek={selectWeek}
+          selectWeek={selectWeek}
           selectOption={selectOption}
         />
       </Grid>
@@ -128,7 +126,6 @@ export default function Dashboard() {
         </Typography>
         <RecipeList
           recipeList={recipeList}
-          day={dayData}
           weekorday={selectOption}
           handlePut={handlePut}
         />

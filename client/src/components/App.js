@@ -13,12 +13,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import Calendar from "./Calendar";
 import Sidebar from "./Sidebar";
 import Home from "./Home";
 import Dashboard from "./dashboard";
 import Recipe from "./Recipe";
-import Auth from "./Auth";
 import useUserData from "../hooks/useUserData";
 
 const useStyles = makeStyles((theme) => ({
@@ -153,7 +151,6 @@ export default function App(props) {
         <main className={classes.content}>
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Route exact path="/user/:userid/calendar" component={Calendar} />
               <Route exact path="/user/:userid/stats" component={Dashboard} />
               <Route
                 exact
@@ -170,10 +167,10 @@ export default function App(props) {
                     sessionUser={sessionUser}
                     handleAdd={(recipe) => handleAdd(recipe)}
                     savedRecipes={savedRecipes}
-                    deleteRecipe={(recipe) => deleteRecipe(recipe)}/>
+                    deleteRecipe={(recipe) => deleteRecipe(recipe)}
+                  />
                 )}
               />
-              <Route exact path="/login" component={Auth} />
             </Switch>
           </Container>
         </main>

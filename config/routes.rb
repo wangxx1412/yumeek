@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :api, defaults: {format: :json}  do # /api/data
-
-    get '/data', to: 'tests#index'
-
     # Save a recipe
     post '/recipe' => 'recipes#create'
     # Recipe detial
