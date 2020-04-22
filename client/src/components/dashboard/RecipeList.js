@@ -54,7 +54,6 @@ export default function RecipeList(props) {
           <Grid container spacing={6} direction="row" alignItems="center">
             <Grid item xs={5}>
               <SavedList
-                allowedDropEffect="any"
                 recipeList={dayRecipleList.recipeList.filter(
                   (el) => el["weekday"] === null
                 )}
@@ -68,7 +67,6 @@ export default function RecipeList(props) {
                 <div></div>
               ) : (
                 <Dustbin
-                  allowedDropEffect="any"
                   recipeList={dayRecipleList.recipeList.filter(
                     (el) => el["weekday"] !== null
                   )}
