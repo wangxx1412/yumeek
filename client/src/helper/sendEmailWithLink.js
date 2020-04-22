@@ -9,7 +9,7 @@ export default (recipe) => {
   const senderEmail = "yumeek@test.com";
   let templateParams = {
     to_name: first_name,
-    form_name: "Yumeek",
+    from_name: "Yumeek",
     message_html: message,
     recieverEmail: receiverEmail,
     senderEmail: senderEmail
