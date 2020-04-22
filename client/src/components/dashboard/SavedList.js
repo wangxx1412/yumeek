@@ -31,7 +31,6 @@ function selectBackgroundColor(isActive, canDrop) {
 }
 export default function SavedList({
   recipeList,
-  allowedDropEffect,
   weekorday,
   handlePut,
   deleteRecipe,
@@ -44,10 +43,10 @@ export default function SavedList({
 
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.ADDED,
-    drop: () => ({
-      name: `${allowedDropEffect} Dustbin`,
-      allowedDropEffect,
-    }),
+    // drop: () => ({
+    //   name: `${allowedDropEffect} Dustbin`,
+    //   allowedDropEffect,
+    // }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),

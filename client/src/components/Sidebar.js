@@ -4,7 +4,7 @@ import DashboardButton from "./homepage/DashboardButton";
 import { Link } from "react-router-dom";
 import SavedRecipes from "./homepage/SavedRecipes";
 import { makeStyles } from "@material-ui/core/styles";
-import logo from "../assets/image/logo.png";
+import logo from "../assets/image/logo2.png";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   logo: {
-    width: theme.spacing(20),
+    width: theme.spacing(27),
   },
 }));
 

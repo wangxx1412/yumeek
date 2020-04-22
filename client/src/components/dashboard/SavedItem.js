@@ -63,24 +63,24 @@ export default function SavedItem({
     end(item, monitor) {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        const isDropAllowed =
-          dropResult.allowedDropEffect === "any" ||
-          dropResult.allowedDropEffect === dropResult.dropEffect;
+        // const isDropAllowed =
+        //   dropResult.allowedDropEffect === "any" ||
+        //   dropResult.allowedDropEffect === dropResult.dropEffect;
 
-        if (isDropAllowed) {
-          const recipeid = item.recipe.id;
-          axios
-            .put(`/api/userrecipe/${userid}/recipe/${recipeid}`, {
-              weekday: weekorday,
-            })
-            .then(() => {
-              item.recipe.weekday = weekorday;
-              handlePut(item);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        }
+        // if (isDropAllowed) {
+        const recipeid = item.recipe.id;
+        axios
+          .put(`/api/userrecipe/${userid}/recipe/${recipeid}`, {
+            weekday: weekorday,
+          })
+          .then(() => {
+            item.recipe.weekday = weekorday;
+            handlePut(item);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        // }
       }
     },
   });
