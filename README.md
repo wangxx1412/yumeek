@@ -22,8 +22,10 @@ Front-end
 - React
 - React Router
 - Axios
+
 Back-end
 - Ruby on Rails
+
 Database
 - PostgreSQL
 
